@@ -1,7 +1,6 @@
 package com.dim4tech.nest.endpoint;
 
 public enum Endpoint {
-    ROOT(""),
     DEVICES("devices"),
     DEVICES_THERMOSTATS(DEVICES, "thermostats"),
     DEVICES_SMOKE_CO_ALARMS(DEVICES, "smoke_co_alarms"),
