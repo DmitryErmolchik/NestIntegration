@@ -14,32 +14,31 @@ public class Endpoints {
     }
 
     public URL getDevices() {
-        try {
-            return new URL(rootPath, Endpoint.DEVICES.getPath());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            throw new NestIntegrationException();
-        }
+        return buildEndpoint(Endpoint.DEVICES);
     }
 
     public URL getThermostats() {
+        return buildEndpoint(Endpoint.DEVICES_THERMOSTATS);
+    }
+
+    public URL getSmokeCoAlarms() {
+        return buildEndpoint(Endpoint.DEVICES_SMOKE_CO_ALARMS);
+    }
+
+    public URL getCameras() {
+        return buildEndpoint(Endpoint.DEVICES_CAMERAS);
+    }
+
+    public URL getStructures() {
+        return buildEndpoint(Endpoint.STRUCTURES);
+    }
+
+    private URL buildEndpoint(Endpoint endpoint) {
         try {
-            return new URL(rootPath, Endpoint.STRUCTURES.getPath());
+            return new URL(rootPath, endpoint.getPath());
         } catch (MalformedURLException e) {
             e.printStackTrace();
             throw new NestIntegrationException();
         }
-    }
-
-    public URL getSmokeCoAlarms() {
-        return null;
-    }
-
-    public URL getCameras() {
-        return null;
-    }
-
-    public URL getStructures() {
-        return null;
     }
 }
