@@ -22,7 +22,7 @@ public enum Endpoint {
     public String getPath() {
         StringBuilder pathBuilder = new StringBuilder();
         if (this.parentEndpoint != null) {
-            pathBuilder.append(this.getPath()).append("/");
+            pathBuilder.append(this.parentEndpoint.getPath()).append("/");
         }
         return pathBuilder.append(path).toString();
     }
