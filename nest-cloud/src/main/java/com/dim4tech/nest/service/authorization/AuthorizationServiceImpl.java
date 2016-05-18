@@ -1,6 +1,9 @@
 package com.dim4tech.nest.service.authorization;
 
+import com.dim4tech.nest.dto.authorization.AuthorizationData;
 import com.dim4tech.nest.exception.NestIntegrationException;
+import com.dim4tech.nest.service.dtoservice.DtoService;
+import com.dim4tech.nest.service.dtoservice.DtoServiceImpl;
 import com.dim4tech.nest.utils.HttpHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +26,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private final URL authorizationUrl;
     private final String productId;
     private final String productSecret;
+    private DtoService<AuthorizationData> dtoService;
     private final Map<String, String > params = new HashMap<>();
 
 
@@ -39,6 +43,10 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         this.charset = charset;
     }
 
+    public void setDtoService(DtoService dtoService) {
+        this.dtoService = dtoService;
+    }
+
     public URL getAuthorizationCodeUrl(String state) {
         try {
             params.put("state", state);
@@ -49,11 +57,14 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         }
     }
 
-    public String getAccessToken(String authorizationCode) {
+    public AuthorizationData getAuthorizationData(String authorizationCode) {
         try {
             HttpURLConnection connection = (HttpsURLConnection) authorizationUrl.openConnection();
-            doPost(connection, getPostParams(authorizationCode));
-            return doGet(connection);
+            //doPost(connection, getPostParams(authorizationCode));
+            //String response = doGet(connection);
+            String response = "{\"access_token\":\"c.Ntt2mloeD93xfYiW9WumL8nPePIVcLh0sNg0AkPMvqH23pkArivBdIvgUdAyabDUbZ83CR6k8L05n9CrkwVCgilqRw9YxMwElZPhINlO4T7OWs1oUNVtZQUPH5mXgyupy0KO0ZEpnv0LnQMX\",\"expires_in\":315360000}";
+            AuthorizationData authorizationData = dtoService.encode(response, AuthorizationData.class);
+            return authorizationData;
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
             throw new NestIntegrationException();

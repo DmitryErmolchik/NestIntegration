@@ -1,5 +1,7 @@
 package com.dim4tech.nest.service.authorization;
 
+import com.dim4tech.nest.dto.authorization.AuthorizationData;
+import com.dim4tech.nest.service.dtoservice.DtoServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,11 +15,11 @@ public class AuthorizationServiceImplTest {
     private final String PRODUCT_SECRET = "AbCdEfGhIjKlMnOpQrStUvWxY";
     private final String AUTHORIZATION_URL = "http://www.example.com";*/
 
-    private final String PRODUCT_ID = "697545b0-df56-4985-8425-d75c28d10cc7 ";
+    private final String PRODUCT_ID = "697545b0-df56-4985-8425-d75c28d10cc7";
     private final String PRODUCT_SECRET = "5VyV8U8XFV7kWSbsKhBSFnOpJ";
     private final String AUTHORIZATION_URL = "https://api.home.nest.com/oauth2/access_token";
 
-    private final AuthorizationService authorizationService;
+    private final AuthorizationServiceImpl authorizationService;
 
     public AuthorizationServiceImplTest() throws MalformedURLException {
         URL authorizationUrl = new URL(AUTHORIZATION_URL);
@@ -38,7 +40,8 @@ public class AuthorizationServiceImplTest {
     @Test
     public void getAccessToken() throws Exception {
         //TODO: test from another connection
-        authorizationService.getAccessToken("J7XF5UVPSTKQ4R45");
+        authorizationService.setDtoService(new DtoServiceImpl<AuthorizationData>());
+        authorizationService.getAuthorizationData("27M75223QM8Z4SNQ");
     }
 
 }

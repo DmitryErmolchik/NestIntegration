@@ -1,19 +1,22 @@
 package com.dim4tech.nest.dto.authorization;
 
 public class AuthorizationData {
-    private final String accessTocken;
-    private final long expiresIn;
+    private String accessToken;
+    private long expiresIn;
 
-    public AuthorizationData(String accessTocken, long expiresIn) {
-        this.accessTocken = accessTocken;
-        this.expiresIn = expiresIn;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public String getAccessTocken() {
-        return accessTocken;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public long getExpiresIn() {
         return expiresIn;
+    }
+
+    public void setExpiresIn(long expiresIn) {
+        this.expiresIn = expiresIn;
     }
 }
