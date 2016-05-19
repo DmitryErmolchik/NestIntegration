@@ -2,6 +2,7 @@ package com.dim4tech.nest.service.authorization;
 
 import com.dim4tech.nest.dto.authorization.AuthorizationData;
 import com.dim4tech.nest.service.dtoservice.DtoServiceImpl;
+import com.dim4tech.nest.utils.serializer.AuthorizationDataSerializer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,7 +41,7 @@ public class AuthorizationServiceImplTest {
     @Test
     public void getAccessToken() throws Exception {
         //TODO: test from another connection
-        authorizationService.setDtoService(new DtoServiceImpl<AuthorizationData>());
+        authorizationService.setDtoService(new DtoServiceImpl<AuthorizationData>(AuthorizationData.class, new AuthorizationDataSerializer()));
         authorizationService.getAuthorizationData("27M75223QM8Z4SNQ");
     }
 
