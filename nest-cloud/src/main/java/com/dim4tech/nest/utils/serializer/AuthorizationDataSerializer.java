@@ -10,11 +10,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 
 public class AuthorizationDataSerializer extends JsonDeserializer<AuthorizationData> {
+    private final String ACCESS_TOKEN = "access_token";
+    private final String EXPIRES_IN = "expires_in";
+
     @Override
     public AuthorizationData deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         JsonNode jsonNode = jsonParser.getCodec().readTree(jsonParser);
-        String accessToken = jsonNode.get("access_token").textValue();
-        long expiresIn = jsonNode.get("expires_in").longValue();
+        String accessToken = jsonNode.get(ACCESS_TOKEN) != null ? jsonNode.get(ACCESS_TOKEN).textValue() : null;
+        long expiresIn = jsonNode.get(EXPIRES_IN) != null ? jsonNode.get(EXPIRES_IN).longValue() : 0;
         return new AuthorizationData(accessToken, expiresIn);
     }
 }
