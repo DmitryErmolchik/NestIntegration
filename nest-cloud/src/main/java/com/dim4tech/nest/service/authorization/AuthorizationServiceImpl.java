@@ -25,7 +25,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private final URL authorizationUrl;
     private final String productId;
     private final String productSecret;
-    private DtoService<AuthorizationData> dtoService;
+    private DtoService dtoService;
     private final Map<String, String > params = new HashMap<>();
 
 
@@ -62,7 +62,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             //doPost(connection, getPostParams(authorizationCode));
             //String response = doGet(connection);
             String response = "{\"access_token\":\"c.Ntt2mloeD93xfYiW9WumL8nPePIVcLh0sNg0AkPMvqH23pkArivBdIvgUdAyabDUbZ83CR6k8L05n9CrkwVCgilqRw9YxMwElZPhINlO4T7OWs1oUNVtZQUPH5mXgyupy0KO0ZEpnv0LnQMX\",\"expires_in\":315360000}";
-            AuthorizationData authorizationData = dtoService.encode(response);
+            AuthorizationData authorizationData = dtoService.encode(response, AuthorizationData.class);
             return authorizationData;
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);

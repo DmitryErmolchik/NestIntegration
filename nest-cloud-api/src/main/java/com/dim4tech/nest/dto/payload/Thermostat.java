@@ -3,120 +3,214 @@ package com.dim4tech.nest.dto.payload;
 import com.dim4tech.nest.dto.payload.constants.HvacMode;
 import com.dim4tech.nest.dto.payload.constants.HvacState;
 import com.dim4tech.nest.dto.payload.constants.TemperatureScale;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 import java.util.Locale;
 
 public class Thermostat {
+    private final static String DEVICE_ID = "device_id";
     /* Thermostat unique identifier */
     private final DeviceId deviceId;
 
+    private final static String LOCALE = "locale";
     /* Country and language preference, in IETF Language Tag (https://en.wikipedia.org/wiki/IETF_language_tag) format */
     private final Locale locale;
 
+    private final static String SOFTWARE_VERSION ="software_version";
     /* Software version */
     private final String softwareVersion;
 
+    private final static String STRUCTURE_ID = "structure_id";
     /* Unique structure identifier */
     private final StructureId structureId;
 
+    private final static String NAME = "name";
     /* Display name of the device */
     private final String name;
 
+    private final static String NAME_LONG = "name_long";
     /* Long display name of the device */
     private final String nameLong;
 
+    private final static String LAST_CONNECTION = "last_connection";
     /* Time of the last successful interaction with the Nest service, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format */
     /* 2016-10-31T23:59:59.000Z */
     private final DateTime lastConnection;
 
+    private final static String IS_ONLINE = "is_online";
     /* Device connection status with the Nest Service */
     private final boolean isOnline;
 
+    private final static String CAN_COOL = "can_cool";
     /* System ability to cool (AC) */
     private final boolean canCool;
 
+    private final static String CAN_HEAT = "can_heat";
     /* System ability to heat */
     private final boolean canHeat;
 
+    private final static String IS_USING_EMERGENCY_HEAT = "is_using_emergency_heat";
     /* Emergency Heat status in systems with heat pumps */
     private final boolean isUsingEmergencyHeat;
 
+    private final static String HAS_FAN = "has_fan";
     /* System ability to control the fan separately from heating or cooling */
     private final boolean hasFan;
 
+    private final static String FAN_TIMER_ACTIVE = "fan_timer_active";
     /* Indicates if the fan timer is engaged; used with 'fan_timer_timeout' to turn on the fan for a (user-specified) preset duration */
     private boolean fanTimerActive;
 
+    private final static String FAN_TIMER_TIMEOUT = "fan_timer_timeout";
     /* Timestamp, showing when the fan timer reaches 0 (end of timer duration), in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format */
     private final DateTime fanTimerTimeout;
 
+    private final static String HAS_LEAF = "has_leaf";
     /* Displayed when users choose an energy-saving temperature */
     private final boolean hasLeaf;
 
+    private final static String TEMPERATURE_SCALE = "temperature_scale";
     /* Celsius or Fahrenheit; used with temperature display */
     private TemperatureScale temperatureScale;
 
+    private final static String TARGET_TEMPERATURE_F = "target_temperature_f";
     /* Desired temperature, displayed in whole degrees Fahrenheit (1°F) */
     private double targetTemperatureF;
 
+    private final static String TARGET_TEMPERATURE_C = "target_temperature_c";
     /* Desired temperature, displayed in half degrees Celsius (0.5°C) */
     private double targetTemperatureC;
 
+    private final static String TARGET_TEMPERATURE_HIGH_F = "target_temperature_high_f";
     /* Maximum target temperature, displayed in whole degrees Fahrenheit (1°F); used with Heat • Cool mode */
     private double targetTemperatureHighF;
 
+    private final static String TARGET_TEMPERATURE_HIGH_C = "target_temperature_high_c";
     /* Maximum target temperature, displayed in half degrees Celsius (0.5°C); used with Heat • Cool mode */
     private double targetTemperatureHighC;
 
+    private final static String TARGET_TEMPERATURE_LOW_F = "target_temperature_low_f";
     /* Minimum target temperature, displayed in whole degrees Fahrenheit (1°F); used with Heat • Cool mode */
     private double targetTemperatureLowF;
 
+    private final static String TARGET_TEMPERATURE_LOW_C = "target_temperature_low_c";
     /* Minimum target temperature, displayed in half degrees Celsius (0.5°C); used with Heat • Cool mode */
     private double targetTemperatureLowC;
 
+    private final static String AWAY_TEMPERATURE_HIGH_F = "away_temperature_high_f";
     /* Maximum 'away' temperature, displayed in whole degrees Fahrenheit (1°F) */
     private final double awayTemperatureHighF;
 
+    private final static String AWAY_TEMPERATURE_HIGH_C = "away_temperature_high_c";
     /* Maximum 'away' temperature, displayed in half degrees Celsius (0.5°C) */
     private final double awayTemperatureHighC;
 
+    private final static String AWAY_TEMPERATURE_LOW_F = "away_temperature_low_f";
     /* Minimum 'away' temperature, displayed in whole degrees Fahrenheit (1°F) */
     private final double awayTemperatureLowF;
 
+    private final static String AWAY_TEMPERATURE_LOW_C = "away_temperature_low_c";
     /* Minimum 'away' temperature, displayed in half degrees Celsius (0.5°C) */
     private final double awayTemperatureLowC;
 
+    private final static String HVAC_MODE = "hvac_mode";
     /* Indicates HVAC system heating/cooling modes; for systems with both heating and cooling capability,
         use 'heat-cool': (Heat • Cool mode) */
-    private HvacMode hvac_mode;
+    private HvacMode hvacMode;
 
+    private final static String AMBIENT_TEMPERATURE_F = "ambient_temperature_f";
     /* Temperature, measured at the device, in whole degrees Fahrenheit (1°f) */
     private final double ambientTemperatureF;
 
+    private final static String AMBIENT_TEMPERATURE_C = "ambient_temperature_c";
     /* Temperature, measured at the device, in half degrees Celsius (0.5°C) */
     private final double ambientTemperatureC;
 
+    private final static String HUMIDITY = "humidity";
     /* Humidity, in percent (%) format, measured at the device. */
     private final double humidity;
 
+    private final static String HVAC_STATE = "hvac_state";
     /* Indicates whether the HVAC system is actively heating, cooling or is off */
     private final HvacState hvacState;
 
+    private final static String WHERE_ID = "where_id";
     /* Where unique identifier. */
     private final WhereId whereId;
 
-    public Thermostat(DeviceId deviceId, Locale locale, String softwareVersion, StructureId structureId,
-                      String name, String nameLong, DateTime lastConnection, boolean isOnline,
-                      boolean canCool, boolean canHeat, boolean isUsingEmergencyHeat, boolean hasFan,
-                      boolean fanTimerActive, DateTime fanTimerTimeout, boolean hasLeaf,
-                      TemperatureScale temperatureScale, double targetTemperatureF, double targetTemperatureC,
-                      double targetTemperatureHighF, double targetTemperatureHighC, double targetTemperatureLowF,
-                      double targetTemperatureLowC, double awayTemperatureHighF, double awayTemperatureHighC,
-                      double awayTemperatureLowF, double awayTemperatureLowC, HvacMode hvac_mode, double ambientTemperatureF,
-                      double ambientTemperatureC, double humidity, HvacState hvacState, WhereId whereId) {
+    private final static String IS_LOCKED = "is_locked";
+    /* Thermostat Lock status. When true, the Thermostat Lock feature is enabled,
+        and restricts the temperature range to these min/max values:
+        locked_temp_min_f, locked_temp_max_f, locked_temp_min_c, and locked_temp_max_c. */
+    private final boolean isLocked;
+
+    private final static String LOCKED_TEMP_MIN_F = "locked_temp_min_f";
+    /* Minimum Thermostat Lock temperature, displayed in whole degrees Fahrenheit (1°F).
+        Used when is_locked is true. */
+    private final String lockedTempMinF;
+
+    private final static String LOCKED_TEMP_MAX_F = "locked_temp_max_f";
+    /* Maximum Thermostat Lock temperature, displayed in whole degrees Fahrenheit (1°F).
+        Used when is_locked is true. */
+    private final String lockedTempMaxF;
+
+    private final static String LOCKED_TEMP_MIN_C = "locked_temp_min_c";
+    /* Minimum Thermostat Lock temperature, displayed in half degrees Celsius (0.5°C).
+        Used when is_locked is true. */
+    private final String lockedTempMinC;
+
+    private final static String LOCKED_TEMP_MAX_C = "locked_temp_max_c";
+    /* Maximum Thermostat Lock temperature, displayed in half degrees Celsius (0.5°C).
+    Used when is_locked is true. */
+    private final String lockedTempMaxC;
+
+    private final static String LABEL = "label";
+    /* Thermostat custom label. */
+    private String label;
+
+    @JsonCreator
+    public Thermostat(@JsonProperty(DEVICE_ID) DeviceId deviceId,
+                      @JsonProperty(LOCALE) Locale locale,
+                      @JsonProperty(SOFTWARE_VERSION) String softwareVersion,
+                      @JsonProperty(STRUCTURE_ID) StructureId structureId,
+                      @JsonProperty(NAME) String name,
+                      @JsonProperty(NAME_LONG) String nameLong,
+                      @JsonProperty(LAST_CONNECTION) DateTime lastConnection,
+                      @JsonProperty(IS_ONLINE) boolean isOnline,
+                      @JsonProperty(CAN_COOL) boolean canCool,
+                      @JsonProperty(CAN_HEAT) boolean canHeat,
+                      @JsonProperty(IS_USING_EMERGENCY_HEAT) boolean isUsingEmergencyHeat,
+                      @JsonProperty(HAS_FAN) boolean hasFan,
+                      @JsonProperty(FAN_TIMER_ACTIVE) boolean fanTimerActive,
+                      @JsonProperty(FAN_TIMER_TIMEOUT) DateTime fanTimerTimeout,
+                      @JsonProperty(HAS_LEAF) boolean hasLeaf,
+                      @JsonProperty(TEMPERATURE_SCALE) TemperatureScale temperatureScale,
+                      @JsonProperty(TARGET_TEMPERATURE_F) double targetTemperatureF,
+                      @JsonProperty(TARGET_TEMPERATURE_C) double targetTemperatureC,
+                      @JsonProperty(TARGET_TEMPERATURE_HIGH_F) double targetTemperatureHighF,
+                      @JsonProperty(TARGET_TEMPERATURE_HIGH_C) double targetTemperatureHighC,
+                      @JsonProperty(TARGET_TEMPERATURE_LOW_F) double targetTemperatureLowF,
+                      @JsonProperty(TARGET_TEMPERATURE_LOW_C) double targetTemperatureLowC,
+                      @JsonProperty(AWAY_TEMPERATURE_HIGH_F) double awayTemperatureHighF,
+                      @JsonProperty(AWAY_TEMPERATURE_HIGH_C) double awayTemperatureHighC,
+                      @JsonProperty(AWAY_TEMPERATURE_LOW_F) double awayTemperatureLowF,
+                      @JsonProperty(AWAY_TEMPERATURE_LOW_C) double awayTemperatureLowC,
+                      @JsonProperty(HVAC_MODE) HvacMode hvacMode,
+                      @JsonProperty(AMBIENT_TEMPERATURE_F) double ambientTemperatureF,
+                      @JsonProperty(AMBIENT_TEMPERATURE_C) double ambientTemperatureC,
+                      @JsonProperty(HUMIDITY) double humidity,
+                      @JsonProperty(HVAC_STATE) HvacState hvacState,
+                      @JsonProperty(WHERE_ID) WhereId whereId,
+                      @JsonProperty(IS_LOCKED) boolean isLocked,
+                      @JsonProperty(LOCKED_TEMP_MIN_F) String lockedTempMinF,
+                      @JsonProperty(LOCKED_TEMP_MAX_F) String lockedTempMaxF,
+                      @JsonProperty(LOCKED_TEMP_MIN_C) String lockedTempMinC,
+                      @JsonProperty(LOCKED_TEMP_MAX_C) String lockedTempMaxC,
+                      @JsonProperty(LABEL) String label) {
         this.deviceId = deviceId;
-        this.locale = locale;
+        this.locale = convertLocale(locale);
         this.softwareVersion = softwareVersion;
         this.structureId = structureId;
         this.name = name;
@@ -141,12 +235,18 @@ public class Thermostat {
         this.awayTemperatureHighC = awayTemperatureHighC;
         this.awayTemperatureLowF = awayTemperatureLowF;
         this.awayTemperatureLowC = awayTemperatureLowC;
-        this.hvac_mode = hvac_mode;
+        this.hvacMode = hvacMode;
         this.ambientTemperatureF = ambientTemperatureF;
         this.ambientTemperatureC = ambientTemperatureC;
         this.humidity = humidity;
         this.hvacState = hvacState;
         this.whereId = whereId;
+        this.isLocked = isLocked;
+        this.lockedTempMinF = lockedTempMinF;
+        this.lockedTempMaxF = lockedTempMaxF;
+        this.lockedTempMinC = lockedTempMinC;
+        this.lockedTempMaxC = lockedTempMaxC;
+        this.label = label;
     }
 
     public DeviceId getDeviceId() {
@@ -285,12 +385,12 @@ public class Thermostat {
         return awayTemperatureLowC;
     }
 
-    public HvacMode getHvac_mode() {
-        return hvac_mode;
+    public HvacMode getHvacMode() {
+        return hvacMode;
     }
 
-    public void setHvac_mode(HvacMode hvac_mode) {
-        this.hvac_mode = hvac_mode;
+    public void setHvacMode(HvacMode hvacMode) {
+        this.hvacMode = hvacMode;
     }
 
     public double getAmbientTemperatureF() {
@@ -311,5 +411,43 @@ public class Thermostat {
 
     public WhereId getWhereId() {
         return whereId;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public String getLockedTempMinF() {
+        return lockedTempMinF;
+    }
+
+    public String getLockedTempMaxF() {
+        return lockedTempMaxF;
+    }
+
+    public String getLockedTempMinC() {
+        return lockedTempMinC;
+    }
+
+    public String getLockedTempMaxC() {
+        return lockedTempMaxC;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    private Locale convertLocale(Locale locale) {
+        if (locale.getCountry() == null || locale.getCountry().isEmpty()) {
+            String [] items = locale.toString().split("-");
+            if (items.length >= 2) {
+                return new Locale(items[0], items[1]);
+            }
+        }
+        return locale;
     }
 }

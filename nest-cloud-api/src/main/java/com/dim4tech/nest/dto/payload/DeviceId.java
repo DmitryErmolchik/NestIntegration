@@ -1,9 +1,12 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public class DeviceId {
     /* Device unique identifier */
     private final String id;
 
+    @JsonCreator
     public DeviceId(String id) {
         this.id = id;
     }

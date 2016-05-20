@@ -1,5 +1,7 @@
 package com.dim4tech.nest.dto.payload.constants;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum AlarmState {
     OK("ok"),
     WARNING("warning"),
@@ -9,5 +11,10 @@ public enum AlarmState {
 
     AlarmState(String state) {
         this.state = state;
+    }
+
+    @JsonValue
+    public String getState() {
+        return state;
     }
 }
