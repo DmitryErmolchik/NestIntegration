@@ -442,12 +442,13 @@ public class Thermostat {
     }
 
     private Locale convertLocale(Locale locale) {
-        if (locale.getCountry() == null || locale.getCountry().isEmpty()) {
-            String [] items = locale.toString().split("-");
-            if (items.length >= 2) {
-                return new Locale(items[0], items[1]);
-            }
+        if (isLanguageTag(locale)) {
+            return Locale.forLanguageTag(locale.toString());
         }
         return locale;
+    }
+
+    private boolean isLanguageTag(Locale locale) {
+        return locale.toString() != null && locale.toString().contains("-");
     }
 }
