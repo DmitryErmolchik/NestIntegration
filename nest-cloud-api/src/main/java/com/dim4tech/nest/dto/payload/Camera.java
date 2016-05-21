@@ -39,7 +39,7 @@ public class Camera {
 
     private final static String IS_STREAMING = "is_streaming";
     /* Camera status, either on and actively streaming video, or off. */
-    private boolean isStreaming;
+    private final boolean isStreaming;
 
     private final static String IS_AUDIO_INPUT_ENABLED = "is_audio_input_enabled";
     /* Camera microphone status, either on and listening, or off. */
@@ -156,10 +156,6 @@ public class Camera {
 
     public boolean isStreaming() {
         return isStreaming;
-    }
-
-    public void setStreaming(boolean streaming) {
-        isStreaming = streaming;
     }
 
     public boolean isAudioInputEnabled() {

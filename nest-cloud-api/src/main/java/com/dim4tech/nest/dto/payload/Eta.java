@@ -6,13 +6,13 @@ import java.util.Objects;
 
 public class Eta {
     /* Unique identifier for this ETA instance */
-    private TripId tripId;
+    private final TripId tripId;
 
     /* Beginning time of the estimated arrival window, in ISO 8601 (http://en.wikipedia.org/wiki/ISO_8601) format */
-    private DateTime estimatedArrivalWindowBegin;
+    private final DateTime estimatedArrivalWindowBegin;
 
     /* End time of the estimated arrival window, in ISO 8601 (http://en.wikipedia.org/wiki/ISO_8601) format */
-    private DateTime estimatedArrivalWindowEnd;
+    private final DateTime estimatedArrivalWindowEnd;
 
     public Eta(TripId tripId, DateTime estimatedArrivalWindowBegin, DateTime estimatedArrivalWindowEnd) {
         this.tripId = tripId;
@@ -24,24 +24,12 @@ public class Eta {
         return tripId;
     }
 
-    public void setTripId(TripId tripId) {
-        this.tripId = tripId;
-    }
-
     public DateTime getEstimatedArrivalWindowBegin() {
         return estimatedArrivalWindowBegin;
     }
 
-    public void setEstimatedArrivalWindowBegin(DateTime estimatedArrivalWindowBegin) {
-        this.estimatedArrivalWindowBegin = estimatedArrivalWindowBegin;
-    }
-
     public DateTime getEstimatedArrivalWindowEnd() {
         return estimatedArrivalWindowEnd;
-    }
-
-    public void setEstimatedArrivalWindowEnd(DateTime estimatedArrivalWindowEnd) {
-        this.estimatedArrivalWindowEnd = estimatedArrivalWindowEnd;
     }
 
     @Override

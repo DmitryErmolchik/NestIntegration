@@ -3,7 +3,7 @@ package com.dim4tech.nest.dto.payload;
 import java.util.Objects;
 
 public class Software {
-    private String version;
+    private final String version;
 
     public Software(String version) {
         this.version = version;
@@ -11,10 +11,6 @@ public class Software {
 
     public String getVersion() {
         return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
     }
 
     @Override

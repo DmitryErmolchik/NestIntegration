@@ -63,7 +63,7 @@ public class Thermostat {
 
     private final static String FAN_TIMER_ACTIVE = "fan_timer_active";
     /* Indicates if the fan timer is engaged; used with 'fan_timer_timeout' to turn on the fan for a (user-specified) preset duration */
-    private boolean fanTimerActive;
+    private final boolean fanTimerActive;
 
     private final static String FAN_TIMER_TIMEOUT = "fan_timer_timeout";
     /* Timestamp, showing when the fan timer reaches 0 (end of timer duration), in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format */
@@ -75,31 +75,31 @@ public class Thermostat {
 
     private final static String TEMPERATURE_SCALE = "temperature_scale";
     /* Celsius or Fahrenheit; used with temperature display */
-    private TemperatureScale temperatureScale;
+    private final TemperatureScale temperatureScale;
 
     private final static String TARGET_TEMPERATURE_F = "target_temperature_f";
     /* Desired temperature, displayed in whole degrees Fahrenheit (1°F) */
-    private double targetTemperatureF;
+    private final double targetTemperatureF;
 
     private final static String TARGET_TEMPERATURE_C = "target_temperature_c";
     /* Desired temperature, displayed in half degrees Celsius (0.5°C) */
-    private double targetTemperatureC;
+    private final double targetTemperatureC;
 
     private final static String TARGET_TEMPERATURE_HIGH_F = "target_temperature_high_f";
     /* Maximum target temperature, displayed in whole degrees Fahrenheit (1°F); used with Heat • Cool mode */
-    private double targetTemperatureHighF;
+    private final double targetTemperatureHighF;
 
     private final static String TARGET_TEMPERATURE_HIGH_C = "target_temperature_high_c";
     /* Maximum target temperature, displayed in half degrees Celsius (0.5°C); used with Heat • Cool mode */
-    private double targetTemperatureHighC;
+    private final double targetTemperatureHighC;
 
     private final static String TARGET_TEMPERATURE_LOW_F = "target_temperature_low_f";
     /* Minimum target temperature, displayed in whole degrees Fahrenheit (1°F); used with Heat • Cool mode */
-    private double targetTemperatureLowF;
+    private final double targetTemperatureLowF;
 
     private final static String TARGET_TEMPERATURE_LOW_C = "target_temperature_low_c";
     /* Minimum target temperature, displayed in half degrees Celsius (0.5°C); used with Heat • Cool mode */
-    private double targetTemperatureLowC;
+    private final double targetTemperatureLowC;
 
     private final static String AWAY_TEMPERATURE_HIGH_F = "away_temperature_high_f";
     /* Maximum 'away' temperature, displayed in whole degrees Fahrenheit (1°F) */
@@ -120,7 +120,7 @@ public class Thermostat {
     private final static String HVAC_MODE = "hvac_mode";
     /* Indicates HVAC system heating/cooling modes; for systems with both heating and cooling capability,
         use 'heat-cool': (Heat • Cool mode) */
-    private HvacMode hvacMode;
+    private final HvacMode hvacMode;
 
     private final static String AMBIENT_TEMPERATURE_F = "ambient_temperature_f";
     /* Temperature, measured at the device, in whole degrees Fahrenheit (1°f) */
@@ -170,7 +170,7 @@ public class Thermostat {
 
     private final static String LABEL = "label";
     /* Thermostat custom label. */
-    private String label;
+    private final String label;
 
     @JsonCreator
     public Thermostat(@JsonProperty(DEVICE_ID) DeviceId deviceId,
@@ -303,10 +303,6 @@ public class Thermostat {
         return fanTimerActive;
     }
 
-    public void setFanTimerActive(boolean fanTimerActive) {
-        this.fanTimerActive = fanTimerActive;
-    }
-
     public DateTime getFanTimerTimeout() {
         return fanTimerTimeout;
     }
@@ -319,56 +315,16 @@ public class Thermostat {
         return temperatureScale;
     }
 
-    public void setTemperatureScale(TemperatureScale temperatureScale) {
-        this.temperatureScale = temperatureScale;
-    }
-
     public double getTargetTemperatureF() {
         return targetTemperatureF;
-    }
-
-    public void setTargetTemperatureF(double targetTemperatureF) {
-        this.targetTemperatureF = targetTemperatureF;
     }
 
     public double getTargetTemperatureC() {
         return targetTemperatureC;
     }
 
-    public void setTargetTemperatureC(double targetTemperatureC) {
-        this.targetTemperatureC = targetTemperatureC;
-    }
-
-    public double getTargetTemperatureHighF() {
-        return targetTemperatureHighF;
-    }
-
-    public void setTargetTemperatureHighF(double targetTemperatureHighF) {
-        this.targetTemperatureHighF = targetTemperatureHighF;
-    }
-
-    public double getTargetTemperatureHighC() {
-        return targetTemperatureHighC;
-    }
-
-    public void setTargetTemperatureHighC(double targetTemperatureHighC) {
-        this.targetTemperatureHighC = targetTemperatureHighC;
-    }
-
-    public double getTargetTemperatureLowF() {
-        return targetTemperatureLowF;
-    }
-
-    public void setTargetTemperatureLowF(double targetTemperatureLowF) {
-        this.targetTemperatureLowF = targetTemperatureLowF;
-    }
-
     public double getTargetTemperatureLowC() {
         return targetTemperatureLowC;
-    }
-
-    public void setTargetTemperatureLowC(double targetTemperatureLowC) {
-        this.targetTemperatureLowC = targetTemperatureLowC;
     }
 
     public double getAwayTemperatureHighF() {
@@ -389,10 +345,6 @@ public class Thermostat {
 
     public HvacMode getHvacMode() {
         return hvacMode;
-    }
-
-    public void setHvacMode(HvacMode hvacMode) {
-        this.hvacMode = hvacMode;
     }
 
     public double getAmbientTemperatureF() {
@@ -437,10 +389,6 @@ public class Thermostat {
 
     public String getLabel() {
         return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
     }
 
     @Override

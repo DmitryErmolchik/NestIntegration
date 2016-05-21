@@ -10,7 +10,7 @@ public class Where {
         Users can optionally create a custom room name.
         You can create custom wheres (where_id and name).
         At this time, wheres cannot be edited or deleted after creation. */
-    private String name;
+    private final String name;
 
     public Where(WhereId whereId, String name) {
         this.whereId = whereId;
@@ -23,10 +23,6 @@ public class Where {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class Structure {
     private final CompanyDevices devices;
 
     /* Describes the Structure state; see the Away Guide for more information */
-    private AwayState away;
+    private final AwayState away;
 
     /* User-defined structure name; defaults to 'Home' if the structure type is 'home' */
     private final String name;
@@ -101,10 +101,6 @@ public class Structure {
 
     public AwayState getAway() {
         return away;
-    }
-
-    public void setAway(AwayState away) {
-        this.away = away;
     }
 
     public String getName() {
