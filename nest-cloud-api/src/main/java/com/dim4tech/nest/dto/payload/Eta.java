@@ -2,6 +2,8 @@ package com.dim4tech.nest.dto.payload;
 
 import org.joda.time.DateTime;
 
+import java.util.Objects;
+
 public class Eta {
     /* Unique identifier for this ETA instance */
     private TripId tripId;
@@ -40,5 +42,20 @@ public class Eta {
 
     public void setEstimatedArrivalWindowEnd(DateTime estimatedArrivalWindowEnd) {
         this.estimatedArrivalWindowEnd = estimatedArrivalWindowEnd;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Eta eta = (Eta) o;
+        return Objects.equals(tripId, eta.tripId) &&
+                Objects.equals(estimatedArrivalWindowBegin, eta.estimatedArrivalWindowBegin) &&
+                Objects.equals(estimatedArrivalWindowEnd, eta.estimatedArrivalWindowEnd);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tripId, estimatedArrivalWindowBegin, estimatedArrivalWindowEnd);
     }
 }

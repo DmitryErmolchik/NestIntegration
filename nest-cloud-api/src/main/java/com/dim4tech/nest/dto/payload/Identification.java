@@ -1,5 +1,7 @@
 package com.dim4tech.nest.dto.payload;
 
+import java.util.Objects;
+
 public class Identification {
     /* Unique device identifier for your product. */
     private final DeviceId deviceId;
@@ -18,5 +20,19 @@ public class Identification {
 
     public String getSerialNumber() {
         return serialNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Identification that = (Identification) o;
+        return Objects.equals(deviceId, that.deviceId) &&
+                Objects.equals(serialNumber, that.serialNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(deviceId, serialNumber);
     }
 }

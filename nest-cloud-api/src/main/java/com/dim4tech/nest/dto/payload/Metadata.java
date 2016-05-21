@@ -3,6 +3,8 @@ package com.dim4tech.nest.dto.payload;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class Metadata {
     /*
         Part of user authorization, your client will use an access token to make API calls to the Nest service.
@@ -30,5 +32,19 @@ public class Metadata {
 
     public int getClientVersion() {
         return clientVersion;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Metadata metadata = (Metadata) o;
+        return clientVersion == metadata.clientVersion &&
+                Objects.equals(accessToken, metadata.accessToken);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accessToken, clientVersion);
     }
 }

@@ -1,6 +1,7 @@
 package com.dim4tech.nest.dto.payload;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ProductTypeIds {
     private final List<ProductId> ids;
@@ -11,5 +12,18 @@ public class ProductTypeIds {
 
     public List<ProductId> getIds() {
         return ids;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductTypeIds that = (ProductTypeIds) o;
+        return Objects.equals(ids, that.ids);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ids);
     }
 }

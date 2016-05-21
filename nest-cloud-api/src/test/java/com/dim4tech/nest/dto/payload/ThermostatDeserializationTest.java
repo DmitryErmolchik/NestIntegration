@@ -99,43 +99,6 @@ public class ThermostatDeserializationTest {
 
         objectMapper.registerModule(new JodaModule());
         Thermostat result = objectMapper.readValue(json, Thermostat.class);
-        assertEquals(expected.getDeviceId(), result.getDeviceId());
-        assertEquals(expected.getLocale(), result.getLocale());
-        assertEquals(expected.getSoftwareVersion(), result.getSoftwareVersion());
-        assertEquals(expected.getStructureId(), result.getStructureId());
-        assertEquals(expected.getName(), result.getName());
-        assertEquals(expected.getNameLong(), result.getNameLong());
-        assertEquals(expected.getLastConnection(), result.getLastConnection());
-        assertEquals(expected.isOnline(), result.isOnline());
-        assertEquals(expected.isCanCool(), result.isCanCool());
-        assertEquals(expected.isCanHeat(), result.isCanHeat());
-        assertEquals(expected.isUsingEmergencyHeat(), result.isUsingEmergencyHeat());
-        assertEquals(expected.isHasFan(), result.isHasFan());
-        assertEquals(expected.isFanTimerActive(), result.isFanTimerActive());
-        assertEquals(expected.getFanTimerTimeout(), result.getFanTimerTimeout());
-        assertEquals(expected.isHasLeaf(), result.isHasLeaf());
-        assertEquals(expected.getTemperatureScale(), result.getTemperatureScale());
-        assertEquals(expected.getTargetTemperatureF(), result.getTargetTemperatureF(), 0);
-        assertEquals(expected.getTargetTemperatureC(), result.getTargetTemperatureC(), 0);
-        assertEquals(expected.getTargetTemperatureHighF(), result.getTargetTemperatureHighF(), 0);
-        assertEquals(expected.getTargetTemperatureHighC(), result.getTargetTemperatureHighC(), 0);
-        assertEquals(expected.getTargetTemperatureLowF(), result.getTargetTemperatureLowF(), 0);
-        assertEquals(expected.getTargetTemperatureLowC(), result.getTargetTemperatureLowC(), 0);
-        assertEquals(expected.getAwayTemperatureHighF(), result.getAwayTemperatureHighF(), 0);
-        assertEquals(expected.getAwayTemperatureHighC(), result.getAwayTemperatureHighC(), 0);
-        assertEquals(expected.getAwayTemperatureLowF(), result.getAwayTemperatureLowF(), 0);
-        assertEquals(expected.getAwayTemperatureLowC(), result.getAwayTemperatureLowC(), 0);
-        assertEquals(expected.getHvacMode(), result.getHvacMode());
-        assertEquals(expected.getAmbientTemperatureF(), result.getAmbientTemperatureF(), 0);
-        assertEquals(expected.getAmbientTemperatureC(), result.getAmbientTemperatureC(), 0);
-        assertEquals(expected.getHumidity(), result.getHumidity(), 0);
-        assertEquals(expected.getHvacState(), result.getHvacState());
-        assertEquals(expected.getWhereId(), result.getWhereId());
-        assertEquals(expected.isLocked(), result.isLocked());
-        assertEquals(expected.getLockedTempMinF(), result.getLockedTempMinF());
-        assertEquals(expected.getLockedTempMaxF(), result.getLockedTempMaxF());
-        assertEquals(expected.getLockedTempMinC(), result.getLockedTempMinC());
-        assertEquals(expected.getLockedTempMaxC(), result.getLockedTempMaxC());
-        assertEquals(expected.getLabel(), result.getLabel());
+        assertEquals(expected, result);
     }
 }

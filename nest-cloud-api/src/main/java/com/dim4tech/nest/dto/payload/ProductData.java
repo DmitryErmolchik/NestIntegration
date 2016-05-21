@@ -1,6 +1,7 @@
 package com.dim4tech.nest.dto.payload;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class ProductData {
     /* Contains product identifiers. */
@@ -37,5 +38,21 @@ public class ProductData {
 
     public Map<String, ProductResource> getResopurceUse() {
         return resopurceUse;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductData that = (ProductData) o;
+        return Objects.equals(identification, that.identification) &&
+                Objects.equals(location, that.location) &&
+                Objects.equals(software, that.software) &&
+                Objects.equals(resopurceUse, that.resopurceUse);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(identification, location, software, resopurceUse);
     }
 }

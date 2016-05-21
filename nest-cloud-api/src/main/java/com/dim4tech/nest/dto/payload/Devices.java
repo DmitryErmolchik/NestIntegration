@@ -3,6 +3,7 @@ package com.dim4tech.nest.dto.payload;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class Devices {
     private final static String THERMOSTATS = "thermostats";
@@ -45,5 +46,21 @@ public class Devices {
 
     public Map<String, ProductType> getCompany() {
         return company;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Devices devices = (Devices) o;
+        return Objects.equals(thermostats, devices.thermostats) &&
+                Objects.equals(smokeCoAlarms, devices.smokeCoAlarms) &&
+                Objects.equals(cameras, devices.cameras) &&
+                Objects.equals(company, devices.company);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(thermostats, smokeCoAlarms, cameras, company);
     }
 }

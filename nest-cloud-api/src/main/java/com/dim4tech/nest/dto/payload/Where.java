@@ -1,5 +1,7 @@
 package com.dim4tech.nest.dto.payload;
 
+import java.util.Objects;
+
 public class Where {
     /* Where unique identifier. */
     private final WhereId whereId;
@@ -25,5 +27,19 @@ public class Where {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Where where = (Where) o;
+        return Objects.equals(whereId, where.whereId) &&
+                Objects.equals(name, where.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(whereId, name);
     }
 }

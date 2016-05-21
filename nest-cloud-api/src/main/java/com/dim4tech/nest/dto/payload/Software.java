@@ -1,5 +1,7 @@
 package com.dim4tech.nest.dto.payload;
 
+import java.util.Objects;
+
 public class Software {
     private String version;
 
@@ -19,15 +21,12 @@ public class Software {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Software software = (Software) o;
-
-        return version.equals(software.version);
-
+        return Objects.equals(version, software.version);
     }
 
     @Override
     public int hashCode() {
-        return version.hashCode();
+        return Objects.hash(version);
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class NestData {
     private final static String METADATA = "metadata";
@@ -43,5 +44,20 @@ public class NestData {
 
     public Map<StructureId, Structure> getStructure() {
         return structure;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NestData nestData = (NestData) o;
+        return Objects.equals(metadata, nestData.metadata) &&
+                Objects.equals(devices, nestData.devices) &&
+                Objects.equals(structure, nestData.structure);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(metadata, devices, structure);
     }
 }

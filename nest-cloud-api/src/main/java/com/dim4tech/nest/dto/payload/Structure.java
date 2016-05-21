@@ -5,6 +5,7 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public class Structure {
@@ -140,5 +141,32 @@ public class Structure {
 
     public Map<WhereId, Where> getWheres() {
         return wheres;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Structure structure = (Structure) o;
+        return rhrEnrollment == structure.rhrEnrollment &&
+                Objects.equals(structureId, structure.structureId) &&
+                Objects.equals(thermostats, structure.thermostats) &&
+                Objects.equals(smokeCoAlarms, structure.smokeCoAlarms) &&
+                Objects.equals(cameras, structure.cameras) &&
+                Objects.equals(devices, structure.devices) &&
+                away == structure.away &&
+                Objects.equals(name, structure.name) &&
+                Objects.equals(countryCode, structure.countryCode) &&
+                Objects.equals(postalCode, structure.postalCode) &&
+                Objects.equals(peakPeriodStartTime, structure.peakPeriodStartTime) &&
+                Objects.equals(peakPeriodEndTime, structure.peakPeriodEndTime) &&
+                Objects.equals(timeZone, structure.timeZone) &&
+                Objects.equals(eta, structure.eta) &&
+                Objects.equals(wheres, structure.wheres);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(structureId, thermostats, smokeCoAlarms, cameras, devices, away, name, countryCode, postalCode, peakPeriodStartTime, peakPeriodEndTime, timeZone, eta, rhrEnrollment, wheres);
     }
 }

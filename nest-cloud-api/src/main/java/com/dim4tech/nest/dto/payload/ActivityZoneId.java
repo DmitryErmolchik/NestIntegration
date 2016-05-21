@@ -1,24 +1,24 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.util.Objects;
 
-public class WhereId {
+public class ActivityZoneId {
+    /* Activity zone unique identifier */
     private final String id;
 
-    public WhereId(String id) {
+    @JsonCreator
+    public ActivityZoneId(String id) {
         this.id = id;
-    }
-
-    public String getId() {
-        return id;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WhereId whereId = (WhereId) o;
-        return Objects.equals(id, whereId.id);
+        ActivityZoneId that = (ActivityZoneId) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override

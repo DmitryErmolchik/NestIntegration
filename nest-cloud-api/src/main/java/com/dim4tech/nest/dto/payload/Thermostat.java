@@ -3,11 +3,13 @@ package com.dim4tech.nest.dto.payload;
 import com.dim4tech.nest.dto.payload.constants.HvacMode;
 import com.dim4tech.nest.dto.payload.constants.HvacState;
 import com.dim4tech.nest.dto.payload.constants.TemperatureScale;
+import com.dim4tech.nest.helper.LocaleHelper;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 import java.util.Locale;
+import java.util.Objects;
 
 public class Thermostat {
     private final static String DEVICE_ID = "device_id";
@@ -210,7 +212,7 @@ public class Thermostat {
                       @JsonProperty(LOCKED_TEMP_MAX_C) String lockedTempMaxC,
                       @JsonProperty(LABEL) String label) {
         this.deviceId = deviceId;
-        this.locale = convertLocale(locale);
+        this.locale = LocaleHelper.convertLocale(locale);
         this.softwareVersion = softwareVersion;
         this.structureId = structureId;
         this.name = name;
@@ -441,14 +443,53 @@ public class Thermostat {
         this.label = label;
     }
 
-    private Locale convertLocale(Locale locale) {
-        if (isLanguageTag(locale)) {
-            return Locale.forLanguageTag(locale.toString());
-        }
-        return locale;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Thermostat that = (Thermostat) o;
+        return isOnline == that.isOnline &&
+                canCool == that.canCool &&
+                canHeat == that.canHeat &&
+                isUsingEmergencyHeat == that.isUsingEmergencyHeat &&
+                hasFan == that.hasFan &&
+                fanTimerActive == that.fanTimerActive &&
+                hasLeaf == that.hasLeaf &&
+                Double.compare(that.targetTemperatureF, targetTemperatureF) == 0 &&
+                Double.compare(that.targetTemperatureC, targetTemperatureC) == 0 &&
+                Double.compare(that.targetTemperatureHighF, targetTemperatureHighF) == 0 &&
+                Double.compare(that.targetTemperatureHighC, targetTemperatureHighC) == 0 &&
+                Double.compare(that.targetTemperatureLowF, targetTemperatureLowF) == 0 &&
+                Double.compare(that.targetTemperatureLowC, targetTemperatureLowC) == 0 &&
+                Double.compare(that.awayTemperatureHighF, awayTemperatureHighF) == 0 &&
+                Double.compare(that.awayTemperatureHighC, awayTemperatureHighC) == 0 &&
+                Double.compare(that.awayTemperatureLowF, awayTemperatureLowF) == 0 &&
+                Double.compare(that.awayTemperatureLowC, awayTemperatureLowC) == 0 &&
+                Double.compare(that.ambientTemperatureF, ambientTemperatureF) == 0 &&
+                Double.compare(that.ambientTemperatureC, ambientTemperatureC) == 0 &&
+                Double.compare(that.humidity, humidity) == 0 &&
+                isLocked == that.isLocked &&
+                Objects.equals(deviceId, that.deviceId) &&
+                Objects.equals(locale, that.locale) &&
+                Objects.equals(softwareVersion, that.softwareVersion) &&
+                Objects.equals(structureId, that.structureId) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(nameLong, that.nameLong) &&
+                Objects.equals(lastConnection, that.lastConnection) &&
+                Objects.equals(fanTimerTimeout, that.fanTimerTimeout) &&
+                temperatureScale == that.temperatureScale &&
+                hvacMode == that.hvacMode &&
+                hvacState == that.hvacState &&
+                Objects.equals(whereId, that.whereId) &&
+                Objects.equals(lockedTempMinF, that.lockedTempMinF) &&
+                Objects.equals(lockedTempMaxF, that.lockedTempMaxF) &&
+                Objects.equals(lockedTempMinC, that.lockedTempMinC) &&
+                Objects.equals(lockedTempMaxC, that.lockedTempMaxC) &&
+                Objects.equals(label, that.label);
     }
 
-    private boolean isLanguageTag(Locale locale) {
-        return locale.toString() != null && locale.toString().contains("-");
+    @Override
+    public int hashCode() {
+        return Objects.hash(deviceId, locale, softwareVersion, structureId, name, nameLong, lastConnection, isOnline, canCool, canHeat, isUsingEmergencyHeat, hasFan, fanTimerActive, fanTimerTimeout, hasLeaf, temperatureScale, targetTemperatureF, targetTemperatureC, targetTemperatureHighF, targetTemperatureHighC, targetTemperatureLowF, targetTemperatureLowC, awayTemperatureHighF, awayTemperatureHighC, awayTemperatureLowF, awayTemperatureLowC, hvacMode, ambientTemperatureF, ambientTemperatureC, humidity, hvacState, whereId, isLocked, lockedTempMinF, lockedTempMaxF, lockedTempMinC, lockedTempMaxC, label);
     }
 }
