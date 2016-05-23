@@ -5,20 +5,16 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class MetadataDeserializationTest {
+public class WhereDeserializationTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final String json = "{  \n" +
-            " \"access_token\": \"c.FmDPkzyzaQe...\",\n" +
-            " \"client_version\": 1\n" +
-            "}";
-
+                                " \"where_id\": \"Fqp6wJI...\",\n" +
+                                " \"name\": \"Bedroom\"\n" +
+                                "}";
     @Test
     public void deserializationTest() throws Exception {
-        Metadata expected = new Metadata(
-                "c.FmDPkzyzaQe...",
-                1
-        );
-        Metadata result = objectMapper.readValue(json, Metadata.class);
+        Where expected = new Where(new WhereId("Fqp6wJI..."), "Bedroom");
+        Where result = objectMapper.readValue(json, Where.class);
         assertEquals(expected, result);
     }
 }

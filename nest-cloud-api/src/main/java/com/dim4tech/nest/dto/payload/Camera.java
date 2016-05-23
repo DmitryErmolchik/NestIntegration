@@ -165,7 +165,7 @@ public class Camera {
     }
 
     public DateTime getLastIsOnlineChange() {
-        return lastIsOnlineChange;
+        return new DateTime(lastIsOnlineChange);
     }
 
     public boolean isVideoHistoryEnabled() {

@@ -1,32 +1,33 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.List;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductTypeIds {
-    private final List<ProductId> ids;
+public class CompanyId {
+    private final String id;
 
-    public ProductTypeIds(List<ProductId> ids) {
-        this.ids = ids;
+    @JsonCreator
+    public CompanyId(String id) {
+        this.id = id;
     }
 
-    public List<ProductId> getIds() {
-        return ids;
+    public String getId() {
+        return id;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductTypeIds that = (ProductTypeIds) o;
-        return Objects.equals(ids, that.ids);
+        CompanyId companyId = (CompanyId) o;
+        return Objects.equals(id, companyId.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ids);
+        return Objects.hash(id);
     }
 }

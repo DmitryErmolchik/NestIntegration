@@ -6,13 +6,13 @@ import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductId {
-    private final DeviceId id;
+    private final String id;
 
-    public ProductId(DeviceId id) {
+    public ProductId(String id) {
         this.id = id;
     }
 
-    public DeviceId getId() {
+    public String getId() {
         return id;
     }
 

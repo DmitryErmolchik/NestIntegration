@@ -134,7 +134,7 @@ public class SmokeCoAlarm {
     }
 
     public DateTime getLastConnection() {
-        return lastConnection;
+        return new DateTime(lastConnection);
     }
 
     public boolean isOnline() {
@@ -158,7 +158,7 @@ public class SmokeCoAlarm {
     }
 
     public DateTime getLastManualTestTime() {
-        return lastManualTestTime;
+        return new DateTime(lastManualTestTime);
     }
 
     public UiColorState getUiColorState() {

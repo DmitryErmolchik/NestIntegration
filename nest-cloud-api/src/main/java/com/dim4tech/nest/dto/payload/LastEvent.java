@@ -90,15 +90,15 @@ public class LastEvent {
     }
 
     public DateTime getStartTime() {
-        return startTime;
+        return new DateTime(startTime);
     }
 
     public DateTime getEndTime() {
-        return endTime;
+        return new DateTime(endTime);
     }
 
     public DateTime getUrlsExpireTime() {
-        return urlsExpireTime;
+        return new DateTime(urlsExpireTime);
     }
 
     public String getWebUrl() {

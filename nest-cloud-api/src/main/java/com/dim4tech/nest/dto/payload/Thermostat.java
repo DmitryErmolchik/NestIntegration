@@ -278,7 +278,7 @@ public class Thermostat {
     }
 
     public DateTime getLastConnection() {
-        return lastConnection;
+        return new DateTime(lastConnection);
     }
 
     public boolean isOnline() {
@@ -306,7 +306,7 @@ public class Thermostat {
     }
 
     public DateTime getFanTimerTimeout() {
-        return fanTimerTimeout;
+        return new DateTime(fanTimerTimeout);
     }
 
     public boolean isHasLeaf() {

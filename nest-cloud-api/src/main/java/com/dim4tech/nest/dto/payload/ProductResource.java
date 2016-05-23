@@ -29,11 +29,11 @@ public class ProductResource {
     }
 
     public DateTime getMeasurementResetTime() {
-        return measurementResetTime;
+        return new DateTime(measurementResetTime);
     }
 
     public DateTime getMeasurementTime() {
-        return measurementTime;
+        return new DateTime(measurementTime);
     }
 
     @Override
