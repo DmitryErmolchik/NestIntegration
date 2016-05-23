@@ -1,9 +1,11 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductResource {
     /* Number of joules consumed in the time period (where time period is measurement_time - measurement_reset_time). */
     private final double value;

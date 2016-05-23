@@ -1,6 +1,7 @@
 package com.dim4tech.nest.dto.payload;
 
 import com.dim4tech.nest.dto.payload.constants.AwayState;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TimeZone;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Structure {
     /* Unique structure identifier */
     private final StructureId structureId;

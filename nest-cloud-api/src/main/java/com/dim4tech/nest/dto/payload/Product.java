@@ -1,8 +1,11 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Map;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
     private final Map<DeviceId, ProductData> products;
 

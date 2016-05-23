@@ -1,9 +1,11 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Eta {
     /* Unique identifier for this ETA instance */
     private final TripId tripId;

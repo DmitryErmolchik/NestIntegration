@@ -5,12 +5,14 @@ import com.dim4tech.nest.dto.payload.constants.HvacState;
 import com.dim4tech.nest.dto.payload.constants.TemperatureScale;
 import com.dim4tech.nest.helper.LocaleHelper;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 import java.util.Locale;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Thermostat {
     private final static String DEVICE_ID = "device_id";
     /* Thermostat unique identifier */
