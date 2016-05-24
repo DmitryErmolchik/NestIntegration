@@ -6,7 +6,10 @@ import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TimeZone;
 
 import static org.junit.Assert.assertEquals;
 
@@ -51,12 +54,16 @@ public class StructureDeserializationTest {
     }
 
     private Structure buildExpectedStructure() {
-        Map<CompanyId, Map<String, List<ProductId>>> devices = new HashMap<>();
+        Map<String, Object>  productTypes = new HashMap<>();
+        productTypes.put("$product_type", new ProductTypeIds(
+                Arrays.asList("CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg",
+                "DPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg")));
+        CompanyDevices companyDevices = new CompanyDevices(productTypes);
 
-        Map<String, List<ProductId>> productType = new HashMap<>();
-        productType.put("$product_type", Arrays.asList(new ProductId("CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg"),
-                new ProductId("DPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg")));
-        devices.put(new CompanyId("$company"), productType);
+        Map<CompanyId, CompanyDevices> company = new HashMap<>();
+        company.put(new CompanyId("$company"), companyDevices);
+
+        StructureDevices devices = new StructureDevices(company);
 
         Map<WhereId, Where> wheres = new HashMap<>();
         wheres.put(new WhereId("Fqp6wJI..."), new Where(new WhereId("Fqp6wJI..."), "Bedroom"));

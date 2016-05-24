@@ -2,22 +2,63 @@ package com.dim4tech.nest.dto.payload;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductData {
+    private final static String IDENTIFICATION = "identification";
     /* Contains product identifiers. */
     private final Identification identification;
 
+    private final static String LOCATION = "location";
     /* Contains the structure identifier for your product. */
     private final ProductLocation location;
 
+    private final static String SOFTWARE = "software";
     /* Contains the software version identifier for your product. */
     private final Software software;
 
+    private final static String RESOURCE_USE = "resource_use";
     /* Contains the resource use data values and measurement timestamps. */
     private final Map<String, ProductResource> resopurceUse;
+
+    public ProductData(Map<String, Object> productData) {
+        Identification identification = null;
+        ProductLocation location = null;
+        Software software = null;
+        Map<String, ProductResource> resopurceUse = new HashMap<>();
+
+        for (Map.Entry<String, Object> entry : productData.entrySet()) {
+            switch (entry.getKey()) {
+                case IDENTIFICATION :
+                    identification = new Identification((Map<String, String>) entry.getValue());
+                    break;
+                case LOCATION :
+                    location = new ProductLocation((Map<String, String>) entry.getValue());
+                    break;
+                case SOFTWARE :
+                    software = new Software((Map<String, String>) entry.getValue());
+                    break;
+                case RESOURCE_USE:
+                    resopurceUse = buildResourceUse((Map<String, Object>) entry.getValue());
+                    break;
+            }
+        }
+        this.identification = identification != null ? identification : null;
+        this.location = location != null ? location : null;
+        this.software = software != null ? software : null;
+        this.resopurceUse = resopurceUse.size() > 0 ? resopurceUse : null;
+    }
+
+    private Map<String, ProductResource> buildResourceUse(Map<String, Object> data) {
+        Map<String, ProductResource> resources = new HashMap<>();
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+            resources.put(entry.getKey(), new ProductResource((Map<String, Object>) entry.getValue()));
+        }
+        return resources;
+    }
 
     public ProductData(Identification identification, ProductLocation location,
                        Software software, Map<String, ProductResource> resopurceUse) {

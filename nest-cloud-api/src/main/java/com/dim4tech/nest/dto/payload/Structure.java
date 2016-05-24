@@ -32,7 +32,7 @@ public class Structure {
 
     private final static String DEVICES = "devices";
     /* Devices */
-    private final Map<CompanyId, Map<String, List<ProductId>>> devices;
+    private final StructureDevices devices;
 
     private final static String AWAY = "away";
     /* Describes the Structure state; see the Away Guide for more information */
@@ -70,11 +70,29 @@ public class Structure {
 
     private final static String RHR_ENROLLMENT = "rhr_enrollment";
     /* Rush Hour Rewards enrollment status */
-    private final boolean rhrEnrollment;
+    private final Boolean rhrEnrollment;
 
     private final static String WHERES = "wheres";
     /* An object containing where identifiers for devices in the structure. */
     private final Map<WhereId, Where> wheres;
+
+    /*public Structure(Map<String, Object> structureDate) {
+        structureId = null;
+        thermostats = null;
+        smokeCoAlarms = null;
+        cameras = null;
+        devices = null;
+        away = null;
+        name = null;
+        countryCode = null;
+        postalCode = null;
+        peakPeriodStartTime = null;
+        peakPeriodEndTime = null;
+        timeZone = null;
+        eta = null;
+        rhrEnrollment = null;
+        wheres = null;
+    }*/
 
     @JsonCreator
     public Structure(
@@ -82,7 +100,7 @@ public class Structure {
             @JsonProperty(THERMOSTATS) List<DeviceId> thermostats,
             @JsonProperty(SMOKE_CO_ALARMS) List<DeviceId> smokeCoAlarms,
             @JsonProperty(CAMERAS) List<DeviceId> cameras,
-            @JsonProperty(DEVICES) Map<CompanyId, Map<String, List<ProductId>>> devices,
+            @JsonProperty(DEVICES) StructureDevices devices,
             @JsonProperty(AWAY) AwayState away,
             @JsonProperty(NAME) String name,
             @JsonProperty(COUNTRY_CODE) String countryCode,
@@ -91,7 +109,7 @@ public class Structure {
             @JsonProperty(PEAK_PERIOD_END_TIME) DateTime peakPeriodEndTime,
             @JsonProperty(TIME_ZONE) TimeZone timeZone,
             @JsonProperty(ETA) Eta eta,
-            @JsonProperty(RHR_ENROLLMENT) boolean rhrEnrollment,
+            @JsonProperty(RHR_ENROLLMENT) Boolean rhrEnrollment,
             @JsonProperty(WHERES) Map<WhereId, Where> wheres) {
         this.structureId = structureId;
         this.thermostats = thermostats;
@@ -126,7 +144,7 @@ public class Structure {
         return cameras;
     }
 
-    public Map<CompanyId, Map<String, List<ProductId>>> getDevices() {
+    public StructureDevices getDevices() {
         return devices;
     }
 
@@ -162,7 +180,7 @@ public class Structure {
         return eta;
     }
 
-    public boolean isRhrEnrollment() {
+    public Boolean isRhrEnrollment() {
         return rhrEnrollment;
     }
 

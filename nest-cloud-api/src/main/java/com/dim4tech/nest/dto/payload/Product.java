@@ -1,7 +1,9 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -9,8 +11,10 @@ import java.util.Objects;
 public class Product {
     private final Map<DeviceId, ProductData> products;
 
-    public Product(Map<DeviceId, ProductData> products) {
-        this.products = products;
+    @JsonCreator
+    public Product(Map<String, Object> products) {
+        this.products = new HashMap<>();
+        products.forEach((deviceId, productData) -> this.products.put(new DeviceId(deviceId), new ProductData((Map<String, Object>) productData)));
     }
 
     public Map<DeviceId, ProductData> getProducts() {

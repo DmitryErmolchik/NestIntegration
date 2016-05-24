@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductId {
+public class ProductTypeId {
     private final String id;
 
-    public ProductId(String id) {
+    public ProductTypeId(String id) {
         this.id = id;
     }
 
@@ -20,8 +20,8 @@ public class ProductId {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductId productId = (ProductId) o;
-        return Objects.equals(id, productId.id);
+        ProductTypeId productTypeId = (ProductTypeId) o;
+        return Objects.equals(id, productTypeId.id);
     }
 
     @Override
