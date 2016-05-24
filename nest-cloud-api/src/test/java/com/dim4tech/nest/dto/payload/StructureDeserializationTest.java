@@ -54,10 +54,10 @@ public class StructureDeserializationTest {
     }
 
     private Structure buildExpectedStructure() {
-        Map<String, Object>  productTypes = new HashMap<>();
+        Map<String, ProductTypeIds>  productTypes = new HashMap<>();
         productTypes.put("$product_type", new ProductTypeIds(
-                Arrays.asList("CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg",
-                "DPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg")));
+                Arrays.asList(new DeviceId("CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg"),
+                new DeviceId("DPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg"))));
         CompanyDevices companyDevices = new CompanyDevices(productTypes);
 
         Map<CompanyId, CompanyDevices> company = new HashMap<>();

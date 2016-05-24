@@ -10,22 +10,27 @@ import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyDevices {
-    private final Map<String, ProductTypeIds> productTypes = new HashMap<>();
+    private final Map<String, ProductTypeIds> productTypes;
+
+    public CompanyDevices() {
+        this(new HashMap<>());
+    }
+
+    public CompanyDevices(Map<String, ProductTypeIds> productTypes) {
+        this.productTypes = productTypes;
+    }
 
     @JsonCreator
-    public CompanyDevices(Map<String, Object> productTypes) {
+    static CompanyDevices createFromJson(Map<String, Object> productTypes) {
+        CompanyDevices companyDevices = new CompanyDevices();
         for (Map.Entry<String, Object> entry : productTypes.entrySet()) {
-            if (entry.getValue() instanceof ProductTypeIds) {
-                this.productTypes.put(entry.getKey(), (ProductTypeIds) entry.getValue());
-            }
-            else {
-                this.productTypes.put(entry.getKey(), new ProductTypeIds((List<String>) entry.getValue()));
-            }
+            companyDevices.productTypes.put(entry.getKey(), ProductTypeIds.createFromJson((List<String>) entry.getValue()));
         }
+        return companyDevices;
     }
 
     public Map<String, ProductTypeIds> getProductTypes() {
-        return productTypes;
+        return new HashMap<>(productTypes);
     }
 
     @Override

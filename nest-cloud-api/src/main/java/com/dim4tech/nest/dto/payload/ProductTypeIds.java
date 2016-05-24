@@ -9,13 +9,23 @@ import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductTypeIds {
-    private final List<DeviceId> ids = new ArrayList<>();
+    private final List<DeviceId> ids;
+
+    private ProductTypeIds() {
+        this(new ArrayList<>());
+    }
+
+    public ProductTypeIds(List<DeviceId> ids) {
+        this.ids = ids;
+    }
 
     @JsonCreator
-    public ProductTypeIds(List<String> ids) {
+    static ProductTypeIds createFromJson(List<String> ids) {
+        ProductTypeIds productTypeIds = new ProductTypeIds();
         for (String id : ids) {
-            this.ids.add(new DeviceId(id));
+            productTypeIds.ids.add(new DeviceId(id));
         }
+        return productTypeIds;
     }
 
     public List<DeviceId> getIds() {

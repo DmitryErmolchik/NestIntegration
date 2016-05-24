@@ -20,10 +20,10 @@ public class StructureDevices {
     }
 
     @JsonCreator
-    private static StructureDevices createFromJson(Map<String, Object> devices) {
+    static StructureDevices createFromJson(Map<String, Object> devices) {
         StructureDevices structureDevices = new StructureDevices();
         for (Map.Entry<String, Object> entry : devices.entrySet()) {
-                structureDevices.devices.put(new CompanyId((String) entry.getKey()), new CompanyDevices((Map<String, Object>) entry.getValue()));
+                structureDevices.devices.put(new CompanyId(entry.getKey()), CompanyDevices.createFromJson((Map<String, Object>) entry.getValue()));
         }
         return structureDevices;
     }
