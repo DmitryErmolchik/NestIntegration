@@ -57,7 +57,13 @@ public class ThermostatDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        Thermostat expected = new Thermostat(
+        objectMapper.registerModule(new JodaModule());
+        Thermostat result = objectMapper.readValue(json, Thermostat.class);
+        assertEquals(buildExpectedThermostat(), result);
+    }
+
+    private Thermostat buildExpectedThermostat() {
+        return new Thermostat(
                 new DeviceId("peyiJNo0IldT2YlIVtYaGQ"),
                 new Locale("en", "us"),
                 "4.0",
@@ -96,9 +102,5 @@ public class ThermostatDeserializationTest {
                 "19.5",
                 "24.5",
                 "upstairs");
-
-        objectMapper.registerModule(new JodaModule());
-        Thermostat result = objectMapper.readValue(json, Thermostat.class);
-        assertEquals(expected, result);
     }
 }

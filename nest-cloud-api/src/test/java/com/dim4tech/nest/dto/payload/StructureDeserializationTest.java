@@ -1,8 +1,14 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.dim4tech.nest.dto.payload.constants.AwayState;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+import org.joda.time.DateTime;
 import org.junit.Test;
+
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class StructureDeserializationTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -40,9 +46,39 @@ public class StructureDeserializationTest {
     @Test
     public void deserializationTest() throws Exception {
         objectMapper.registerModule(new JodaModule());
-        //Structure expected = new Structure();
         Structure result = objectMapper.readValue(json, Structure.class);
-        //assertEquals(expected, result);
+        assertEquals(buildExpectedStructure(), result);
     }
 
+    private Structure buildExpectedStructure() {
+        Map<CompanyId, Map<String, List<ProductId>>> devices = new HashMap<>();
+
+        Map<String, List<ProductId>> productType = new HashMap<>();
+        productType.put("$product_type", Arrays.asList(new ProductId("CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg"),
+                new ProductId("DPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg")));
+        devices.put(new CompanyId("$company"), productType);
+
+        Map<WhereId, Where> wheres = new HashMap<>();
+        wheres.put(new WhereId("Fqp6wJI..."), new Where(new WhereId("Fqp6wJI..."), "Bedroom"));
+
+        Structure expected = new Structure(
+                new StructureId("VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw"),
+                Arrays.asList(new DeviceId("peyiJNo0IldT2YlIVtYaGQ"), new DeviceId("qeyiJNo0IldT2YlIVtYaGQ")),
+                Arrays.asList(new DeviceId("RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs"), new DeviceId("STMTKxsQTCxzVcsySOHPxKoF4OyCifrs")),
+                Arrays.asList(new DeviceId("awJo6rH…"), new DeviceId("bwJo6rH…")),
+                devices,
+                AwayState.HOME,
+                "Home",
+                "US",
+                "94304",
+                DateTime.parse("2016-10-31T23:59:59.000Z"),
+                DateTime.parse("2016-10-31T23:59:59.000Z"),
+                TimeZone.getTimeZone("America/Los_Angeles"),
+                new Eta(new TripId("myTripHome1024"),
+                        DateTime.parse("2016-10-31T22:42:59.000Z"),
+                        DateTime.parse("2016-10-31T23:59:59.000Z")),
+                true,
+                wheres);
+        return expected;
+    }
 }

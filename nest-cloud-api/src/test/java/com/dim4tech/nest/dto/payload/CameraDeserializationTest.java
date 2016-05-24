@@ -49,12 +49,11 @@ public class CameraDeserializationTest {
     @Test
     public void deserializationTest() throws Exception {
         objectMapper.registerModule(new JodaModule());
-        Camera expected = buildCamera();
         Camera result = objectMapper.readValue(json, Camera.class);
-        assertEquals(expected, result);
+        assertEquals(buildExpectedCamera(), result);
     }
 
-    private Camera buildCamera() {
+    private Camera buildExpectedCamera() {
         List<ActivityZoneId> activityZoneIds = new ArrayList<>();
         activityZoneIds.add(new ActivityZoneId("244083"));
         activityZoneIds.add(new ActivityZoneId("244084"));

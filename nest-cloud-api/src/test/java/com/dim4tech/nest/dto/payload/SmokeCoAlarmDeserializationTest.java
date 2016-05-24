@@ -34,7 +34,13 @@ public class SmokeCoAlarmDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        SmokeCoAlarm expected = new SmokeCoAlarm(
+        objectMapper.registerModule(new JodaModule());
+        SmokeCoAlarm result = objectMapper.readValue(json, SmokeCoAlarm.class);
+        assertEquals(buildExpectedSmokeCoAlarm(), result);
+    }
+
+    private SmokeCoAlarm buildExpectedSmokeCoAlarm() {
+        return new SmokeCoAlarm(
                 new DeviceId("RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs"),
                 Locale.US,
                 "1.01",
@@ -51,8 +57,5 @@ public class SmokeCoAlarmDeserializationTest {
                 UiColorState.GRAY,
                 new WhereId("UNCBGUnN24...")
         );
-        objectMapper.registerModule(new JodaModule());
-        SmokeCoAlarm result = objectMapper.readValue(json, SmokeCoAlarm.class);
-        assertEquals(expected, result);
     }
 }

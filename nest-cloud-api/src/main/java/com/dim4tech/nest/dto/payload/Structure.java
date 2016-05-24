@@ -77,22 +77,22 @@ public class Structure {
     private final Map<WhereId, Where> wheres;
 
     @JsonCreator
-    public Structure(@JsonProperty(COUNTRY_CODE) String countryCode,
-                     @JsonProperty(STRUCTURE_ID) StructureId structureId,
-                     @JsonProperty(THERMOSTATS) List<DeviceId> thermostats,
-                     @JsonProperty(SMOKE_CO_ALARMS) List<DeviceId> smokeCoAlarms,
-                     @JsonProperty(CAMERAS) List<DeviceId> cameras,
-                     @JsonProperty(DEVICES) Map<CompanyId, Map<String, List<ProductId>>> devices,
-                     @JsonProperty(AWAY) AwayState away,
-                     @JsonProperty(NAME) String name,
-                     @JsonProperty(POSTAL_CODE) String postalCode,
-                     @JsonProperty(PEAK_PERIOD_START_TIME) DateTime peakPeriodStartTime,
-                     @JsonProperty(PEAK_PERIOD_END_TIME) DateTime peakPeriodEndTime,
-                     @JsonProperty(TIME_ZONE) TimeZone timeZone,
-                     @JsonProperty(ETA) Eta eta,
-                     @JsonProperty(RHR_ENROLLMENT) boolean rhrEnrollment,
-                     @JsonProperty(WHERES) Map<WhereId, Where> wheres) {
-        this.countryCode = countryCode;
+    public Structure(
+            @JsonProperty(STRUCTURE_ID) StructureId structureId,
+            @JsonProperty(THERMOSTATS) List<DeviceId> thermostats,
+            @JsonProperty(SMOKE_CO_ALARMS) List<DeviceId> smokeCoAlarms,
+            @JsonProperty(CAMERAS) List<DeviceId> cameras,
+            @JsonProperty(DEVICES) Map<CompanyId, Map<String, List<ProductId>>> devices,
+            @JsonProperty(AWAY) AwayState away,
+            @JsonProperty(NAME) String name,
+            @JsonProperty(COUNTRY_CODE) String countryCode,
+            @JsonProperty(POSTAL_CODE) String postalCode,
+            @JsonProperty(PEAK_PERIOD_START_TIME) DateTime peakPeriodStartTime,
+            @JsonProperty(PEAK_PERIOD_END_TIME) DateTime peakPeriodEndTime,
+            @JsonProperty(TIME_ZONE) TimeZone timeZone,
+            @JsonProperty(ETA) Eta eta,
+            @JsonProperty(RHR_ENROLLMENT) boolean rhrEnrollment,
+            @JsonProperty(WHERES) Map<WhereId, Where> wheres) {
         this.structureId = structureId;
         this.thermostats = thermostats;
         this.smokeCoAlarms = smokeCoAlarms;
@@ -100,6 +100,7 @@ public class Structure {
         this.devices = devices;
         this.away = away;
         this.name = name;
+        this.countryCode = countryCode;
         this.postalCode = postalCode;
         this.peakPeriodStartTime = peakPeriodStartTime;
         this.peakPeriodEndTime = peakPeriodEndTime;

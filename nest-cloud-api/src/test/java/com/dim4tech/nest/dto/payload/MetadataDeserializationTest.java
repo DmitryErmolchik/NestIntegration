@@ -14,11 +14,14 @@ public class MetadataDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        Metadata expected = new Metadata(
+        Metadata result = objectMapper.readValue(json, Metadata.class);
+        assertEquals(buildExpectedMetadate(), result);
+    }
+
+    private Metadata buildExpectedMetadate() {
+        return new Metadata(
                 "c.FmDPkzyzaQe...",
                 1
         );
-        Metadata result = objectMapper.readValue(json, Metadata.class);
-        assertEquals(expected, result);
     }
 }

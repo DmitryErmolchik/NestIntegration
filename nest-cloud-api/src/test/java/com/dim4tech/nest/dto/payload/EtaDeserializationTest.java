@@ -18,12 +18,16 @@ public class EtaDeserializationTest {
     @Test
     public void deserializationTest() throws Exception {
         objectMapper.registerModule(new JodaModule());
-        Eta expected = new Eta(
+        Eta expected = buildExpectedEta();
+        Eta result = objectMapper.readValue(json, Eta.class);
+        assertEquals(expected, result);
+    }
+
+    private Eta buildExpectedEta() {
+        return new Eta(
                 new TripId("myTripHome1024"),
                 DateTime.parse("2016-10-31T22:42:59.000Z"),
                 DateTime.parse("2016-10-31T23:59:59.000Z")
-                );
-        Eta result = objectMapper.readValue(json, Eta.class);
-        assertEquals(expected, result);
+        );
     }
 }

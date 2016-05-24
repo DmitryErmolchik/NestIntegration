@@ -27,11 +27,17 @@ public class LastEventDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
+        objectMapper.registerModule(new JodaModule());
+        LastEvent result = objectMapper.readValue(json, LastEvent.class);
+        assertEquals(buildExpectedLastEvent(), result);
+    }
+
+    private LastEvent buildExpectedLastEvent() {
         List<ActivityZoneId> activityZoneIds = new ArrayList<>();
         activityZoneIds.add(new ActivityZoneId("244083"));
         activityZoneIds.add(new ActivityZoneId("244084"));
         activityZoneIds.add(new ActivityZoneId("244085"));
-        LastEvent expected = new LastEvent(
+        return new LastEvent(
                 true,
                 true,
                 DateTime.parse("2016-12-29T00:00:00.000Z"),
@@ -43,8 +49,5 @@ public class LastEventDeserializationTest {
                 "STRING1/device_id/STRING2?auth=access_token",
                 activityZoneIds
         );
-        objectMapper.registerModule(new JodaModule());
-        LastEvent result = objectMapper.readValue(json, LastEvent.class);
-        assertEquals(expected, result);
     }
 }

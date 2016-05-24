@@ -13,8 +13,11 @@ public class WhereDeserializationTest {
                                 "}";
     @Test
     public void deserializationTest() throws Exception {
-        Where expected = new Where(new WhereId("Fqp6wJI..."), "Bedroom");
         Where result = objectMapper.readValue(json, Where.class);
-        assertEquals(expected, result);
+        assertEquals(buildExpectedWhere(), result);
+    }
+
+    private Where buildExpectedWhere() {
+        return new Where(new WhereId("Fqp6wJI..."), "Bedroom");
     }
 }
