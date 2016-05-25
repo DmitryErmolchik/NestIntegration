@@ -2,6 +2,7 @@ package com.dim4tech.nest.dto.payload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 import java.util.Objects;
@@ -26,8 +27,11 @@ public class Devices {
     private final Map<String, ProductType> company;
 
     @JsonCreator
-    public Devices(Map<DeviceId, Thermostat> thermostats, Map<DeviceId, SmokeCoAlarm> smokeCoAlarms,
-                   Map<DeviceId, Camera> cameras, Map<String, ProductType> company) {
+    public Devices(
+            @JsonProperty(THERMOSTATS) Map<DeviceId, Thermostat> thermostats,
+            @JsonProperty(SMOKE_CO_ALARMS) Map<DeviceId, SmokeCoAlarm> smokeCoAlarms,
+            @JsonProperty(CAMERAS) Map<DeviceId, Camera> cameras,
+            @JsonProperty(COMPANY) Map<String, ProductType> company) {
         this.thermostats = thermostats;
         this.smokeCoAlarms = smokeCoAlarms;
         this.cameras = cameras;
