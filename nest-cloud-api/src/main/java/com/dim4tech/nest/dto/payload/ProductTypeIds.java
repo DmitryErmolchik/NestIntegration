@@ -11,17 +11,13 @@ import java.util.Objects;
 public class ProductTypeIds {
     private final List<DeviceId> ids;
 
-    private ProductTypeIds() {
-        this(new ArrayList<>());
-    }
-
     public ProductTypeIds(List<DeviceId> ids) {
         this.ids = ids;
     }
 
     @JsonCreator
     static ProductTypeIds createFromJson(List<String> ids) {
-        ProductTypeIds productTypeIds = new ProductTypeIds();
+        ProductTypeIds productTypeIds = new ProductTypeIds(new ArrayList<>());
         for (String id : ids) {
             productTypeIds.ids.add(new DeviceId(id));
         }

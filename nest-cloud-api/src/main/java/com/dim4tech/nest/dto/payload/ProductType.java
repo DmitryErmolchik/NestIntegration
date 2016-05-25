@@ -9,11 +9,19 @@ import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductType {
-    private final Map<ProductTypeId, Product> productType = new HashMap<>();
+    private final Map<ProductTypeId, Product> productType;
+
+    public ProductType(Map<ProductTypeId, Product> productType) {
+        this.productType = productType;
+    }
 
     @JsonCreator
-    public ProductType(Map<String, Object> props) {
-        props.forEach((productId, product) -> productType.put(new ProductTypeId(productId), new Product((Map<String, Object>) product)));
+    public static ProductType createFromJson(Map<String, Object> props) {
+        ProductType productTypeIntance = new ProductType(new HashMap<>());
+        for (Map.Entry<String, Object> entry : props.entrySet()) {
+            productTypeIntance.productType.put(new ProductTypeId(entry.getKey()), Product.createFromJson((Map<String, Object>) entry.getValue()));
+        }
+        return productTypeIntance;
     }
 
     public Map<ProductTypeId, Product> getProductType() {

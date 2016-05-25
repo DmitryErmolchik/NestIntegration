@@ -17,7 +17,16 @@ public class Identification {
     /* Serial number of your product or device. */
     private final String serialNumber;
 
-    public Identification(Map<String, String> identificationData) {
+
+    @JsonCreator
+    public Identification(
+            @JsonProperty(DEVICE_ID) DeviceId deviceId,
+            @JsonProperty(SERIAL_NUMBER) String serialNumber) {
+        this.deviceId = deviceId;
+        this.serialNumber = serialNumber;
+    }
+
+    public static Identification createFromJson(Map<String, String> identificationData) {
         String deviceId = null;
         String serialNumber = null;
         for (Map.Entry<String, String> entry : identificationData.entrySet()) {
@@ -30,16 +39,7 @@ public class Identification {
                     break;
             }
         }
-        this.deviceId = deviceId != null ? new DeviceId(deviceId) : null;
-        this.serialNumber = serialNumber != null ? serialNumber : null;
-    }
-
-    @JsonCreator
-    public Identification(
-            @JsonProperty(DEVICE_ID) DeviceId deviceId,
-            @JsonProperty(SERIAL_NUMBER) String serialNumber) {
-        this.deviceId = deviceId;
-        this.serialNumber = serialNumber;
+        return new Identification(new DeviceId(deviceId), serialNumber);
     }
 
     public DeviceId getDeviceId() {

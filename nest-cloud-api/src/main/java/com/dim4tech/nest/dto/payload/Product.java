@@ -11,10 +11,17 @@ import java.util.Objects;
 public class Product {
     private final Map<DeviceId, ProductData> products;
 
+    public Product(Map<DeviceId, ProductData> products) {
+        this.products = products;
+    }
+
     @JsonCreator
-    public Product(Map<String, Object> products) {
-        this.products = new HashMap<>();
-        products.forEach((deviceId, productData) -> this.products.put(new DeviceId(deviceId), new ProductData((Map<String, Object>) productData)));
+    public static Product createFromJson(Map<String, Object> products) {
+        Product product = new Product(new HashMap<>());
+        for (Map.Entry<String, Object> entry : products.entrySet()) {
+            product.products.put(new DeviceId(entry.getKey()), ProductData.createFromJson((Map<String, Object>) entry.getValue()));
+        }
+        return product;
     }
 
     public Map<DeviceId, ProductData> getProducts() {

@@ -11,17 +11,13 @@ import java.util.Objects;
 public class StructureDevices {
     private final Map<CompanyId, CompanyDevices> devices;
 
-    public StructureDevices() {
-        this(new HashMap<>());
-    }
-
     public StructureDevices(Map<CompanyId, CompanyDevices> devices) {
         this.devices = devices;
     }
 
     @JsonCreator
     static StructureDevices createFromJson(Map<String, Object> devices) {
-        StructureDevices structureDevices = new StructureDevices();
+        StructureDevices structureDevices = new StructureDevices(new HashMap<>());
         for (Map.Entry<String, Object> entry : devices.entrySet()) {
                 structureDevices.devices.put(new CompanyId(entry.getKey()), CompanyDevices.createFromJson((Map<String, Object>) entry.getValue()));
         }

@@ -24,7 +24,17 @@ public class ProductResource {
         in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. */
     private final DateTime measurementTime;
 
-    public ProductResource(Map<String, Object> productResource) {
+    @JsonCreator
+    public ProductResource(
+            @JsonProperty(VALUE) Double value,
+            @JsonProperty(MEASUREMENT_RESET_TIME) DateTime measurementResetTime,
+            @JsonProperty(MEASUREMENT_TIME) DateTime measurementTime) {
+        this.value = value;
+        this.measurementResetTime = measurementResetTime;
+        this.measurementTime = measurementTime;
+    }
+
+    public static ProductResource createFromJson(Map<String, Object> productResource) {
         Double value = null;
         String measurementResetTime = null;
         String measurementTime = null;
@@ -41,19 +51,9 @@ public class ProductResource {
                     break;
             }
         }
-        this.value = value != null ? value : null;
-        this.measurementResetTime = measurementResetTime != null ? DateTime.parse(measurementResetTime) : null;
-        this.measurementTime = measurementTime != null ? DateTime.parse(measurementTime) : null;
-    }
-
-    @JsonCreator
-    public ProductResource(
-            @JsonProperty(VALUE) Double value,
-            @JsonProperty(MEASUREMENT_RESET_TIME) DateTime measurementResetTime,
-            @JsonProperty(MEASUREMENT_TIME) DateTime measurementTime) {
-        this.value = value;
-        this.measurementResetTime = measurementResetTime;
-        this.measurementTime = measurementTime;
+        return new ProductResource(value,
+                measurementResetTime != null ? DateTime.parse(measurementResetTime) : null,
+                measurementTime != null ? DateTime.parse(measurementTime) : null);
     }
 
     public Double getValue() {

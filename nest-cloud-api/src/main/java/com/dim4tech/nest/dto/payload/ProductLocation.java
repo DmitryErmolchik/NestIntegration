@@ -17,7 +17,15 @@ public class ProductLocation {
     /* Where unique identifier. */
     private final WhereId whereId;
 
-    public ProductLocation(Map<String, String> identificationData) {
+    @JsonCreator
+    public ProductLocation(
+            @JsonProperty(STRUCTURE_ID) StructureId structureId,
+            @JsonProperty(WHERE_ID) WhereId whereId) {
+        this.structureId = structureId;
+        this.whereId = whereId;
+    }
+
+    public static ProductLocation createFromJson(Map<String, String> identificationData) {
         String structureId = null;
         String whereId = null;
         for (Map.Entry<String, String> entry : identificationData.entrySet()) {
@@ -30,16 +38,8 @@ public class ProductLocation {
                     break;
             }
         }
-        this.structureId = structureId != null ? new StructureId(structureId) : null;
-        this.whereId = whereId != null ? new WhereId(whereId) : null;
-    }
-
-    @JsonCreator
-    public ProductLocation(
-            @JsonProperty(STRUCTURE_ID) StructureId structureId,
-            @JsonProperty(WHERE_ID) WhereId whereId) {
-        this.structureId = structureId;
-        this.whereId = whereId;
+        return new ProductLocation(structureId != null ? new StructureId(structureId) : null,
+                                   whereId != null ? new WhereId(whereId) : null);
     }
 
     public StructureId getStructureId() {

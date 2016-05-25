@@ -13,7 +13,12 @@ public class Software {
     /* Software version number of your product or device. */
     private final String version;
 
-    public Software(Map<String, String> identificationData) {
+    @JsonCreator
+    public Software(@JsonProperty(VERSION) String version) {
+        this.version = version;
+    }
+
+    public static Software createFromJson(Map<String, String> identificationData) {
         String version = null;
         for (Map.Entry<String, String> entry : identificationData.entrySet()) {
             switch (entry.getKey()) {
@@ -22,12 +27,7 @@ public class Software {
                     break;
             }
         }
-        this.version = version != null ? version : null;
-    }
-
-    @JsonCreator
-    public Software(@JsonProperty(VERSION) String version) {
-        this.version = version;
+        return new Software(version);
     }
 
     public String getVersion() {

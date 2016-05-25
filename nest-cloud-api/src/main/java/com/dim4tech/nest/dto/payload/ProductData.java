@@ -1,6 +1,8 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +26,19 @@ public class ProductData {
     /* Contains the resource use data values and measurement timestamps. */
     private final Map<String, ProductResource> resopurceUse;
 
-    public ProductData(Map<String, Object> productData) {
+    @JsonCreator
+    public ProductData(
+            @JsonProperty(IDENTIFICATION) Identification identification,
+            @JsonProperty(LOCATION) ProductLocation location,
+            @JsonProperty(SOFTWARE) Software software,
+            @JsonProperty(RESOURCE_USE) Map<String, ProductResource> resopurceUse) {
+        this.identification = identification;
+        this.location = location;
+        this.software = software;
+        this.resopurceUse = resopurceUse;
+    }
+
+    public static ProductData createFromJson(Map<String, Object> productData) {
         Identification identification = null;
         ProductLocation location = null;
         Software software = null;
@@ -33,39 +47,31 @@ public class ProductData {
         for (Map.Entry<String, Object> entry : productData.entrySet()) {
             switch (entry.getKey()) {
                 case IDENTIFICATION :
-                    identification = new Identification((Map<String, String>) entry.getValue());
+                    identification = Identification.createFromJson((Map<String, String>) entry.getValue());
                     break;
                 case LOCATION :
-                    location = new ProductLocation((Map<String, String>) entry.getValue());
+                    location = ProductLocation.createFromJson((Map<String, String>) entry.getValue());
                     break;
                 case SOFTWARE :
-                    software = new Software((Map<String, String>) entry.getValue());
+                    software = Software.createFromJson((Map<String, String>) entry.getValue());
                     break;
                 case RESOURCE_USE:
                     resopurceUse = buildResourceUse((Map<String, Object>) entry.getValue());
                     break;
             }
         }
-        this.identification = identification != null ? identification : null;
-        this.location = location != null ? location : null;
-        this.software = software != null ? software : null;
-        this.resopurceUse = resopurceUse.size() > 0 ? resopurceUse : null;
+        return new ProductData(identification,
+                location,
+                software,
+                resopurceUse.size() > 0 ? resopurceUse : null);
     }
 
-    private Map<String, ProductResource> buildResourceUse(Map<String, Object> data) {
+    private static Map<String, ProductResource> buildResourceUse(Map<String, Object> data) {
         Map<String, ProductResource> resources = new HashMap<>();
         for (Map.Entry<String, Object> entry : data.entrySet()) {
-            resources.put(entry.getKey(), new ProductResource((Map<String, Object>) entry.getValue()));
+            resources.put(entry.getKey(), ProductResource.createFromJson((Map<String, Object>) entry.getValue()));
         }
         return resources;
-    }
-
-    public ProductData(Identification identification, ProductLocation location,
-                       Software software, Map<String, ProductResource> resopurceUse) {
-        this.identification = identification;
-        this.location = location;
-        this.software = software;
-        this.resopurceUse = resopurceUse;
     }
 
     public Identification getIdentification() {
