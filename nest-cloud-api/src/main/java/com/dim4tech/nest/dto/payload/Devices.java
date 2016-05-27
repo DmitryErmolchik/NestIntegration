@@ -2,7 +2,6 @@ package com.dim4tech.nest.dto.payload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 import java.util.Objects;
@@ -26,16 +25,27 @@ public class Devices {
         Identifies your company as an entity that can share product data with the Nest service. */
     private final Map<String, ProductType> company;
 
-    @JsonCreator
+    public Devices() {
+        this.thermostats = null;
+        this.smokeCoAlarms = null;
+        this.cameras = null;
+        this.company = null;
+    }
+
     public Devices(
-            @JsonProperty(THERMOSTATS) Map<DeviceId, Thermostat> thermostats,
-            @JsonProperty(SMOKE_CO_ALARMS) Map<DeviceId, SmokeCoAlarm> smokeCoAlarms,
-            @JsonProperty(CAMERAS) Map<DeviceId, Camera> cameras,
-            @JsonProperty(COMPANY) Map<String, ProductType> company) {
+            Map<DeviceId, Thermostat> thermostats,
+            Map<DeviceId, SmokeCoAlarm> smokeCoAlarms,
+            Map<DeviceId, Camera> cameras,
+            Map<String, ProductType> company) {
         this.thermostats = thermostats;
         this.smokeCoAlarms = smokeCoAlarms;
         this.cameras = cameras;
         this.company = company;
+    }
+
+    @JsonCreator
+    private static Devices createFromJson(Map<String, Object> devices) {
+        return new Devices();
     }
 
     public Map<DeviceId, Thermostat> getThermostats() {

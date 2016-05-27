@@ -76,24 +76,6 @@ public class Structure {
     /* An object containing where identifiers for devices in the structure. */
     private final Map<WhereId, Where> wheres;
 
-    /*public Structure(Map<String, Object> structureDate) {
-        structureId = null;
-        thermostats = null;
-        smokeCoAlarms = null;
-        cameras = null;
-        devices = null;
-        away = null;
-        name = null;
-        countryCode = null;
-        postalCode = null;
-        peakPeriodStartTime = null;
-        peakPeriodEndTime = null;
-        timeZone = null;
-        eta = null;
-        rhrEnrollment = null;
-        wheres = null;
-    }*/
-
     @JsonCreator
     public Structure(
             @JsonProperty(STRUCTURE_ID) StructureId structureId,
