@@ -1,4 +1,4 @@
-package com.dim4tech.nest.dto.payload.constants;
+package com.dim4tech.nest.domain.payload.constants;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
