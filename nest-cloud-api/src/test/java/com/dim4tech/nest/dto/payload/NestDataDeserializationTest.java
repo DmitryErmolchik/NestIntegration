@@ -76,7 +76,7 @@ public class NestDataDeserializationTest {
                     "},\n" +
                     "\"cameras\": {  \n" +
                         "\"awJo6rH0IldT2YlIVtYaGQ\": {  \n" +
-                            " \"device_id\": \"awJo6rH...\",\n" +
+                            " \"device_id\": \"awJo6rH0IldT2YlIVtYaGQ\",\n" +
                             " \"software_version\": \"4.0\",\n" +
                             " \"structure_id\": \"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw\",\n" +
                             " \"where_id\": \"d6reb_OZTM...\",\n" +
@@ -90,7 +90,7 @@ public class NestDataDeserializationTest {
                             " \"web_url\": \"https://home.nest.com/cameras/device_id?auth=access_token\",\n" +
                             " \"app_url\": \"nestmobile://cameras/device_id?auth=access_token\",\n" +
                             " \"is_public_share_enabled\": true,\n" +
-                            " \"activity_zones\": [ { \"name\": \"Walkway-1\", \"id\": \"244083\" }, { \"name\": \"Walkway-1\", \"id\": \"244084\" } ],\n" +
+                            " \"activity_zones\": [ { \"name\": \"Walkway-1\", \"id\": \"244083\" }, { \"name\": \"Walkway-2\", \"id\": \"244084\" } ],\n" +
                             " \"public_share_url\": \"https://video.nest.com/live/STRING1?STRING2\",\n" +
                             " \"snapshot_url\": \"STRING1/device_id/STRING2?auth=access_token\",\n" +
                             "\"last_event\": {  \n" +

@@ -2,11 +2,11 @@ package com.dim4tech.nest.dto.payload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -37,15 +37,15 @@ public class Camera {
 
     private final static String IS_ONLINE = "is_online";
     /* Device connection status with the Nest Service */
-    private final boolean isOnline;
+    private final Boolean isOnline;
 
     private final static String IS_STREAMING = "is_streaming";
     /* Camera status, either on and actively streaming video, or off. */
-    private final boolean isStreaming;
+    private final Boolean isStreaming;
 
     private final static String IS_AUDIO_INPUT_ENABLED = "is_audio_input_enabled";
     /* Camera microphone status, either on and listening, or off. */
-    private final boolean isAudioInputEnabled;
+    private final Boolean isAudioInputEnabled;
 
     private final static String LAST_IS_ONLINE_CHANGE = "last_is_online_change";
     /* Timestamp that identifies the last change to the online status,
@@ -54,7 +54,7 @@ public class Camera {
 
     private final static String IS_LAST_VIDEO_HISTORY_ENABLED = "is_video_history_enabled";
     /* Nest Aware subscription status. */
-    private final boolean isVideoHistoryEnabled;
+    private final Boolean isVideoHistoryEnabled;
 
     private final static String WEB_URL = "web_url";
     /* Web URL (deep link) to the device page at home.nest.com. Used to display the camera live feed
@@ -69,7 +69,7 @@ public class Camera {
     private final static String IS_PUBLIC_SHARE_ENABLED = "is_public_share_enabled";
     /* Users can choose to share their video and make it viewable by anyone.
         When public share is enabled, you can read public_share_url. */
-    private final boolean isPublicShareEnabled;
+    private final Boolean isPublicShareEnabled;
 
     private final static String ACTIVITY_ZONES = "activity_zones";
     /* Activity Zones are used to monitor motion events within user-defined areas of the video stream. */
@@ -88,26 +88,12 @@ public class Camera {
     /* This object captures the last event that triggered a notification. */
     private final LastEvent lastEvent;
 
-    @JsonCreator
-    public Camera(
-            @JsonProperty(DEVICE_ID) DeviceId deviceId,
-            @JsonProperty(SOFTWARE_VERSION) String softwareVersion,
-            @JsonProperty(STRUCTURE_ID) StructureId structureId,
-            @JsonProperty(WHERE_ID) WhereId whereId,
-            @JsonProperty(NAME) String name,
-            @JsonProperty(NAME_LONG) String nameLong,
-            @JsonProperty(IS_ONLINE) boolean isOnline,
-            @JsonProperty(IS_STREAMING) boolean isStreaming,
-            @JsonProperty(IS_AUDIO_INPUT_ENABLED) boolean isAudioInputEnabled,
-            @JsonProperty(LAST_IS_ONLINE_CHANGE) DateTime lastIsOnlineChange,
-            @JsonProperty(IS_LAST_VIDEO_HISTORY_ENABLED) boolean isVideoHistoryEnabled,
-            @JsonProperty(WEB_URL) String webUrl,
-            @JsonProperty(APP_URL) String appUrl,
-            @JsonProperty(IS_PUBLIC_SHARE_ENABLED) boolean isPublicShareEnabled,
-            @JsonProperty(ACTIVITY_ZONES) List<ActivityZone> activityZones,
-            @JsonProperty(PUBLIC_SHARE_URL) String publicShareUrl,
-            @JsonProperty(SNAPSHOT_URL) String snapshotUrl,
-            @JsonProperty(LAST_EVENT) LastEvent lastEvent) {
+    public Camera(DeviceId deviceId, String softwareVersion, StructureId structureId, WhereId whereId,
+                  String name, String nameLong, Boolean isOnline, Boolean isStreaming,
+                  Boolean isAudioInputEnabled, DateTime lastIsOnlineChange, Boolean isVideoHistoryEnabled,
+                  String webUrl, String appUrl, Boolean isPublicShareEnabled,
+                  List<ActivityZone> activityZones, String publicShareUrl, String snapshotUrl,
+                  LastEvent lastEvent) {
         this.deviceId = deviceId;
         this.softwareVersion = softwareVersion;
         this.structureId = structureId;
@@ -128,6 +114,95 @@ public class Camera {
         this.lastEvent = lastEvent;
     }
 
+    @JsonCreator
+    public static Camera createFromJson(Map<String, Object> props) {
+        DeviceId deviceId = null;
+        String softwareVersion = null;
+        StructureId structureId = null;
+        WhereId whereId = null;
+        String name = null;
+        String nameLong = null;
+        Boolean isOnline = null;
+        Boolean isStreaming = null;
+        Boolean isAudioInputEnabled = null;
+        DateTime lastIsOnlineChange = null;
+        Boolean isVideoHistoryEnabled = null;
+        String webUrl = null;
+        String appUrl = null;
+        Boolean isPublicShareEnabled = null;
+        List<ActivityZone> activityZones = new ArrayList<>();
+        String publicShareUrl = null;
+        String snapshotUrl = null;
+        LastEvent lastEvent = null;
+
+        for (Map.Entry<String, Object> entry : props.entrySet()) {
+            switch (entry.getKey()) {
+                case DEVICE_ID:
+                    deviceId = new DeviceId((String) entry.getValue());
+                    break;
+                case SOFTWARE_VERSION:
+                    softwareVersion = (String) entry.getValue();
+                    break;
+                case STRUCTURE_ID:
+                    structureId = new StructureId((String) entry.getValue());
+                    break;
+                case WHERE_ID:
+                    whereId = new WhereId((String) entry.getValue());
+                    break;
+                case NAME:
+                    name = (String) entry.getValue();
+                    break;
+                case NAME_LONG:
+                    nameLong = (String) entry.getValue();
+                    break;
+                case IS_ONLINE:
+                    isOnline = (Boolean) entry.getValue();
+                    break;
+                case IS_STREAMING:
+                    isStreaming = (Boolean) entry.getValue();
+                    break;
+                case IS_AUDIO_INPUT_ENABLED:
+                    isAudioInputEnabled = (Boolean) entry.getValue();
+                    break;
+                case LAST_IS_ONLINE_CHANGE:
+                    lastIsOnlineChange = DateTime.parse((String) entry.getValue());
+                    break;
+                case IS_LAST_VIDEO_HISTORY_ENABLED:
+                    isVideoHistoryEnabled = (Boolean) entry.getValue();
+                    break;
+                case WEB_URL:
+                    webUrl = (String) entry.getValue();
+                    break;
+                case APP_URL:
+                    appUrl = (String) entry.getValue();
+                    break;
+                case IS_PUBLIC_SHARE_ENABLED:
+                    isPublicShareEnabled = (Boolean) entry.getValue();
+                    break;
+                case ACTIVITY_ZONES:
+                    for (Object activityZoneObject : ((List <Object>) entry.getValue())) {
+                        activityZones.add(ActivityZone.createFromJson((Map<String, Object>) activityZoneObject));
+                    }
+                    break;
+                case PUBLIC_SHARE_URL:
+                    publicShareUrl = (String) entry.getValue();
+                    break;
+                case SNAPSHOT_URL:
+                    snapshotUrl = (String) entry.getValue();
+                    break;
+                case LAST_EVENT:
+                    lastEvent = null; //entry.getValue();
+                    break;
+            }
+        }
+
+        activityZones = activityZones.size() == 0 ? null : activityZones;
+
+        return new Camera(deviceId, softwareVersion, structureId, whereId, name, nameLong, isOnline,
+                isStreaming, isAudioInputEnabled, lastIsOnlineChange, isVideoHistoryEnabled, webUrl,
+                appUrl, isPublicShareEnabled, activityZones, publicShareUrl, snapshotUrl, lastEvent);
+    }
+    
     public DeviceId getDeviceId() {
         return deviceId;
     }
@@ -152,15 +227,15 @@ public class Camera {
         return nameLong;
     }
 
-    public boolean isOnline() {
+    public Boolean isOnline() {
         return isOnline;
     }
 
-    public boolean isStreaming() {
+    public Boolean isStreaming() {
         return isStreaming;
     }
 
-    public boolean isAudioInputEnabled() {
+    public Boolean isAudioInputEnabled() {
         return isAudioInputEnabled;
     }
 
@@ -168,7 +243,7 @@ public class Camera {
         return new DateTime(lastIsOnlineChange);
     }
 
-    public boolean isVideoHistoryEnabled() {
+    public Boolean isVideoHistoryEnabled() {
         return isVideoHistoryEnabled;
     }
 
@@ -180,7 +255,7 @@ public class Camera {
         return appUrl;
     }
 
-    public boolean isPublicShareEnabled() {
+    public Boolean isPublicShareEnabled() {
         return isPublicShareEnabled;
     }
 

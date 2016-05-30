@@ -3,6 +3,7 @@ package com.dim4tech.nest.dto.payload;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -25,13 +26,6 @@ public class Devices {
         Identifies your company as an entity that can share product data with the Nest service. */
     private final Map<String, ProductType> company;
 
-    public Devices() {
-        this.thermostats = null;
-        this.smokeCoAlarms = null;
-        this.cameras = null;
-        this.company = null;
-    }
-
     public Devices(
             Map<DeviceId, Thermostat> thermostats,
             Map<DeviceId, SmokeCoAlarm> smokeCoAlarms,
@@ -45,7 +39,35 @@ public class Devices {
 
     @JsonCreator
     private static Devices createFromJson(Map<String, Object> devices) {
-        return new Devices();
+        Map<DeviceId, Thermostat> thermostats = new HashMap();
+        Map<DeviceId, SmokeCoAlarm> smokeCoAlarms = new HashMap<>();
+        Map<DeviceId, Camera> cameras = new HashMap<>();
+        Map<String, ProductType> company = new HashMap<>();
+
+        for (Map.Entry<String, Object> entry : devices.entrySet()) {
+            switch (entry.getKey()) {
+                case THERMOSTATS:
+                    break;
+                case SMOKE_CO_ALARMS:
+                    break;
+                case CAMERAS:
+                    for (Map.Entry<String, Object> cameraEntry : ((Map<String, Object>) entry.getValue()).entrySet()) {
+                        Camera camera = Camera.createFromJson((Map<String, Object>) cameraEntry.getValue());
+                        cameras.put(camera.getDeviceId(), camera);
+                    }
+                    break;
+                default:
+                    company.put(entry.getKey(), ProductType.createFromJson((Map<String, Object>) entry.getValue()));
+                    break;
+            }
+        }
+
+        thermostats = thermostats.size() == 0 ? null : thermostats;
+        smokeCoAlarms = smokeCoAlarms.size() == 0 ? null :  smokeCoAlarms;
+        cameras = cameras.size() == 0 ? null :  cameras;
+        company = company.size() == 0 ? null :  company;
+
+        return new Devices(thermostats, smokeCoAlarms, cameras, company);
     }
 
     public Map<DeviceId, Thermostat> getThermostats() {
