@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ErrorMessage {
+public class ErrorMessageDto {
     private final static String ERROR = "error";
     private final String error;
 
@@ -23,11 +23,11 @@ public class ErrorMessage {
     private final Map<String, String> details;
 
     @JsonCreator
-    public ErrorMessage(@JsonProperty(ERROR) String error,
-                        @JsonProperty(TYPE) String type,
-                        @JsonProperty(MESSAGE) String message,
-                        @JsonProperty(INSTANCE) String instance,
-                        @JsonProperty(DETAILS) Map<String, String> details) {
+    public ErrorMessageDto(@JsonProperty(ERROR) String error,
+                           @JsonProperty(TYPE) String type,
+                           @JsonProperty(MESSAGE) String message,
+                           @JsonProperty(INSTANCE) String instance,
+                           @JsonProperty(DETAILS) Map<String, String> details) {
         this.error = error;
         this.type = type;
         this.message = message;

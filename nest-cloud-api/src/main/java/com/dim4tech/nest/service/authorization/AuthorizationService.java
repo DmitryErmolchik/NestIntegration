@@ -1,6 +1,6 @@
 package com.dim4tech.nest.service.authorization;
 
-import com.dim4tech.nest.dto.authorization.AuthorizationData;
+import com.dim4tech.nest.domain.authorization.AuthorizationData;
 
 import java.net.URL;
 

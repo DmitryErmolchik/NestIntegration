@@ -1,5 +1,7 @@
 package com.dim4tech.nest.domain.payload.constants;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum UiColorState {
     GRAY("gray", "Offline"),
     GREEN("green", "OK"),
@@ -18,6 +20,7 @@ public enum UiColorState {
         return state;
     }
 
+    @JsonValue
     public String getColor() {
         return color;
     }

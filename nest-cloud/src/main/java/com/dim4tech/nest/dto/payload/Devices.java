@@ -2,7 +2,11 @@ package com.dim4tech.nest.dto.payload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -44,17 +48,21 @@ public class Devices {
         Map<DeviceId, Camera> cameras = new HashMap<>();
         Map<String, ProductType> company = new HashMap<>();
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JodaModule());
+
         for (Map.Entry<String, Object> entry : devices.entrySet()) {
             switch (entry.getKey()) {
                 case THERMOSTATS:
+                    try {
+                        thermostats = objectMapper.readValue(objectMapper.writeValueAsString(entry.getValue()), new TypeReference<Map<DeviceId, Thermostat>>() {});
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case SMOKE_CO_ALARMS:
                     break;
                 case CAMERAS:
-                    for (Map.Entry<String, Object> cameraEntry : ((Map<String, Object>) entry.getValue()).entrySet()) {
-                        Camera camera = Camera.createFromJson((Map<String, Object>) cameraEntry.getValue());
-                        cameras.put(camera.getDeviceId(), camera);
-                    }
                     break;
                 default:
                     company.put(entry.getKey(), ProductType.createFromJson((Map<String, Object>) entry.getValue()));

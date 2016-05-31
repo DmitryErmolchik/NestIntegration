@@ -2,11 +2,11 @@ package com.dim4tech.nest.dto.payload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -57,17 +57,17 @@ public class LastEvent {
     /* Identifiers for Activity Zones that detected a motion event. Used with activity_zones and has_motion. */
     private final List<ActivityZoneId> activityZoneIds;
 
-    public LastEvent(
-            Boolean hasSound,
-            Boolean hasMotion,
-            DateTime startTime,
-            DateTime endTime,
-            DateTime urlsExpireTime,
-            String webUrl,
-            String appUrl,
-            String imageUrl,
-            String animatedImageUrl,
-            List<ActivityZoneId> activityZoneIds) {
+    @JsonCreator
+    public LastEvent(@JsonProperty(HAS_SOUND) Boolean hasSound,
+                     @JsonProperty(HAS_MOTION) Boolean hasMotion,
+                     @JsonProperty(START_TIME) DateTime startTime,
+                     @JsonProperty(END_TIME) DateTime endTime,
+                     @JsonProperty(URLS_EXPIRE_TIME) DateTime urlsExpireTime,
+                     @JsonProperty(WEB_URL) String webUrl,
+                     @JsonProperty(APP_URL) String appUrl,
+                     @JsonProperty(IMAGE_URL) String imageUrl,
+                     @JsonProperty(ANIMATED_IMAGE_URL) String animatedImageUrl,
+                     @JsonProperty(ACTIVITY_ZONE_IDS) List<ActivityZoneId> activityZoneIds) {
         this.hasSound = hasSound;
         this.hasMotion = hasMotion;
         this.startTime = startTime;
@@ -78,58 +78,6 @@ public class LastEvent {
         this.imageUrl = imageUrl;
         this.animatedImageUrl = animatedImageUrl;
         this.activityZoneIds = activityZoneIds;
-    }
-
-    @JsonCreator
-    public static LastEvent createFromJson(Map<String, Object> props) {
-        Boolean hasSound = null;
-        Boolean hasMotion = null;
-        DateTime startTime = null;
-        DateTime endTime = null;
-        DateTime urlsExpireTime = null;
-        String webUrl = null;
-        String appUrl = null;
-        String imageUrl = null;
-        String animatedImageUrl = null;
-        List<ActivityZoneId> activityZoneIds = new ArrayList<>();
-
-        for (Map.Entry<String, Object> entry : props.entrySet()) {
-            switch (entry.getKey()) {
-                case HAS_SOUND:
-                    hasSound = entry.getValue();
-                    break;
-                case HAS_MOTION:
-                    hasMotion = entry.getValue();
-                    break;
-                case START_TIME:
-                    startTime = entry.getValue();
-                    break;
-                case END_TIME:
-                    endTime = entry.getValue();
-                    break;
-                case URLS_EXPIRE_TIME:
-                    urlsExpireTime = entry.getValue();
-                    break;
-                case WEB_URL:
-                    webUrl = entry.getValue();
-                    break;
-                case APP_URL:
-                    appUrl = entry.getValue();
-                    break;
-                case IMAGE_URL:
-                    imageUrl = entry.getValue();
-                    break;
-                case ANIMATED_IMAGE_URL:
-                    animatedImageUrl = entry.getValue();
-                    break;
-                case ACTIVITY_ZONE_IDS:
-                    activityZoneIds = entry.getValue();
-                    break;
-            }
-        }
-        activityZoneIds = activityZoneIds.size() == 0 ? null : activityZoneIds;
-        return new LastEvent(hasSound, hasMotion, startTime, endTime, urlsExpireTime, webUrl, appUrl,
-                imageUrl, animatedImageUrl, activityZoneIds);
     }
 
     public boolean isHasSound() {

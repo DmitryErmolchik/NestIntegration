@@ -1,8 +1,8 @@
 package com.dim4tech.nest.dto.payload;
 
-import com.dim4tech.nest.dto.payload.constants.HvacMode;
-import com.dim4tech.nest.dto.payload.constants.HvacState;
-import com.dim4tech.nest.dto.payload.constants.TemperatureScale;
+import com.dim4tech.nest.domain.payload.constants.HvacMode;
+import com.dim4tech.nest.domain.payload.constants.HvacState;
+import com.dim4tech.nest.domain.payload.constants.TemperatureScale;
 import com.dim4tech.nest.helper.LocaleHelper;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

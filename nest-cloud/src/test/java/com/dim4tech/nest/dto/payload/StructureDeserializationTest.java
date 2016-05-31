@@ -1,6 +1,6 @@
 package com.dim4tech.nest.dto.payload;
 
-import com.dim4tech.nest.dto.payload.constants.AwayState;
+import com.dim4tech.nest.domain.payload.constants.AwayState;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.joda.time.DateTime;

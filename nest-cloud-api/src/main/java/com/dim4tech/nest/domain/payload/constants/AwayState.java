@@ -1,5 +1,7 @@
 package com.dim4tech.nest.domain.payload.constants;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum AwayState {
     HOME("home"),
     AWAY("away"),
@@ -12,6 +14,7 @@ public enum AwayState {
         this.state = state;
     }
 
+    @JsonValue
     public String getState() {
         return state;
     }

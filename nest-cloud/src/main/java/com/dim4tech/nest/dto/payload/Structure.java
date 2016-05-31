@@ -1,6 +1,6 @@
 package com.dim4tech.nest.dto.payload;
 
-import com.dim4tech.nest.dto.payload.constants.AwayState;
+import com.dim4tech.nest.domain.payload.constants.AwayState;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
