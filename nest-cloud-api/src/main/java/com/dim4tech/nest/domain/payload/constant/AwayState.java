@@ -1,15 +1,16 @@
-package com.dim4tech.nest.domain.payload.constants;
+package com.dim4tech.nest.domain.payload.constant;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum AlarmState {
-    OK("ok"),
-    WARNING("warning"),
-    EMERGENCY("emergency");
+public enum AwayState {
+    HOME("home"),
+    AWAY("away"),
+    AUTO_AWAY("auto-away"),
+    UNKNOWN("unknown");
 
     private final String state;
 
-    AlarmState(String state) {
+    AwayState(String state) {
         this.state = state;
     }
 

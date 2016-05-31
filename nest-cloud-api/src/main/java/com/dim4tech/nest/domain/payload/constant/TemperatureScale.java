@@ -1,4 +1,4 @@
-package com.dim4tech.nest.domain.payload.constants;
+package com.dim4tech.nest.domain.payload.constant;
 
 public enum TemperatureScale {
     C /* Celsius */,

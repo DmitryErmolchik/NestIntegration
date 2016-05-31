@@ -2,7 +2,7 @@ package com.dim4tech.nest.service.authorization;
 
 import com.dim4tech.nest.domain.authorization.AuthorizationData;
 import com.dim4tech.nest.exception.NestIntegrationException;
-import com.dim4tech.nest.service.dtoservice.DtoService;
+import com.dim4tech.nest.service.deserializer.DeserializationService;
 import com.dim4tech.nest.utils.HttpHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private final URL authorizationUrl;
     private final String productId;
     private final String productSecret;
-    private DtoService dtoService;
+    private DeserializationService deserializationService;
     private final Map<String, String > params = new HashMap<>();
 
 
@@ -42,8 +42,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         this.charset = charset;
     }
 
-    public void setDtoService(DtoService dtoService) {
-        this.dtoService = dtoService;
+    public void setDeserializationService(DeserializationService deserializationService) {
+        this.deserializationService = deserializationService;
     }
 
     public URL getAuthorizationCodeUrl(String state) {
@@ -62,7 +62,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             //doPost(connection, getPostParams(authorizationCode));
             //String response = doGet(connection);
             String response = "{\"access_token\":\"c.Ntt2mloeD93xfYiW9WumL8nPePIVcLh0sNg0AkPMvqH23pkArivBdIvgUdAyabDUbZ83CR6k8L05n9CrkwVCgilqRw9YxMwElZPhINlO4T7OWs1oUNVtZQUPH5mXgyupy0KO0ZEpnv0LnQMX\",\"expires_in\":315360000}";
-            AuthorizationData authorizationData = dtoService.encode(response, AuthorizationData.class);
+            AuthorizationData authorizationData = deserializationService.deserialize(response, AuthorizationData.class);
             return authorizationData;
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);

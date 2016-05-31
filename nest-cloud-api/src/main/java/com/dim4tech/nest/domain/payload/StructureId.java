@@ -1,10 +1,15 @@
 package com.dim4tech.nest.domain.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StructureId {
     private final String id;
 
+    @JsonCreator
     public StructureId(String id) {
         this.id = id;
     }

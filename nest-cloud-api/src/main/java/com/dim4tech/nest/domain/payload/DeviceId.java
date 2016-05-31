@@ -1,11 +1,16 @@
 package com.dim4tech.nest.domain.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DeviceId {
     /* Device unique identifier */
     private final String id;
 
+    @JsonCreator
     public DeviceId(String id) {
         this.id = id;
     }

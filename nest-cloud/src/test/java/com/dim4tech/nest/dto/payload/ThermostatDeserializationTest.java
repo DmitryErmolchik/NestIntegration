@@ -1,8 +1,12 @@
 package com.dim4tech.nest.dto.payload;
 
-import com.dim4tech.nest.domain.payload.constants.HvacMode;
-import com.dim4tech.nest.domain.payload.constants.HvacState;
-import com.dim4tech.nest.domain.payload.constants.TemperatureScale;
+import com.dim4tech.nest.domain.payload.DeviceId;
+import com.dim4tech.nest.domain.payload.StructureId;
+import com.dim4tech.nest.domain.payload.Thermostat;
+import com.dim4tech.nest.domain.payload.WhereId;
+import com.dim4tech.nest.domain.payload.constant.HvacMode;
+import com.dim4tech.nest.domain.payload.constant.HvacState;
+import com.dim4tech.nest.domain.payload.constant.TemperatureScale;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.joda.time.DateTime;

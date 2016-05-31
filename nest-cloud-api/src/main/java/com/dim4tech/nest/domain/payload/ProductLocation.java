@@ -1,18 +1,44 @@
 package com.dim4tech.nest.domain.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Map;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductLocation {
+    private final static String STRUCTURE_ID = "structure_id";
     /* Unique identifier for the structure. */
     private final StructureId structureId;
 
+    private final static String WHERE_ID = "where_id";
     /* Where unique identifier. */
     private final WhereId whereId;
 
-    public ProductLocation(StructureId structureId,
-                           WhereId whereId) {
+    @JsonCreator
+    public ProductLocation(@JsonProperty(STRUCTURE_ID) StructureId structureId,
+                           @JsonProperty(WHERE_ID) WhereId whereId) {
         this.structureId = structureId;
         this.whereId = whereId;
+    }
+
+    public static ProductLocation createFromJson(Map<String, String> identificationData) {
+        String structureId = null;
+        String whereId = null;
+        for (Map.Entry<String, String> entry : identificationData.entrySet()) {
+            switch (entry.getKey()) {
+                case STRUCTURE_ID:
+                    structureId = entry.getValue();
+                    break;
+                case WHERE_ID:
+                    whereId = entry.getValue();
+                    break;
+            }
+        }
+        return new ProductLocation(structureId != null ? new StructureId(structureId) : null,
+                whereId != null ? new WhereId(whereId) : null);
     }
 
     public StructureId getStructureId() {

@@ -1,8 +1,9 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.dim4tech.nest.domain.payload.*;
+import com.dim4tech.nest.service.deserializer.DeserializationService;
+import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class CompanyDeserializationTest {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final DeserializationService deserializationService = new DeserializationServiceImpl();
     private final String json = "{  \n" +
             "\"$company\": {  \n" +
             "\"$product_type\": {  \n" +
@@ -52,8 +53,7 @@ public class CompanyDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        objectMapper.registerModule(new JodaModule());
-        Map<String, ProductType> result = objectMapper.readValue(json, new TypeReference<Map<String, ProductType>>() {});
+        Map<String, ProductType> result = deserializationService.deserialize(json, new TypeReference<Map<String, ProductType>>() {});
         assertEquals(buildExpectedCompany(), result);
     }
 

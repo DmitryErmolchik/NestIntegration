@@ -1,11 +1,16 @@
 package com.dim4tech.nest.domain.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ActivityZoneId {
     /* Activity zone unique identifier */
     private final String id;
 
+    @JsonCreator
     public ActivityZoneId(String id) {
         this.id = id;
     }

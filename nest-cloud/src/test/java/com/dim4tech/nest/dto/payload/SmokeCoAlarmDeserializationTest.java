@@ -1,8 +1,12 @@
 package com.dim4tech.nest.dto.payload;
 
-import com.dim4tech.nest.domain.payload.constants.AlarmState;
-import com.dim4tech.nest.domain.payload.constants.BatteryHealth;
-import com.dim4tech.nest.domain.payload.constants.UiColorState;
+import com.dim4tech.nest.domain.payload.DeviceId;
+import com.dim4tech.nest.domain.payload.SmokeCoAlarm;
+import com.dim4tech.nest.domain.payload.StructureId;
+import com.dim4tech.nest.domain.payload.WhereId;
+import com.dim4tech.nest.domain.payload.constant.AlarmState;
+import com.dim4tech.nest.domain.payload.constant.BatteryHealth;
+import com.dim4tech.nest.domain.payload.constant.UiColorState;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.joda.time.DateTime;

@@ -1,8 +1,9 @@
 package com.dim4tech.nest.dto.payload;
 
-import com.dim4tech.nest.domain.payload.constants.AwayState;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.dim4tech.nest.domain.payload.*;
+import com.dim4tech.nest.domain.payload.constant.AwayState;
+import com.dim4tech.nest.service.deserializer.DeserializationService;
+import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ import java.util.TimeZone;
 import static org.junit.Assert.assertEquals;
 
 public class StructureDeserializationTest {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final DeserializationService deserializationService = new DeserializationServiceImpl();
     private final String json = "{  \n" +
             " \"structure_id\": \"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw\",\n" +
             " \"thermostats\": [ \"peyiJNo0IldT2YlIVtYaGQ\", \"qeyiJNo0IldT2YlIVtYaGQ\" ],\n" +
@@ -48,8 +49,7 @@ public class StructureDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        objectMapper.registerModule(new JodaModule());
-        Structure result = objectMapper.readValue(json, Structure.class);
+        Structure result = deserializationService.deserialize(json, Structure.class);
         assertEquals(buildExpectedStructure(), result);
     }
 

@@ -1,5 +1,6 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.dim4tech.nest.domain.payload.Metadata;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 

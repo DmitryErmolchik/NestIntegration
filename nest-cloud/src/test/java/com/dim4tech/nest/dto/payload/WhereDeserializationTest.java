@@ -1,5 +1,7 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.dim4tech.nest.domain.payload.Where;
+import com.dim4tech.nest.domain.payload.WhereId;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
