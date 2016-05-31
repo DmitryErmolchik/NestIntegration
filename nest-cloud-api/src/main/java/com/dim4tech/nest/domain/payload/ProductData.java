@@ -1,6 +1,5 @@
 package com.dim4tech.nest.domain.payload;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -25,14 +24,6 @@ public class ProductData {
         this.location = location;
         this.software = software;
         this.resopurceUse = resopurceUse;
-    }
-
-    private static Map<String, ProductResource> buildResourceUse(Map<String, Object> data) {
-        Map<String, ProductResource> resources = new HashMap<>();
-        for (Map.Entry<String, Object> entry : data.entrySet()) {
-            resources.put(entry.getKey(), ProductResource.createFromJson((Map<String, Object>) entry.getValue()));
-        }
-        return resources;
     }
 
     public Identification getIdentification() {

@@ -1,7 +1,5 @@
 package com.dim4tech.nest.domain.payload.constants;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum HvacMode {
     HEAT("heat") /* Heating mode */,
     COOL("cool") /* Cooling mode */,
@@ -14,7 +12,6 @@ public enum HvacMode {
         this.mode = mode;
     }
 
-    @JsonValue
     public String getMode() {
         return mode;
     }

@@ -1,13 +1,11 @@
 package com.dim4tech.nest.domain.payload;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class LastEvent {
     /* Sound event - sound was detected. */
     private final boolean hasSound;
