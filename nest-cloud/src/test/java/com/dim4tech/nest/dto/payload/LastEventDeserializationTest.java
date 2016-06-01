@@ -2,8 +2,8 @@ package com.dim4tech.nest.dto.payload;
 
 import com.dim4tech.nest.domain.payload.ActivityZoneId;
 import com.dim4tech.nest.domain.payload.LastEvent;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.dim4tech.nest.service.deserializer.DeserializationService;
+import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class LastEventDeserializationTest {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final DeserializationService deserializationService = new DeserializationServiceImpl();
     private final String json = "{ " +
             " \"has_sound\": true," +
             " \"has_motion\": true," +
@@ -29,8 +29,7 @@ public class LastEventDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        objectMapper.registerModule(new JodaModule());
-        LastEvent result = objectMapper.readValue(json, LastEvent.class);
+        LastEvent result = deserializationService.deserialize(json, LastEvent.class);
         assertEquals(buildExpectedLastEvent(), result);
     }
 

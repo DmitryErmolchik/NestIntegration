@@ -1,21 +1,23 @@
 package com.dim4tech.nest.domain.payload;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Devices {
-    private final static String THERMOSTATS = "thermostats";
+    public final static String THERMOSTATS = "thermostats";
     /* Thermostats in the structure */
     private final Map<DeviceId, Thermostat> thermostats;
 
-    private final static String SMOKE_CO_ALARMS = "smoke_co_alarms";
+    public final static String SMOKE_CO_ALARMS = "smoke_co_alarms";
     /* Smoke + CO alarms in the structure */
     private final Map<DeviceId, SmokeCoAlarm> smokeCoAlarms;
 
-    private final static String CAMERAS= "cameras";
+    public final static String CAMERAS= "cameras";
     /* Cameras in the structure */
     private final Map<DeviceId, Camera> cameras;
 
@@ -24,10 +26,11 @@ public class Devices {
         Identifies your company as an entity that can share product data with the Nest service. */
     private final Map<String, ProductType> company;
 
-    public Devices(Map<DeviceId, Thermostat> thermostats,
-                   Map<DeviceId, SmokeCoAlarm> smokeCoAlarms,
-                   Map<DeviceId, Camera> cameras,
-                   Map<String, ProductType> company) {
+    @JsonCreator
+    public Devices(@JsonProperty(THERMOSTATS) Map<DeviceId, Thermostat> thermostats,
+                   @JsonProperty(SMOKE_CO_ALARMS) Map<DeviceId, SmokeCoAlarm> smokeCoAlarms,
+                   @JsonProperty(CAMERAS) Map<DeviceId, Camera> cameras,
+                   @JsonProperty(COMPANY) Map<String, ProductType> company) {
         this.thermostats = thermostats;
         this.smokeCoAlarms = smokeCoAlarms;
         this.cameras = cameras;

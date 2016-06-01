@@ -7,8 +7,8 @@ import com.dim4tech.nest.domain.payload.WhereId;
 import com.dim4tech.nest.domain.payload.constant.HvacMode;
 import com.dim4tech.nest.domain.payload.constant.HvacState;
 import com.dim4tech.nest.domain.payload.constant.TemperatureScale;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.dim4tech.nest.service.deserializer.DeserializationService;
+import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ import java.util.Locale;
 import static org.junit.Assert.assertEquals;
 
 public class ThermostatDeserializationTest {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final DeserializationService deserializationService = new DeserializationServiceImpl();
     private final String json = "{  " +
             " \"device_id\": \"peyiJNo0IldT2YlIVtYaGQ\"," +
             " \"locale\": \"en-US\"," +
@@ -61,8 +61,7 @@ public class ThermostatDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        objectMapper.registerModule(new JodaModule());
-        Thermostat result = objectMapper.readValue(json, Thermostat.class);
+        Thermostat result = deserializationService.deserialize(json, Thermostat.class);
         assertEquals(buildExpectedThermostat(), result);
     }
 

@@ -1,12 +1,12 @@
 package com.dim4tech.nest.dto.payload;
 
 import com.dim4tech.nest.domain.payload.NestData;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.dim4tech.nest.service.deserializer.DeserializationService;
+import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import org.junit.Test;
 
 public class NestDataDeserializationTest {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final DeserializationService deserializationService = new DeserializationServiceImpl();
     private final String json =
             "{\n" +
                 "\"metadata\": {  \n" +
@@ -179,8 +179,7 @@ public class NestDataDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        objectMapper.registerModule(new JodaModule());
-        NestData result = objectMapper.readValue(json, NestData.class);
+        NestData result = deserializationService.deserialize(json, NestData.class);
         //assertEquals(buildExpectedWhere(), result);
     }
 

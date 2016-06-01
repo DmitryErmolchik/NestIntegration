@@ -1,8 +1,8 @@
 package com.dim4tech.nest.dto.payload;
 
 import com.dim4tech.nest.domain.payload.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.dim4tech.nest.service.deserializer.DeserializationService;
+import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class CameraDeserializationTest {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final DeserializationService deserializationService = new DeserializationServiceImpl();
     private final String json = "{ \n" +
             " \"device_id\": \"awJo6rH...\",\n" +
             " \"software_version\": \"4.0\",\n" +
@@ -49,8 +49,7 @@ public class CameraDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        objectMapper.registerModule(new JodaModule());
-        Camera result = objectMapper.readValue(json, Camera.class);
+        Camera result = deserializationService.deserialize(json, Camera.class);
         assertEquals(buildExpectedCamera(), result);
     }
 
