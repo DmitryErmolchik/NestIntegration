@@ -35,7 +35,8 @@ public class DeserializationServiceImpl implements DeserializationService {
                 JsonNode node = objectMapper.readTree(jsonString).at("/devices");
 
                 Iterator<Map.Entry<String, JsonNode>> iteratorDevices = node.fields();
-                while (iteratorDevices.hasNext())
+                while (iteratorDevices.hasNext()) {
+                }
 
                 node.fields().forEachRemaining((action) -> {
                     switch (action.getKey()) {

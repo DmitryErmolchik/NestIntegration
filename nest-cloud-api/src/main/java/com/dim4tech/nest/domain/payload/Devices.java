@@ -11,15 +11,15 @@ import java.util.Objects;
 public class Devices {
     public final static String THERMOSTATS = "thermostats";
     /* Thermostats in the structure */
-    private final Map<DeviceId, Thermostat> thermostats;
+    private final Thermostats thermostats;
 
     public final static String SMOKE_CO_ALARMS = "smoke_co_alarms";
     /* Smoke + CO alarms in the structure */
-    private final Map<DeviceId, SmokeCoAlarm> smokeCoAlarms;
+    private final SmokeCoAlarms smokeCoAlarms;
 
     public final static String CAMERAS= "cameras";
     /* Cameras in the structure */
-    private final Map<DeviceId, Camera> cameras;
+    private final Cameras cameras;
 
     private final static String COMPANY = "company";
     /* A variable provided by Nest when you create a client with Product data read/write permissions.
@@ -27,9 +27,9 @@ public class Devices {
     private final Map<String, ProductType> company;
 
     @JsonCreator
-    public Devices(@JsonProperty(THERMOSTATS) Map<DeviceId, Thermostat> thermostats,
-                   @JsonProperty(SMOKE_CO_ALARMS) Map<DeviceId, SmokeCoAlarm> smokeCoAlarms,
-                   @JsonProperty(CAMERAS) Map<DeviceId, Camera> cameras,
+    public Devices(@JsonProperty(THERMOSTATS) Thermostats thermostats,
+                   @JsonProperty(SMOKE_CO_ALARMS) SmokeCoAlarms smokeCoAlarms,
+                   @JsonProperty(CAMERAS) Cameras cameras,
                    @JsonProperty(COMPANY) Map<String, ProductType> company) {
         this.thermostats = thermostats;
         this.smokeCoAlarms = smokeCoAlarms;
@@ -37,52 +37,15 @@ public class Devices {
         this.company = company;
     }
 
-    /*@JsonCreator
-    private static Devices createFromJson(Map<String, Object> devices) {
-        Map<DeviceId, Thermostat> thermostats = new HashMap();
-        Map<DeviceId, SmokeCoAlarm> smokeCoAlarms = new HashMap<>();
-        Map<DeviceId, Camera> cameras = new HashMap<>();
-        Map<String, ProductType> company = new HashMap<>();
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JodaModule());
-
-        for (Map.Entry<String, Object> entry : devices.entrySet()) {
-            switch (entry.getKey()) {
-                case THERMOSTATS:
-                    try {
-                        thermostats = objectMapper.readValue(objectMapper.writeValueAsString(entry.getValue()), new TypeReference<Map<DeviceId, Thermostat>>() {});
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case SMOKE_CO_ALARMS:
-                    break;
-                case CAMERAS:
-                    break;
-                default:
-                    company.put(entry.getKey(), ProductType.createFromJson((Map<String, Object>) entry.getValue()));
-                    break;
-            }
-        }
-
-        thermostats = thermostats.size() == 0 ? null : thermostats;
-        smokeCoAlarms = smokeCoAlarms.size() == 0 ? null :  smokeCoAlarms;
-        cameras = cameras.size() == 0 ? null :  cameras;
-        company = company.size() == 0 ? null :  company;
-
-        return new Devices(thermostats, smokeCoAlarms, cameras, company);
-    }*/
-
-    public Map<DeviceId, Thermostat> getThermostats() {
+    public Thermostats getThermostats() {
         return thermostats;
     }
 
-    public Map<DeviceId, SmokeCoAlarm> getSmokeCoAlarms() {
+    public SmokeCoAlarms getSmokeCoAlarms() {
         return smokeCoAlarms;
     }
 
-    public Map<DeviceId, Camera> getCameras() {
+    public Cameras getCameras() {
         return cameras;
     }
 
