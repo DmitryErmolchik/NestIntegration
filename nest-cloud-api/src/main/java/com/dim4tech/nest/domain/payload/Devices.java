@@ -11,15 +11,15 @@ import java.util.Objects;
 public class Devices {
     public final static String THERMOSTATS = "thermostats";
     /* Thermostats in the structure */
-    private final Thermostats thermostats;
+    private final Map<DeviceId, Thermostat> thermostats;
 
     public final static String SMOKE_CO_ALARMS = "smoke_co_alarms";
     /* Smoke + CO alarms in the structure */
-    private final SmokeCoAlarms smokeCoAlarms;
+    private final Map<DeviceId, SmokeCoAlarm> smokeCoAlarms;
 
     public final static String CAMERAS= "cameras";
     /* Cameras in the structure */
-    private final Cameras cameras;
+    private final Map<DeviceId, Camera> cameras;
 
     private final static String COMPANY = "company";
     /* A variable provided by Nest when you create a client with Product data read/write permissions.
@@ -27,9 +27,9 @@ public class Devices {
     private final Map<String, ProductType> company;
 
     @JsonCreator
-    public Devices(@JsonProperty(THERMOSTATS) Thermostats thermostats,
-                   @JsonProperty(SMOKE_CO_ALARMS) SmokeCoAlarms smokeCoAlarms,
-                   @JsonProperty(CAMERAS) Cameras cameras,
+    public Devices(@JsonProperty(THERMOSTATS) Map<DeviceId, Thermostat> thermostats,
+                   @JsonProperty(SMOKE_CO_ALARMS) Map<DeviceId, SmokeCoAlarm> smokeCoAlarms,
+                   @JsonProperty(CAMERAS) Map<DeviceId, Camera> cameras,
                    @JsonProperty(COMPANY) Map<String, ProductType> company) {
         this.thermostats = thermostats;
         this.smokeCoAlarms = smokeCoAlarms;
@@ -37,15 +37,15 @@ public class Devices {
         this.company = company;
     }
 
-    public Thermostats getThermostats() {
+    public Map<DeviceId, Thermostat> getThermostats() {
         return thermostats;
     }
 
-    public SmokeCoAlarms getSmokeCoAlarms() {
+    public Map<DeviceId, SmokeCoAlarm> getSmokeCoAlarms() {
         return smokeCoAlarms;
     }
 
-    public Cameras getCameras() {
+    public Map<DeviceId, Camera> getCameras() {
         return cameras;
     }
 

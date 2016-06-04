@@ -1,6 +1,8 @@
 package com.dim4tech.nest.service.deserializer;
 
-import com.dim4tech.nest.domain.payload.*;
+import com.dim4tech.nest.domain.payload.Devices;
+import com.dim4tech.nest.domain.payload.NestData;
+import com.dim4tech.nest.domain.payload.ProductType;
 import com.dim4tech.nest.exception.NestIntegrationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -30,38 +32,30 @@ public class DeserializationServiceImpl implements DeserializationService {
             }
             else {
                 final Map<String, ProductType> companies = new HashMap<>();
-                Map<DeviceId, Thermostat> thermostats;
-                T nestData = objectMapper.readValue(jsonString, clazz);
+                NestData nestData = objectMapper.readValue(jsonString, NestData.class);
                 JsonNode node = objectMapper.readTree(jsonString).at("/devices");
-
                 Iterator<Map.Entry<String, JsonNode>> iteratorDevices = node.fields();
                 while (iteratorDevices.hasNext()) {
-                }
-
-                node.fields().forEachRemaining((action) -> {
-                    switch (action.getKey()) {
+                    Map.Entry<String, JsonNode> devices = iteratorDevices.next();
+                    switch (devices.getKey()) {
                         case Devices.THERMOSTATS:
-                            thermostats = this.deserialize(action.getValue().toString(), new TypeReference<Map<DeviceId, Thermostat>>() {});
-                            break;
                         case Devices.CAMERAS:
-                            Map<DeviceId, Thermostat> cameras = this.deserialize(action.getValue().toString(), new TypeReference<Map<DeviceId, Camera>>() {});
-                            break;
                         case Devices.SMOKE_CO_ALARMS:
-                            Map<DeviceId, Thermostat> smokeCoAlarms = this.deserialize(action.getValue().toString(), new TypeReference<Map<DeviceId, SmokeCoAlarm>>() {});
                             break;
                         default:
                             try {
-                                ProductType productType = objectMapper.readValue(action.getValue().toString(), ProductType.class);
-                                companies.put(action.getKey(), productType);
+                                ProductType productType = objectMapper.readValue(devices.getValue().toString(), ProductType.class);
+                                companies.put(devices.getKey(), productType);
                             } catch (IOException e) {
                                 throw new NestIntegrationException();
                             }
                             break;
                     }
-                    }
-                });
-                Devices devices = objectMapper.readValue(node.toString(), Devices.class);
-                return nestData;
+                }
+                Devices tempDevices = objectMapper.readValue(node.toString(), Devices.class);
+                return (T) new NestData(nestData.getMetadata(),
+                        new Devices(tempDevices.getThermostats(), tempDevices.getSmokeCoAlarms(), tempDevices.getCameras(), companies),
+                        nestData.getStructure());
             }
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
