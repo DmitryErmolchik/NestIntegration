@@ -59,9 +59,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     public AuthorizationData getAuthorizationData(String authorizationCode) {
         try {
             HttpURLConnection connection = (HttpsURLConnection) authorizationUrl.openConnection();
-            //doPost(connection, getPostParams(authorizationCode));
-            //String response = doGet(connection);
-            String response = "{\"access_token\":\"c.Ntt2mloeD93xfYiW9WumL8nPePIVcLh0sNg0AkPMvqH23pkArivBdIvgUdAyabDUbZ83CR6k8L05n9CrkwVCgilqRw9YxMwElZPhINlO4T7OWs1oUNVtZQUPH5mXgyupy0KO0ZEpnv0LnQMX\",\"expires_in\":315360000}";
+            doPost(connection, getPostParams(authorizationCode));
+            String response = doGet(connection);
             AuthorizationData authorizationData = deserializationService.deserialize(response, AuthorizationData.class);
             return authorizationData;
         } catch (IOException e) {
