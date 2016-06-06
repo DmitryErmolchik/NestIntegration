@@ -97,7 +97,7 @@ public class NestDataDeserializationTest {
                             " \"web_url\": \"https://home.nest.com/cameras/device_id?auth=access_token\",\n" +
                             " \"app_url\": \"nestmobile://cameras/device_id?auth=access_token\",\n" +
                             " \"is_public_share_enabled\": true,\n" +
-                            " \"activity_zones\": [ { \"name\": \"Walkway-1\", \"id\": \"244083\" }, { \"name\": \"Walkway-2\", \"id\": \"244084\" } ],\n" +
+                            " \"activity_zones\": [ { \"name\": \"Walkway 1\", \"id\": \"244083\" }, { \"name\": \"Walkway 2\", \"id\": \"244084\" }, { \"name\": \"Walkway 3\", \"id\": \"244085\" } ],\n" +
                             " \"public_share_url\": \"https://video.nest.com/live/STRING1?STRING2\",\n" +
                             " \"snapshot_url\": \"STRING1/device_id/STRING2?auth=access_token\",\n" +
                             "\"last_event\": {  \n" +
@@ -110,7 +110,7 @@ public class NestDataDeserializationTest {
                                 " \"app_url\": \"nestmobile://cameras/device_id/cuepoints/STRING?auth=access_token\",\n" +
                                 " \"image_url\": \"STRING1/device_id/STRING2?auth=access_token\",\n" +
                                 " \"animated_image_url\": \"STRING1/device_id/STRING2?auth=access_token\",\n" +
-                                " \"activity_zone_ids\": [ \"244083\", \"244084\" ]\n" +
+                                " \"activity_zone_ids\": [ \"244083\", \"244084\", \"244085\" ]\n" +
                             "}\n" +
                         "}\n" +
                     "},\n" +
@@ -246,7 +246,7 @@ public class NestDataDeserializationTest {
         smokeCoAlarms.put(new DeviceId("RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs"), buildExpectedSmokeCoAlarm());
 
         Map<DeviceId, Camera> cameras = new HashMap<>();
-        cameras.put(new DeviceId("awJo6rH..."), buildExpectedCamera());
+        cameras.put(new DeviceId("awJo6rH0IldT2YlIVtYaGQ"), buildExpectedCamera());
 
         Map<String, ProductType> company = buildExpectedCompany();
         return new Devices(thermostats, smokeCoAlarms, cameras, company);
