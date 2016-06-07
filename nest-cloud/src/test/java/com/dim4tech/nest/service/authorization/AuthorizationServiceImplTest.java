@@ -19,6 +19,7 @@ public class AuthorizationServiceImplTest {
     private final String PRODUCT_ID = "abcdefgh-ijkl-mnop-qrst-uvwxyz012345";
     private final String PRODUCT_SECRET = "AbCdEfGhIjKlMnOpQrStUvWxY";
     private final String AUTHORIZATION_URL = "http://localhost";
+    private final String ACCESS_TOKEN_URL = "http://localhost";
     private final String AUTHORIZATION_CODE = "12345";
     private final int SERVER_PORT = 8000;
     private final String CHARSET = "UTF-8";
@@ -31,7 +32,8 @@ public class AuthorizationServiceImplTest {
 
     public AuthorizationServiceImplTest() throws MalformedURLException {
         URL authorizationUrl = new URL(AUTHORIZATION_URL + ":" + SERVER_PORT);
-        this.authorizationService = new AuthorizationServiceImpl(authorizationUrl, PRODUCT_ID, PRODUCT_SECRET);
+        URL accessTokenUrl = new URL(ACCESS_TOKEN_URL + ":" + SERVER_PORT);
+        this.authorizationService = new AuthorizationServiceImpl(authorizationUrl, accessTokenUrl, PRODUCT_ID, PRODUCT_SECRET);
         this.authorizationService.setDeserializationService(new DeserializationServiceImpl());
     }
 

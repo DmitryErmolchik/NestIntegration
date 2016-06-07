@@ -18,12 +18,13 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private final Logger LOG = LoggerFactory.getLogger(AuthorizationServiceImpl.class);
 
     private final URL authorizationUrl;
+    private final URL accessTokenUrl;
     private final String productId;
     private final String productSecret;
     private DeserializationService deserializationService;
-    private final Map<String, String > params = new HashMap<>();
 
     private final static String CLIENT_ID = "client_id";
+    private final static String STATE = "state";
     private final static String CODE = "code";
     private final static String CLIENT_SECRET = "client_secret";
     private final static String GRANT_TYPE = "grant_type";
@@ -31,11 +32,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     private String charset = "UTF-8";
 
-    public AuthorizationServiceImpl(URL authorizationUrl, String productId, String productSecret) {
+    public AuthorizationServiceImpl(URL authorizationUrl, URL accessTokenUrl, String productId, String productSecret) {
         this.authorizationUrl = authorizationUrl;
+        this.accessTokenUrl = accessTokenUrl;
         this.productId = productId;
         this.productSecret = productSecret;
-        params.put("client_id", this.productId);
     }
 
     public void setCharset(String charset) {
@@ -49,7 +50,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Override
     public URL getAuthorizationCodeUrl(String state) {
         try {
-            params.put("state", state);
+            Map<String, String> params = new HashMap<>();
+            params.put(CLIENT_ID, productId);
+            params.put(STATE, state);
             return new URL(authorizationUrl, HttpHelper.encodeGetRequestParameters(params, charset));
         } catch (MalformedURLException e) {
             LOG.error(e.getMessage(), e);
@@ -65,7 +68,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         params.put(CLIENT_SECRET, productSecret);
         params.put(GRANT_TYPE, GRANT_TYPE_VALUE);
         try {
-            HttpURLConnection connection = (HttpURLConnection) authorizationUrl.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) accessTokenUrl.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
             HttpHelper.request(connection, HttpHelper.encodePostRequestParameters(params, charset));
