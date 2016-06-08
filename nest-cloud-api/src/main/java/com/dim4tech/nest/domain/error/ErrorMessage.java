@@ -24,17 +24,27 @@ public class ErrorMessage {
     private final static String DETAILS = "details";
     private final Map<String, String> details;
 
+    private final static String ERROR_DESCRIPTION = "error_description";
+    private final String errorDescription;
+
+    private final static String INSTANCE_ID = "instance_id";
+    private final String instanceId;
+
     @JsonCreator
     public ErrorMessage(@JsonProperty(ERROR) String error,
                         @JsonProperty(TYPE) String type,
                         @JsonProperty(MESSAGE) String message,
                         @JsonProperty(INSTANCE) String instance,
-                        @JsonProperty(DETAILS) Map<String, String> details) {
+                        @JsonProperty(DETAILS) Map<String, String> details,
+                        @JsonProperty(ERROR_DESCRIPTION) String errorDescription,
+                        @JsonProperty(INSTANCE_ID) String instanceId) {
         this.error = error;
         this.type = type;
         this.message = message;
         this.instance = instance;
         this.details = details;
+        this.errorDescription = errorDescription;
+        this.instanceId = instanceId;
     }
 
     public String getError() {
@@ -55,5 +65,13 @@ public class ErrorMessage {
 
     public Map<String, String> getDetails() {
         return new HashMap<>(details);
+    }
+
+    public String getInstanceId() {
+        return instanceId;
+    }
+
+    public String getErrorDescription() {
+        return errorDescription;
     }
 }

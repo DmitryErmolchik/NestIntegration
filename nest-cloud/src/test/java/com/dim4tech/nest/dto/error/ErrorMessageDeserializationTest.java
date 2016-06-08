@@ -18,7 +18,9 @@ public class ErrorMessageDeserializationTest {
             "  \"instance\": \"ee3657bc-6df3-48ad-88ec-050f59e80b24\"," +
             "  \"details\": {" +
             "    \"fields\": \"temperature_scale\"" +
-            "  }" +
+            "  },\n" +
+            "  \"error_description\": \"authorization code not found\",\n" +
+            "  \"instance_id\": \"01dad188-3334-420f-b730-7a33f60a8c5e\"" +
             "}";
 
 
@@ -30,7 +32,9 @@ public class ErrorMessageDeserializationTest {
                 "https://developer.nest.com/documentation/cloud/error-messages#no-write-permission",
                 "No write permission(s) for field(s): temperature_scale",
                 "ee3657bc-6df3-48ad-88ec-050f59e80b24",
-                details);
+                details,
+                "authorization code not found",
+                "01dad188-3334-420f-b730-7a33f60a8c5e");
 
         ErrorMessage result = deserializationService.deserialize(json, ErrorMessage.class);
         assertEquals(expected.getError(), result.getError());
@@ -38,6 +42,8 @@ public class ErrorMessageDeserializationTest {
         assertEquals(expected.getMessage(), result.getMessage());
         assertEquals(expected.getInstance(), result.getInstance());
         assertEquals(expected.getDetails(), result.getDetails());
+        assertEquals(expected.getErrorDescription(), result.getErrorDescription());
+        assertEquals(expected.getInstanceId(), result.getInstanceId());
     }
 
 }

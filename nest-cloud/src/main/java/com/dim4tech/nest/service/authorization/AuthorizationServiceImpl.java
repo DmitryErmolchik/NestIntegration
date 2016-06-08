@@ -1,7 +1,9 @@
 package com.dim4tech.nest.service.authorization;
 
 import com.dim4tech.nest.domain.authorization.AuthorizationData;
+import com.dim4tech.nest.dto.Response;
 import com.dim4tech.nest.exception.NestIntegrationException;
+import com.dim4tech.nest.service.data.AbstractDataSevice;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
 import com.dim4tech.nest.utils.HttpHelper;
 import org.slf4j.Logger;
@@ -14,7 +16,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthorizationServiceImpl implements AuthorizationService {
+public class AuthorizationServiceImpl extends AbstractDataSevice implements AuthorizationService {
     private final Logger LOG = LoggerFactory.getLogger(AuthorizationServiceImpl.class);
 
     private final URL authorizationUrl;
@@ -72,9 +74,13 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
             HttpHelper.request(connection, HttpHelper.encodePostRequestParameters(params, charset));
-            String response = HttpHelper.response(connection);
-            AuthorizationData authorizationData = deserializationService.deserialize(response, AuthorizationData.class);
-            return authorizationData;
+            Response response = HttpHelper.response(connection);
+            if (response.getResponseCode() == 200) {
+                return deserializationService.deserialize(response.getContent(), AuthorizationData.class);
+            }
+            else {
+                throw createException(deserializationService, response.getContent());
+            }
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
             throw new NestIntegrationException();

@@ -1,5 +1,6 @@
 package com.dim4tech.nest.utils;
 
+import com.dim4tech.nest.dto.Response;
 import com.dim4tech.nest.exception.NestIntegrationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 public class HttpHelper {
     private final static Logger LOG = LoggerFactory.getLogger(HttpHelper.class);
+
 
     public static String encodeGetRequestParameters(Map<String, String> params, String charset) {
         return "?" + encodeParameters(params, charset);
@@ -54,16 +56,30 @@ public class HttpHelper {
         }
     }
 
-    public static String response(HttpURLConnection connection) {
+    public static Response response(HttpURLConnection connection) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader bufferedReader = getConnectionReader(connection);
             StringBuilder result = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 result.append(line);
             }
             bufferedReader.close();
-            return result.toString();
+            return new Response(connection.getResponseCode(), result.toString());
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+            throw new NestIntegrationException();
+        }
+    }
+
+    private static BufferedReader getConnectionReader(HttpURLConnection connection) {
+        try {
+            if (connection.getResponseCode() == 200) {
+                return new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            }
+            else {
+                return new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            }
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
             throw new NestIntegrationException();
