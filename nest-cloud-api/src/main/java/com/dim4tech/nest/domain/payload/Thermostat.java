@@ -3,7 +3,7 @@ package com.dim4tech.nest.domain.payload;
 import com.dim4tech.nest.domain.payload.constant.HvacMode;
 import com.dim4tech.nest.domain.payload.constant.HvacState;
 import com.dim4tech.nest.domain.payload.constant.TemperatureScale;
-import com.dim4tech.nest.helper.LocaleHelper;
+import com.dim4tech.nest.helper.locale.LocaleHelper;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -45,27 +45,27 @@ public class Thermostat {
 
     private final static String IS_ONLINE = "is_online";
     /* Device connection status with the Nest Service */
-    private final boolean isOnline;
+    private final Boolean isOnline;
 
     private final static String CAN_COOL = "can_cool";
     /* System ability to cool (AC) */
-    private final boolean canCool;
+    private final Boolean canCool;
 
     private final static String CAN_HEAT = "can_heat";
     /* System ability to heat */
-    private final boolean canHeat;
+    private final Boolean canHeat;
 
     private final static String IS_USING_EMERGENCY_HEAT = "is_using_emergency_heat";
     /* Emergency Heat status in systems with heat pumps */
-    private final boolean isUsingEmergencyHeat;
+    private final Boolean isUsingEmergencyHeat;
 
     private final static String HAS_FAN = "has_fan";
     /* System ability to control the fan separately from heating or cooling */
-    private final boolean hasFan;
+    private final Boolean hasFan;
 
     private final static String FAN_TIMER_ACTIVE = "fan_timer_active";
     /* Indicates if the fan timer is engaged; used with 'fan_timer_timeout' to turn on the fan for a (user-specified) preset duration */
-    private final boolean fanTimerActive;
+    private final Boolean fanTimerActive;
 
     private final static String FAN_TIMER_TIMEOUT = "fan_timer_timeout";
     /* Timestamp, showing when the fan timer reaches 0 (end of timer duration), in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format */
@@ -73,7 +73,7 @@ public class Thermostat {
 
     private final static String HAS_LEAF = "has_leaf";
     /* Displayed when users choose an energy-saving temperature */
-    private final boolean hasLeaf;
+    private final Boolean hasLeaf;
 
     private final static String TEMPERATURE_SCALE = "temperature_scale";
     /* Celsius or Fahrenheit; used with temperature display */
@@ -81,43 +81,43 @@ public class Thermostat {
 
     private final static String TARGET_TEMPERATURE_F = "target_temperature_f";
     /* Desired temperature, displayed in whole degrees Fahrenheit (1°F) */
-    private final double targetTemperatureF;
+    private final Double targetTemperatureF;
 
     private final static String TARGET_TEMPERATURE_C = "target_temperature_c";
     /* Desired temperature, displayed in half degrees Celsius (0.5°C) */
-    private final double targetTemperatureC;
+    private final Double targetTemperatureC;
 
     private final static String TARGET_TEMPERATURE_HIGH_F = "target_temperature_high_f";
     /* Maximum target temperature, displayed in whole degrees Fahrenheit (1°F); used with Heat • Cool mode */
-    private final double targetTemperatureHighF;
+    private final Double targetTemperatureHighF;
 
     private final static String TARGET_TEMPERATURE_HIGH_C = "target_temperature_high_c";
     /* Maximum target temperature, displayed in half degrees Celsius (0.5°C); used with Heat • Cool mode */
-    private final double targetTemperatureHighC;
+    private final Double targetTemperatureHighC;
 
     private final static String TARGET_TEMPERATURE_LOW_F = "target_temperature_low_f";
     /* Minimum target temperature, displayed in whole degrees Fahrenheit (1°F); used with Heat • Cool mode */
-    private final double targetTemperatureLowF;
+    private final Double targetTemperatureLowF;
 
     private final static String TARGET_TEMPERATURE_LOW_C = "target_temperature_low_c";
     /* Minimum target temperature, displayed in half degrees Celsius (0.5°C); used with Heat • Cool mode */
-    private final double targetTemperatureLowC;
+    private final Double targetTemperatureLowC;
 
     private final static String AWAY_TEMPERATURE_HIGH_F = "away_temperature_high_f";
     /* Maximum 'away' temperature, displayed in whole degrees Fahrenheit (1°F) */
-    private final double awayTemperatureHighF;
+    private final Double awayTemperatureHighF;
 
     private final static String AWAY_TEMPERATURE_HIGH_C = "away_temperature_high_c";
     /* Maximum 'away' temperature, displayed in half degrees Celsius (0.5°C) */
-    private final double awayTemperatureHighC;
+    private final Double awayTemperatureHighC;
 
     private final static String AWAY_TEMPERATURE_LOW_F = "away_temperature_low_f";
     /* Minimum 'away' temperature, displayed in whole degrees Fahrenheit (1°F) */
-    private final double awayTemperatureLowF;
+    private final Double awayTemperatureLowF;
 
     private final static String AWAY_TEMPERATURE_LOW_C = "away_temperature_low_c";
     /* Minimum 'away' temperature, displayed in half degrees Celsius (0.5°C) */
-    private final double awayTemperatureLowC;
+    private final Double awayTemperatureLowC;
 
     private final static String HVAC_MODE = "hvac_mode";
     /* Indicates HVAC system heating/cooling modes; for systems with both heating and cooling capability,
@@ -126,15 +126,15 @@ public class Thermostat {
 
     private final static String AMBIENT_TEMPERATURE_F = "ambient_temperature_f";
     /* Temperature, measured at the device, in whole degrees Fahrenheit (1°f) */
-    private final double ambientTemperatureF;
+    private final Double ambientTemperatureF;
 
     private final static String AMBIENT_TEMPERATURE_C = "ambient_temperature_c";
     /* Temperature, measured at the device, in half degrees Celsius (0.5°C) */
-    private final double ambientTemperatureC;
+    private final Double ambientTemperatureC;
 
     private final static String HUMIDITY = "humidity";
     /* Humidity, in percent (%) format, measured at the device. */
-    private final double humidity;
+    private final Double humidity;
 
     private final static String HVAC_STATE = "hvac_state";
     /* Indicates whether the HVAC system is actively heating, cooling or is off */
@@ -148,7 +148,7 @@ public class Thermostat {
     /* Thermostat Lock status. When true, the Thermostat Lock feature is enabled,
         and restricts the temperature range to these min/max values:
         locked_temp_min_f, locked_temp_max_f, locked_temp_min_c, and locked_temp_max_c. */
-    private final boolean isLocked;
+    private final Boolean isLocked;
 
     private final static String LOCKED_TEMP_MIN_F = "locked_temp_min_f";
     /* Minimum Thermostat Lock temperature, displayed in whole degrees Fahrenheit (1°F).
@@ -182,32 +182,32 @@ public class Thermostat {
                       @JsonProperty(NAME) String name,
                       @JsonProperty(NAME_LONG) String nameLong,
                       @JsonProperty(LAST_CONNECTION) DateTime lastConnection,
-                      @JsonProperty(IS_ONLINE) boolean isOnline,
-                      @JsonProperty(CAN_COOL) boolean canCool,
-                      @JsonProperty(CAN_HEAT) boolean canHeat,
-                      @JsonProperty(IS_USING_EMERGENCY_HEAT) boolean isUsingEmergencyHeat,
-                      @JsonProperty(HAS_FAN) boolean hasFan,
-                      @JsonProperty(FAN_TIMER_ACTIVE) boolean fanTimerActive,
+                      @JsonProperty(IS_ONLINE) Boolean isOnline,
+                      @JsonProperty(CAN_COOL) Boolean canCool,
+                      @JsonProperty(CAN_HEAT) Boolean canHeat,
+                      @JsonProperty(IS_USING_EMERGENCY_HEAT) Boolean isUsingEmergencyHeat,
+                      @JsonProperty(HAS_FAN) Boolean hasFan,
+                      @JsonProperty(FAN_TIMER_ACTIVE) Boolean fanTimerActive,
                       @JsonProperty(FAN_TIMER_TIMEOUT) DateTime fanTimerTimeout,
-                      @JsonProperty(HAS_LEAF) boolean hasLeaf,
+                      @JsonProperty(HAS_LEAF) Boolean hasLeaf,
                       @JsonProperty(TEMPERATURE_SCALE) TemperatureScale temperatureScale,
-                      @JsonProperty(TARGET_TEMPERATURE_F) double targetTemperatureF,
-                      @JsonProperty(TARGET_TEMPERATURE_C) double targetTemperatureC,
-                      @JsonProperty(TARGET_TEMPERATURE_HIGH_F) double targetTemperatureHighF,
-                      @JsonProperty(TARGET_TEMPERATURE_HIGH_C) double targetTemperatureHighC,
-                      @JsonProperty(TARGET_TEMPERATURE_LOW_F) double targetTemperatureLowF,
-                      @JsonProperty(TARGET_TEMPERATURE_LOW_C) double targetTemperatureLowC,
-                      @JsonProperty(AWAY_TEMPERATURE_HIGH_F) double awayTemperatureHighF,
-                      @JsonProperty(AWAY_TEMPERATURE_HIGH_C) double awayTemperatureHighC,
-                      @JsonProperty(AWAY_TEMPERATURE_LOW_F) double awayTemperatureLowF,
-                      @JsonProperty(AWAY_TEMPERATURE_LOW_C) double awayTemperatureLowC,
+                      @JsonProperty(TARGET_TEMPERATURE_F) Double targetTemperatureF,
+                      @JsonProperty(TARGET_TEMPERATURE_C) Double targetTemperatureC,
+                      @JsonProperty(TARGET_TEMPERATURE_HIGH_F) Double targetTemperatureHighF,
+                      @JsonProperty(TARGET_TEMPERATURE_HIGH_C) Double targetTemperatureHighC,
+                      @JsonProperty(TARGET_TEMPERATURE_LOW_F) Double targetTemperatureLowF,
+                      @JsonProperty(TARGET_TEMPERATURE_LOW_C) Double targetTemperatureLowC,
+                      @JsonProperty(AWAY_TEMPERATURE_HIGH_F) Double awayTemperatureHighF,
+                      @JsonProperty(AWAY_TEMPERATURE_HIGH_C) Double awayTemperatureHighC,
+                      @JsonProperty(AWAY_TEMPERATURE_LOW_F) Double awayTemperatureLowF,
+                      @JsonProperty(AWAY_TEMPERATURE_LOW_C) Double awayTemperatureLowC,
                       @JsonProperty(HVAC_MODE) HvacMode hvacMode,
-                      @JsonProperty(AMBIENT_TEMPERATURE_F) double ambientTemperatureF,
-                      @JsonProperty(AMBIENT_TEMPERATURE_C) double ambientTemperatureC,
-                      @JsonProperty(HUMIDITY) double humidity,
+                      @JsonProperty(AMBIENT_TEMPERATURE_F) Double ambientTemperatureF,
+                      @JsonProperty(AMBIENT_TEMPERATURE_C) Double ambientTemperatureC,
+                      @JsonProperty(HUMIDITY) Double humidity,
                       @JsonProperty(HVAC_STATE) HvacState hvacState,
                       @JsonProperty(WHERE_ID) WhereId whereId,
-                      @JsonProperty(IS_LOCKED) boolean isLocked,
+                      @JsonProperty(IS_LOCKED) Boolean isLocked,
                       @JsonProperty(LOCKED_TEMP_MIN_F) String lockedTempMinF,
                       @JsonProperty(LOCKED_TEMP_MAX_F) String lockedTempMaxF,
                       @JsonProperty(LOCKED_TEMP_MIN_C) String lockedTempMinC,
@@ -281,27 +281,27 @@ public class Thermostat {
         return new DateTime(lastConnection);
     }
 
-    public boolean isOnline() {
+    public Boolean isOnline() {
         return isOnline;
     }
 
-    public boolean isCanCool() {
+    public Boolean isCanCool() {
         return canCool;
     }
 
-    public boolean isCanHeat() {
+    public Boolean isCanHeat() {
         return canHeat;
     }
 
-    public boolean isUsingEmergencyHeat() {
+    public Boolean isUsingEmergencyHeat() {
         return isUsingEmergencyHeat;
     }
 
-    public boolean isHasFan() {
+    public Boolean isHasFan() {
         return hasFan;
     }
 
-    public boolean isFanTimerActive() {
+    public Boolean isFanTimerActive() {
         return fanTimerActive;
     }
 
@@ -309,7 +309,7 @@ public class Thermostat {
         return new DateTime(fanTimerTimeout);
     }
 
-    public boolean isHasLeaf() {
+    public Boolean isHasLeaf() {
         return hasLeaf;
     }
 
@@ -317,31 +317,31 @@ public class Thermostat {
         return temperatureScale;
     }
 
-    public double getTargetTemperatureF() {
+    public Double getTargetTemperatureF() {
         return targetTemperatureF;
     }
 
-    public double getTargetTemperatureC() {
+    public Double getTargetTemperatureC() {
         return targetTemperatureC;
     }
 
-    public double getTargetTemperatureLowC() {
+    public Double getTargetTemperatureLowC() {
         return targetTemperatureLowC;
     }
 
-    public double getAwayTemperatureHighF() {
+    public Double getAwayTemperatureHighF() {
         return awayTemperatureHighF;
     }
 
-    public double getAwayTemperatureHighC() {
+    public Double getAwayTemperatureHighC() {
         return awayTemperatureHighC;
     }
 
-    public double getAwayTemperatureLowF() {
+    public Double getAwayTemperatureLowF() {
         return awayTemperatureLowF;
     }
 
-    public double getAwayTemperatureLowC() {
+    public Double getAwayTemperatureLowC() {
         return awayTemperatureLowC;
     }
 
@@ -349,15 +349,15 @@ public class Thermostat {
         return hvacMode;
     }
 
-    public double getAmbientTemperatureF() {
+    public Double getAmbientTemperatureF() {
         return ambientTemperatureF;
     }
 
-    public double getAmbientTemperatureC() {
+    public Double getAmbientTemperatureC() {
         return ambientTemperatureC;
     }
 
-    public double getHumidity() {
+    public Double getHumidity() {
         return humidity;
     }
 
@@ -369,7 +369,7 @@ public class Thermostat {
         return whereId;
     }
 
-    public boolean isLocked() {
+    public Boolean isLocked() {
         return isLocked;
     }
 

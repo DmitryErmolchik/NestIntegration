@@ -24,17 +24,17 @@ public class ProductData {
 
     private final static String RESOURCE_USE = "resource_use";
     /* Contains the resource use data values and measurement timestamps. */
-    private final Map<String, ProductResource> resopurceUse;
+    private final Map<String, ProductResource> resourceUse;
 
     @JsonCreator
     public ProductData(@JsonProperty(IDENTIFICATION) Identification identification,
                        @JsonProperty(LOCATION) ProductLocation location,
                        @JsonProperty(SOFTWARE) Software software,
-                       @JsonProperty(RESOURCE_USE) Map<String, ProductResource> resopurceUse) {
+                       @JsonProperty(RESOURCE_USE) Map<String, ProductResource> resourceUse) {
         this.identification = identification;
         this.location = location;
         this.software = software;
-        this.resopurceUse = resopurceUse;
+        this.resourceUse = resourceUse;
     }
 
     public static ProductData createFromJson(Map<String, Object> productData) {
@@ -85,8 +85,8 @@ public class ProductData {
         return software;
     }
 
-    public Map<String, ProductResource> getResopurceUse() {
-        return resopurceUse;
+    public Map<String, ProductResource> getResourceUse() {
+        return resourceUse;
     }
 
     @Override
@@ -97,11 +97,11 @@ public class ProductData {
         return Objects.equals(identification, that.identification) &&
                 Objects.equals(location, that.location) &&
                 Objects.equals(software, that.software) &&
-                Objects.equals(resopurceUse, that.resopurceUse);
+                Objects.equals(resourceUse, that.resourceUse);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(identification, location, software, resopurceUse);
+        return Objects.hash(identification, location, software, resourceUse);
     }
 }

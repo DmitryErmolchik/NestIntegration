@@ -1,4 +1,4 @@
-package com.dim4tech.nest.helper;
+package com.dim4tech.nest.helper.locale;
 
 import java.util.Locale;
 

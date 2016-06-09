@@ -3,7 +3,7 @@ package com.dim4tech.nest.domain.payload;
 import com.dim4tech.nest.domain.payload.constant.AlarmState;
 import com.dim4tech.nest.domain.payload.constant.BatteryHealth;
 import com.dim4tech.nest.domain.payload.constant.UiColorState;
-import com.dim4tech.nest.helper.LocaleHelper;
+import com.dim4tech.nest.helper.locale.LocaleHelper;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
