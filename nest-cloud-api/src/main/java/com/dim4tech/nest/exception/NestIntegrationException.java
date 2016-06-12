@@ -2,6 +2,7 @@ package com.dim4tech.nest.exception;
 
 
 import com.dim4tech.nest.domain.error.ErrorMessage;
+import com.dim4tech.nest.service.deserializer.DeserializationService;
 
 public class NestIntegrationException extends RuntimeException {
 
@@ -15,4 +16,9 @@ public class NestIntegrationException extends RuntimeException {
         super(errorMessage.getMessage() != null ? errorMessage.getMessage() : errorMessage.getErrorDescription());
         this.errorMessage = errorMessage;
     }
+
+    public static NestIntegrationException createException(DeserializationService deserializationService, String message) {
+        return new NestIntegrationException(deserializationService.deserialize(message, ErrorMessage.class));
+    }
+
 }

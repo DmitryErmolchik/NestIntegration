@@ -4,10 +4,13 @@ import java.util.Locale;
 
 public class LocaleHelper {
     public static Locale convertLocale(Locale locale) {
-        if (isLanguageTag(locale)) {
-            return Locale.forLanguageTag(locale.toString());
+        if (locale != null) {
+            if (isLanguageTag(locale)) {
+                return Locale.forLanguageTag(locale.toString());
+            }
+            return locale;
         }
-        return locale;
+        return null;
     }
 
     private static boolean isLanguageTag(Locale locale) {

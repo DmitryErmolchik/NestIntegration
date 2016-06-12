@@ -1,13 +1,12 @@
 package com.dim4tech.nest.dto.payload;
 
-import com.dim4tech.nest.domain.payload.*;
+import com.dim4tech.nest.common.ExpectedObjectsBuilder;
+import com.dim4tech.nest.domain.payload.ProductType;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
 import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.joda.time.DateTime;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -54,40 +53,6 @@ public class CompanyDeserializationTest {
     @Test
     public void deserializationTest() throws Exception {
         Map<String, ProductType> result = deserializationService.deserialize(json, new TypeReference<Map<String, ProductType>>() {});
-        assertEquals(buildExpectedCompany(), result);
+        assertEquals(ExpectedObjectsBuilder.buildExpectedCompany(), result);
     }
-
-    private Map<String, ProductType> buildExpectedCompany() {
-        Map<DeviceId, ProductData> product = new HashMap<>();
-        product.put(new DeviceId("CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg"), buildExpectedProductData());
-
-        Map<ProductTypeId, Product> productType = new HashMap<>();
-        productType.put(new ProductTypeId("$product_type"), new Product(product));
-
-        ProductType productTypeExpected = new ProductType(productType);
-
-        Map<String, ProductType> expectedCompany = new HashMap<>();
-        expectedCompany.put("$company", productTypeExpected);
-        return expectedCompany;
-    }
-
-    private ProductData buildExpectedProductData() {
-        Identification identification = new Identification(new DeviceId("CPMEMSnC48JlSAHjQIp-kHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg"),
-                "1L090B50230");
-        ProductLocation productLocation = new ProductLocation(new StructureId("VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw"),
-                new WhereId("UNCBGUnN24..."));
-        Software software = new Software("1.0");
-        Map<String, ProductResource> resopurceUse = new HashMap<>();
-        resopurceUse.put("electricity", new ProductResource(42.789,
-                DateTime.parse("2016-01-01T01:01:01.000Z"),
-                DateTime.parse("2016-01-01T01:02:35.000Z")));
-        resopurceUse.put("gas", new ProductResource(0.345234545,
-                DateTime.parse("2016-01-01T01:01:01.000Z"),
-                DateTime.parse("2016-01-01T01:02:35.000Z")));
-        resopurceUse.put("water", new ProductResource(10000.3,
-                DateTime.parse("2016-01-01T01:01:01.000Z"),
-                DateTime.parse("2016-01-01T01:02:35.000Z")));
-        return new ProductData(identification, productLocation, software, resopurceUse);
-    }
-
 }

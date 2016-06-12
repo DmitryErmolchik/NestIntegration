@@ -7,7 +7,8 @@ import java.net.URL;
 
 public enum UrlConstant {
     AUTHORIZATION_URL("https://home.nest.com/login/oauth2"),
-    ACCESS_TOKEN_URL("https://api.home.nest.com/oauth2/access_token");
+    ACCESS_TOKEN_URL("https://api.home.nest.com/oauth2/access_token"),
+    DATA_URL("https://developer-api.nest.com");
 
     private URL url;
 

@@ -1,20 +1,17 @@
 package com.dim4tech.nest.dto.payload;
 
-import com.dim4tech.nest.domain.payload.*;
+import com.dim4tech.nest.common.ExpectedObjectsBuilder;
+import com.dim4tech.nest.domain.payload.Camera;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
 import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
-import org.joda.time.DateTime;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class CameraDeserializationTest {
     private final DeserializationService deserializationService = new DeserializationServiceImpl();
     private final String json = "{ \n" +
-            " \"device_id\": \"awJo6rH...\",\n" +
+            " \"device_id\": \"awJo6rH0IldT2YlIVtYaGQ\",\n" +
             " \"software_version\": \"4.0\",\n" +
             " \"structure_id\": \"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw\",\n" +
             " \"where_id\": \"d6reb_OZTM...\",\n" +
@@ -50,52 +47,6 @@ public class CameraDeserializationTest {
     @Test
     public void deserializationTest() throws Exception {
         Camera result = deserializationService.deserialize(json, Camera.class);
-        assertEquals(buildExpectedCamera(), result);
-    }
-
-    private Camera buildExpectedCamera() {
-        List<ActivityZoneId> activityZoneIds = new ArrayList<>();
-        activityZoneIds.add(new ActivityZoneId("244083"));
-        activityZoneIds.add(new ActivityZoneId("244084"));
-        activityZoneIds.add(new ActivityZoneId("244085"));
-
-        List<ActivityZone> expectedActivityZones = new ArrayList<>();
-        expectedActivityZones.add(new ActivityZone(new ActivityZoneId("244083"), "Walkway 1"));
-        expectedActivityZones.add(new ActivityZone(new ActivityZoneId("244084"), "Walkway 2"));
-        expectedActivityZones.add(new ActivityZone(new ActivityZoneId("244085"), "Walkway 3"));
-
-        LastEvent expectedLastEvent = new LastEvent(
-                true,
-                true,
-                DateTime.parse("2016-12-29T00:00:00.000Z"),
-                DateTime.parse("2016-12-29T18:42:00.000Z"),
-                DateTime.parse("2016-10-31T23:59:59.000Z"),
-                "https://home.nest.com/cameras/device_id/cuepoints/STRING?auth=access_token",
-                "nestmobile://cameras/device_id/cuepoints/STRING?auth=access_token",
-                "STRING1/device_id/STRING2?auth=access_token",
-                "STRING1/device_id/STRING2?auth=access_token",
-                activityZoneIds
-        );
-        Camera expectedCamera = new Camera(
-                new DeviceId("awJo6rH..."),
-                "4.0",
-                new StructureId("VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw"),
-                new WhereId("d6reb_OZTM..."),
-                "Hallway (upstairs)",
-                "Hallway Camera (upstairs)",
-                true,
-                true,
-                true,
-                DateTime.parse("2016-12-29T18:42:00.000Z"),
-                true,
-                "https://home.nest.com/cameras/device_id?auth=access_token",
-                "nestmobile://cameras/device_id?auth=access_token",
-                true,
-                expectedActivityZones,
-                "https://video.nest.com/live/STRING1?STRING2",
-                "STRING1/device_id/STRING2?auth=access_token",
-                expectedLastEvent
-        );
-        return expectedCamera;
+        assertEquals(ExpectedObjectsBuilder.buildExpectedCamera(), result);
     }
 }

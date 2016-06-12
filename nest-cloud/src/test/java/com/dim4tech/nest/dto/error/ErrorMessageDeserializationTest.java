@@ -1,12 +1,10 @@
 package com.dim4tech.nest.dto.error;
 
+import com.dim4tech.nest.common.ExpectedObjectsBuilder;
 import com.dim4tech.nest.domain.error.ErrorMessage;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
 import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,16 +24,7 @@ public class ErrorMessageDeserializationTest {
 
     @Test
     public void deserializationTest() throws Exception {
-        Map<String, String> details = new HashMap<>();
-        details.put("fields", "temperature_scale");
-        ErrorMessage expected = new ErrorMessage("No write permission(s) for field(s): temperature_scale",
-                "https://developer.nest.com/documentation/cloud/error-messages#no-write-permission",
-                "No write permission(s) for field(s): temperature_scale",
-                "ee3657bc-6df3-48ad-88ec-050f59e80b24",
-                details,
-                "authorization code not found",
-                "01dad188-3334-420f-b730-7a33f60a8c5e");
-
+        ErrorMessage expected = ExpectedObjectsBuilder.buildExpectedErrorMessage();
         ErrorMessage result = deserializationService.deserialize(json, ErrorMessage.class);
         assertEquals(expected.getError(), result.getError());
         assertEquals(expected.getType(), result.getType());

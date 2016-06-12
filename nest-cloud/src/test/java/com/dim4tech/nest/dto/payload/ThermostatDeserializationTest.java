@@ -1,18 +1,10 @@
 package com.dim4tech.nest.dto.payload;
 
-import com.dim4tech.nest.domain.payload.DeviceId;
-import com.dim4tech.nest.domain.payload.StructureId;
+import com.dim4tech.nest.common.ExpectedObjectsBuilder;
 import com.dim4tech.nest.domain.payload.Thermostat;
-import com.dim4tech.nest.domain.payload.WhereId;
-import com.dim4tech.nest.domain.payload.constant.HvacMode;
-import com.dim4tech.nest.domain.payload.constant.HvacState;
-import com.dim4tech.nest.domain.payload.constant.TemperatureScale;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
 import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
-import org.joda.time.DateTime;
 import org.junit.Test;
-
-import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 
@@ -62,48 +54,6 @@ public class ThermostatDeserializationTest {
     @Test
     public void deserializationTest() throws Exception {
         Thermostat result = deserializationService.deserialize(json, Thermostat.class);
-        assertEquals(buildExpectedThermostat(), result);
-    }
-
-    private Thermostat buildExpectedThermostat() {
-        return new Thermostat(
-                new DeviceId("peyiJNo0IldT2YlIVtYaGQ"),
-                new Locale("en", "us"),
-                "4.0",
-                new StructureId("VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw"),
-                "Hallway (upstairs)",
-                "Hallway Thermostat (upstairs)",
-                DateTime.parse("2016-10-31T23:59:59.000Z"),
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                DateTime.parse("2016-10-31T23:59:59.000Z"),
-                true,
-                TemperatureScale.C,
-                72,
-                21.5,
-                72,
-                21.5,
-                64,
-                17.5,
-                72,
-                21.5,
-                64,
-                17.5,
-                HvacMode.HEAT,
-                72,
-                21.5,
-                40,
-                HvacState.HEATING,
-                new WhereId("UNCBGUnN24..."),
-                true,
-                "65",
-                "80",
-                "19.5",
-                "24.5",
-                "upstairs");
+        assertEquals(ExpectedObjectsBuilder.buildExpectedThermostat(), result);
     }
 }

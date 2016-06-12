@@ -1,5 +1,6 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.dim4tech.nest.common.ExpectedObjectsBuilder;
 import com.dim4tech.nest.domain.payload.Metadata;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
 import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
@@ -17,13 +18,6 @@ public class MetadataDeserializationTest {
     @Test
     public void deserializationTest() throws Exception {
         Metadata result = deserializationService.deserialize(json, Metadata.class);
-        assertEquals(buildExpectedMetadate(), result);
-    }
-
-    private Metadata buildExpectedMetadate() {
-        return new Metadata(
-                "c.FmDPkzyzaQe...",
-                1
-        );
+        assertEquals(ExpectedObjectsBuilder.buildExpectedMetadate(), result);
     }
 }

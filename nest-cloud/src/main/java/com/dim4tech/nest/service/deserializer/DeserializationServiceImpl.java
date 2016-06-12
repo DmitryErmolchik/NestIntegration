@@ -27,36 +27,50 @@ public class DeserializationServiceImpl implements DeserializationService {
     @Override
     public <T> T deserialize(String jsonString, Class<T> clazz) {
         try {
-            if (!clazz.equals(NestData.class)) {
-                return objectMapper.readValue(jsonString, clazz);
+            if (clazz.equals(Devices.class)) {
+                return (T) readDevices(jsonString);
+            } else if (clazz.equals(NestData.class)) {
+                NestData nestData = objectMapper.readValue(jsonString, NestData.class);
+                return (T) new NestData(nestData.getMetadata(),
+                                        readDevices(jsonString),
+                                        nestData.getStructure());
             }
             else {
-                final Map<String, ProductType> companies = new HashMap<>();
-                NestData nestData = objectMapper.readValue(jsonString, NestData.class);
-                JsonNode node = objectMapper.readTree(jsonString).at("/devices");
-                Iterator<Map.Entry<String, JsonNode>> iteratorDevices = node.fields();
-                while (iteratorDevices.hasNext()) {
-                    Map.Entry<String, JsonNode> devices = iteratorDevices.next();
-                    switch (devices.getKey()) {
-                        case Devices.THERMOSTATS:
-                        case Devices.CAMERAS:
-                        case Devices.SMOKE_CO_ALARMS:
-                            break;
-                        default:
-                            try {
-                                ProductType productType = objectMapper.readValue(devices.getValue().toString(), ProductType.class);
-                                companies.put(devices.getKey(), productType);
-                            } catch (IOException e) {
-                                throw new NestIntegrationException();
-                            }
-                            break;
-                    }
-                }
-                Devices tempDevices = objectMapper.readValue(node.toString(), Devices.class);
-                return (T) new NestData(nestData.getMetadata(),
-                        new Devices(tempDevices.getThermostats(), tempDevices.getSmokeCoAlarms(), tempDevices.getCameras(), companies),
-                        nestData.getStructure());
+                return objectMapper.readValue(jsonString, clazz);
             }
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+            throw new NestIntegrationException();
+        }
+    }
+
+    private Devices readDevices(String jsonString) {
+        final Map<String, ProductType> companies = new HashMap<>();
+        try {
+            JsonNode node = objectMapper.readTree(jsonString).get("devices");
+            if (node == null) {
+                node = objectMapper.readTree(jsonString);
+            }
+            Iterator<Map.Entry<String, JsonNode>> iteratorDevices = node.fields();
+            while (iteratorDevices.hasNext()) {
+                Map.Entry<String, JsonNode> devices = iteratorDevices.next();
+                switch (devices.getKey()) {
+                    case Devices.THERMOSTATS:
+                    case Devices.CAMERAS:
+                    case Devices.SMOKE_CO_ALARMS:
+                        break;
+                    default:
+                        try {
+                            ProductType productType = objectMapper.readValue(devices.getValue().toString(), ProductType.class);
+                            companies.put(devices.getKey(), productType);
+                        } catch (IOException e) {
+                            throw new NestIntegrationException();
+                        }
+                        break;
+                }
+            }
+            Devices tempDevices = objectMapper.readValue(node.toString(), Devices.class);
+            return new Devices(tempDevices.getThermostats(), tempDevices.getSmokeCoAlarms(), tempDevices.getCameras(), companies);
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
             throw new NestIntegrationException();

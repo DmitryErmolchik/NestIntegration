@@ -1,5 +1,6 @@
 package com.dim4tech.nest.service.authorization;
 
+import com.dim4tech.nest.constant.Default;
 import com.dim4tech.nest.domain.authorization.AuthorizationData;
 import com.dim4tech.nest.dto.Response;
 import com.dim4tech.nest.exception.NestIntegrationException;
@@ -32,7 +33,7 @@ public class AuthorizationServiceImpl extends AbstractDataSevice implements Auth
     private final static String GRANT_TYPE = "grant_type";
     private final static String GRANT_TYPE_VALUE = "authorization_code";
 
-    private String charset = "UTF-8";
+    private String charset = Default.CHARSET;
 
     public AuthorizationServiceImpl(URL authorizationUrl, URL accessTokenUrl, String productId, String productSecret) {
         this.authorizationUrl = authorizationUrl;
@@ -79,7 +80,7 @@ public class AuthorizationServiceImpl extends AbstractDataSevice implements Auth
                 return deserializationService.deserialize(response.getContent(), AuthorizationData.class);
             }
             else {
-                throw createException(deserializationService, response.getContent());
+                throw NestIntegrationException.createException(deserializationService, response.getContent());
             }
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);

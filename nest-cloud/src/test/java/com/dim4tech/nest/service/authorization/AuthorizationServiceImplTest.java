@@ -1,5 +1,6 @@
 package com.dim4tech.nest.service.authorization;
 
+import com.dim4tech.nest.constant.Default;
 import com.dim4tech.nest.domain.authorization.AuthorizationData;
 import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import com.sun.net.httpserver.HttpServer;
@@ -22,7 +23,7 @@ public class AuthorizationServiceImplTest {
     private final String ACCESS_TOKEN_URL = "http://localhost";
     private final String AUTHORIZATION_CODE = "12345";
     private final int SERVER_PORT = 8000;
-    private final String CHARSET = "UTF-8";
+    private final String CHARSET = Default.CHARSET;
     private final String AUTHORIZATION_DATA = "{\"access_token\":\"c.Ntt2mloeD93xfYiW9WumL8nPePIVcLh0sNg0AkPMvqH23pkArivBdIvgUdAyabDUbZ83CR6k8L05n9CrkwVCgilqRw9YxMwElZPhINlO4T7OWs1oUNVtZQUPH5mXgyupy0KO0ZEpnv0LnQMX\"," +
             "\"expires_in\":315360000}";
 

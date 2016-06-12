@@ -1,7 +1,7 @@
 package com.dim4tech.nest.dto.payload;
 
+import com.dim4tech.nest.common.ExpectedObjectsBuilder;
 import com.dim4tech.nest.domain.payload.Where;
-import com.dim4tech.nest.domain.payload.WhereId;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
 import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import org.junit.Test;
@@ -17,10 +17,6 @@ public class WhereDeserializationTest {
     @Test
     public void deserializationTest() throws Exception {
         Where result = deserializationService.deserialize(json, Where.class);
-        assertEquals(buildExpectedWhere(), result);
-    }
-
-    private Where buildExpectedWhere() {
-        return new Where(new WhereId("Fqp6wJI..."), "Bedroom");
+        assertEquals(ExpectedObjectsBuilder.buildExpectedWhere(), result);
     }
 }
