@@ -1,5 +1,7 @@
 package com.dim4tech.nest.utils;
 
+import com.dim4tech.nest.domain.payload.DeviceId;
+import com.dim4tech.nest.domain.payload.StructureId;
 import org.junit.Test;
 
 import java.net.MalformedURLException;
@@ -16,6 +18,11 @@ public class EndpointsTest {
     }
 
     @Test
+    public void getNestData() throws Exception {
+        assertEquals(baseUrl, endpoints.getNestData().toString());
+    }
+
+    @Test
     public void getDevices() throws Exception {
         assertEquals(baseUrl + "devices", endpoints.getDevices().toString());
     }
@@ -26,8 +33,18 @@ public class EndpointsTest {
     }
 
     @Test
+    public void getThermostat() throws Exception {
+        assertEquals(baseUrl + "devices/thermostats/123", endpoints.getThermostat(new DeviceId("123")).toString());
+    }
+
+    @Test
     public void getSmokeCoAlarms() throws Exception {
         assertEquals(baseUrl + "devices/smoke_co_alarms", endpoints.getSmokeCoAlarms().toString());
+    }
+
+    @Test
+    public void getSmokeCoAlarm() throws Exception {
+        assertEquals(baseUrl + "devices/smoke_co_alarms/123", endpoints.getSmokeCoAlarm(new DeviceId("123")).toString());
     }
 
     @Test
@@ -36,7 +53,27 @@ public class EndpointsTest {
     }
 
     @Test
+    public void getCamera() throws Exception {
+        assertEquals(baseUrl + "devices/cameras/123", endpoints.getCamera(new DeviceId("123")).toString());
+    }
+
+    @Test
+    public void getCompany() throws Exception {
+        assertEquals(baseUrl + "devices/$company", endpoints.getCompany("$company").toString());
+    }
+
+    @Test
     public void getStructures() throws Exception {
         assertEquals(baseUrl + "structures", endpoints.getStructures().toString());
+    }
+
+    @Test
+    public void getStructure() throws Exception {
+        assertEquals(baseUrl + "structures/123", endpoints.getStructure(new StructureId("123")).toString());
+    }
+
+    @Test
+    public void getMetadata() throws Exception {
+        assertEquals(baseUrl + "metadata", endpoints.getMetadata().toString());
     }
 }

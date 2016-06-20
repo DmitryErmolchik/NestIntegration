@@ -14,14 +14,20 @@ import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
 
-public class DevicesLoaderTest {
+public class NestDataLoaderTest {
     private final static String accessToken = "c.KzH5UIETsHENeKfWoXHRV7wZLKwgofmqx3RFV53qJ7ZYXpiH18aYKptfekCzmNQAMCVu3RnipfrmcqFMZL8ruuMKcvlMgBVvkoCUMRxMeRJjiLZMH3HJWWbO793EEA5tSR7E4J3VA0CG66as";
-    private final DevicesLoader loader;
+    private final NestDataLoader loader;
     private final String HOST_URL = "http://localhost";
     private final int SERVER_PORT = 8000;
     private final String CHARSET = Default.CHARSET;
 
-    private final String DATA = "{  \n" +
+    private final String DATA =
+            "{\n" +
+            "\"metadata\": {  \n" +
+            " \"access_token\": \"c.FmDPkzyzaQe...\",\n" +
+            " \"client_version\": 1\n" +
+            "},\n" +
+            "\"devices\": {  \n" +
             "\"thermostats\": {  \n" +
             "\"peyiJNo0IldT2YlIVtYaGQ\": {  \n" +
             " \"device_id\": \"peyiJNo0IldT2YlIVtYaGQ\",\n" +
@@ -150,19 +156,51 @@ public class DevicesLoaderTest {
             "}\n" +
             "}\n" +
             "}\n" +
+            "},\n" +
+            "\"structures\": {  \n" +
+            "\"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw\": {  \n" +
+            " \"structure_id\": \"VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw\",\n" +
+            " \"thermostats\": [ \"peyiJNo0IldT2YlIVtYaGQ\", \"qeyiJNo0IldT2YlIVtYaGQ\" ],\n" +
+            " \"smoke_co_alarms\": [ \"RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs\", \"STMTKxsQTCxzVcsySOHPxKoF4OyCifrs\" ],\n" +
+            " \"cameras\": [ \"awJo6rH...\", \"bwJo6rH...\" ],\n" +
+            "\"devices\": {  \n" +
+            "\"$company\": {  \n" +
+            " \"$product_type\": [ \"CPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg\", \"DPMEMSnC48JlSAHjQIp-aHI72IjLYHK_ul_c54UFb8CmPXNj4ixLbg\" ]\n" +
+            "}\n" +
+            "},\n" +
+            " \"away\": \"home\",\n" +
+            " \"name\": \"Home\",\n" +
+            " \"country_code\": \"US\",\n" +
+            " \"postal_code\": \"94304\",\n" +
+            " \"peak_period_start_time\": \"2016-10-31T23:59:59.000Z\",\n" +
+            " \"peak_period_end_time\": \"2016-10-31T23:59:59.000Z\",\n" +
+            " \"time_zone\": \"America/Los_Angeles\",\n" +
+            "\"eta\": {  \n" +
+            " \"trip_id\": \"myTripHome1024\",\n" +
+            " \"estimated_arrival_window_begin\": \"2016-10-31T22:42:59.000Z\",\n" +
+            " \"estimated_arrival_window_end\": \"2016-10-31T23:59:59.000Z\"\n" +
+            "},\n" +
+            " \"rhr_enrollment\": true,\n" +
+            "\"wheres\": {  \n" +
+            "\"Fqp6wJI...\": {  \n" +
+            " \"where_id\": \"Fqp6wJI...\",\n" +
+            " \"name\": \"Bedroom\"\n" +
+            "}\n" +
+            "}\n" +
+            "}\n" +
+            "}\n" +
             "}";
-
     private HttpServer httpServer;
 
-    public DevicesLoaderTest() throws MalformedURLException {
-        loader = new DevicesLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getDevices());
+    public NestDataLoaderTest() throws MalformedURLException {
+        loader = new NestDataLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getNestData());
     }
 
     @Test
     public void load() throws Exception {
         try {
             startSimpleServer();
-            assertEquals(ExpectedObjectsBuilder.buildExpectedDevices(), loader.load(accessToken));
+            assertEquals(ExpectedObjectsBuilder.buildExpectedCamera(), loader.load(accessToken));
         }
         finally {
             stopSimpleServer();
@@ -172,7 +210,7 @@ public class DevicesLoaderTest {
     private void startSimpleServer() {
         try {
             httpServer = HttpServer.create(new InetSocketAddress(SERVER_PORT), 0);
-            httpServer.createContext("/devices", httpExchange -> {
+            httpServer.createContext("/devices/cameras/awJo6rH0IldT2YlIVtYaGQ", httpExchange -> {
                 String response = DATA;
                 httpExchange.sendResponseHeaders(200, response.length());
                 OutputStream outputStream = httpExchange.getResponseBody();

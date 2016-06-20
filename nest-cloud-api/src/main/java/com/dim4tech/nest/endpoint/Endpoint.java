@@ -5,7 +5,8 @@ public enum Endpoint {
     DEVICES_THERMOSTATS(DEVICES, "thermostats"),
     DEVICES_SMOKE_CO_ALARMS(DEVICES, "smoke_co_alarms"),
     DEVICES_CAMERAS(DEVICES, "cameras"),
-    STRUCTURES("structures");
+    STRUCTURES("structures"),
+    METADATA("metadata");
 
     private final Endpoint parentEndpoint;
     private final String path;

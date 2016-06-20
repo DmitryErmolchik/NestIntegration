@@ -12,10 +12,10 @@ public class ExpectedObjectsBuilder {
     public static NestData buildExpectedNestData() {
         Map<StructureId, Structure> structures = new HashMap<>();
         structures.put(new StructureId("VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw"), buildExpectedStructure());
-        return new NestData(buildExpectedMetadate(), buildExpectedDevices(), structures);
+        return new NestData(buildExpectedMetadata(), buildExpectedDevices(), structures);
     }
 
-    public static Metadata buildExpectedMetadate() {
+    public static Metadata buildExpectedMetadata() {
         return new Metadata(
                 "c.FmDPkzyzaQe...",
                 1
@@ -41,7 +41,7 @@ public class ExpectedObjectsBuilder {
                 new StructureId("VqFabWH21nwVyd4RWgJgNb292wa7hG_dUwo2i2SG7j3-BOLY0BA4sw"),
                 Arrays.asList(new DeviceId("peyiJNo0IldT2YlIVtYaGQ"), new DeviceId("qeyiJNo0IldT2YlIVtYaGQ")),
                 Arrays.asList(new DeviceId("RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs"), new DeviceId("STMTKxsQTCxzVcsySOHPxKoF4OyCifrs")),
-                Arrays.asList(new DeviceId("awJo6rH…"), new DeviceId("bwJo6rH…")),
+                Arrays.asList(new DeviceId("awJo6rH..."), new DeviceId("bwJo6rH...")),
                 devices,
                 AwayState.HOME,
                 "Home",

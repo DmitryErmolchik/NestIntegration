@@ -1,31 +1,21 @@
 package com.dim4tech.nest.service.loader;
 
 import com.dim4tech.nest.domain.payload.Devices;
-import com.dim4tech.nest.dto.Response;
-import com.dim4tech.nest.exception.NestIntegrationException;
-import com.dim4tech.nest.service.deserializer.DeserializationService;
-import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
-import com.dim4tech.nest.utils.Endpoints;
+
+import java.net.URL;
 
 public class DevicesLoader extends AbstractLoader<Devices> {
-    private final DeserializationService deserializationService = new DeserializationServiceImpl();
 
-    public DevicesLoader(Endpoints endpoints, String charset) {
-        super(endpoints, charset);
+    public DevicesLoader(URL endpoint, String charset) {
+        super(endpoint, charset);
     }
 
-    public DevicesLoader(Endpoints endpoints) {
-        super(endpoints);
+    public DevicesLoader(URL endpoint) {
+        super(endpoint);
     }
 
     @Override
     public Devices load(String accessToken) {
-        Response response = loadJsonData(accessToken);
-        if (response.getResponseCode() == 200) {
-            return deserializationService.deserialize(response.getContent(), Devices.class);
-        }
-        else {
-            throw NestIntegrationException.createException(deserializationService, response.getContent());
-        }
+        return loadJsonData(accessToken, Devices.class);
     }
 }

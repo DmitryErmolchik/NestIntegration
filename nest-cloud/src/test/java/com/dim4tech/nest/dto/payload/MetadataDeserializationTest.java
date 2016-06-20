@@ -18,6 +18,6 @@ public class MetadataDeserializationTest {
     @Test
     public void deserializationTest() throws Exception {
         Metadata result = deserializationService.deserialize(json, Metadata.class);
-        assertEquals(ExpectedObjectsBuilder.buildExpectedMetadate(), result);
+        assertEquals(ExpectedObjectsBuilder.buildExpectedMetadata(), result);
     }
 }
