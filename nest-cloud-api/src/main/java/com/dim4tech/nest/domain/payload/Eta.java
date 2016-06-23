@@ -2,12 +2,14 @@ package com.dim4tech.nest.domain.payload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Eta {
     private final static String TRIP_ID = "trip_id";
     /* Unique identifier for this ETA instance */
@@ -35,11 +37,11 @@ public class Eta {
     }
 
     public DateTime getEstimatedArrivalWindowBegin() {
-        return new DateTime(estimatedArrivalWindowBegin);
+        return estimatedArrivalWindowBegin;
     }
 
     public DateTime getEstimatedArrivalWindowEnd() {
-        return new DateTime(estimatedArrivalWindowEnd);
+        return estimatedArrivalWindowEnd;
     }
 
     @Override

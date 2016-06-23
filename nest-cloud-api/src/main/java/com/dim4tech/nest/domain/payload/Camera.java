@@ -2,6 +2,7 @@ package com.dim4tech.nest.domain.payload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Camera {
     private final static String DEVICE_ID = "device_id";
     /* Camera unique identifier */
@@ -164,7 +166,7 @@ public class Camera {
     }
 
     public DateTime getLastIsOnlineChange() {
-        return new DateTime(lastIsOnlineChange);
+        return lastIsOnlineChange;
     }
 
     public Boolean isVideoHistoryEnabled() {

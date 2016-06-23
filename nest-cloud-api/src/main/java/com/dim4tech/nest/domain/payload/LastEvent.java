@@ -2,6 +2,7 @@ package com.dim4tech.nest.domain.payload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LastEvent {
     private final static String HAS_SOUND = "has_sound";
     /* Sound event - sound was detected. */
@@ -89,15 +91,15 @@ public class LastEvent {
     }
 
     public DateTime getStartTime() {
-        return new DateTime(startTime);
+        return startTime;
     }
 
     public DateTime getEndTime() {
-        return new DateTime(endTime);
+        return endTime;
     }
 
     public DateTime getUrlsExpireTime() {
-        return new DateTime(urlsExpireTime);
+        return urlsExpireTime;
     }
 
     public String getWebUrl() {

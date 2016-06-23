@@ -3,6 +3,7 @@ package com.dim4tech.nest.domain.payload;
 import com.dim4tech.nest.domain.payload.constant.AwayState;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
@@ -12,6 +13,7 @@ import java.util.Objects;
 import java.util.TimeZone;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Structure {
     private final static String STRUCTURE_ID = "structure_id";
     /* Unique structure identifier */
@@ -146,11 +148,11 @@ public class Structure {
     }
 
     public DateTime getPeakPeriodStartTime() {
-        return new DateTime(peakPeriodStartTime);
+        return peakPeriodStartTime;
     }
 
     public DateTime getPeakPeriodEndTime() {
-        return new DateTime(peakPeriodEndTime);
+        return peakPeriodEndTime;
     }
 
     public TimeZone getTimeZone() {

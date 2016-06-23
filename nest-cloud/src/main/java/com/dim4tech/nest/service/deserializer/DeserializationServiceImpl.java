@@ -24,6 +24,7 @@ public class DeserializationServiceImpl implements DeserializationService {
         objectMapper.registerModule(new JodaModule());
     }
 
+
     @Override
     public <T> T deserialize(String jsonString, Class<T> clazz) {
         try {

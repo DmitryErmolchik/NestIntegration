@@ -2,6 +2,7 @@ package com.dim4tech.nest.domain.payload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductResource {
     private final static String VALUE = "value";
     /* Number of joules consumed in the time period (where time period is measurement_time - measurement_reset_time). */
@@ -60,11 +62,11 @@ public class ProductResource {
     }
 
     public DateTime getMeasurementResetTime() {
-        return new DateTime(measurementResetTime);
+        return measurementResetTime;
     }
 
     public DateTime getMeasurementTime() {
-        return new DateTime(measurementTime);
+        return measurementTime;
     }
 
     @Override

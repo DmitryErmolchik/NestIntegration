@@ -6,6 +6,7 @@ import com.dim4tech.nest.domain.payload.constant.UiColorState;
 import com.dim4tech.nest.helper.locale.LocaleHelper;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
@@ -13,6 +14,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SmokeCoAlarm {
     private final static String DEVICE_ID = "device_id";
     /* Smoke+CO alarm unique identifier */
@@ -134,7 +136,7 @@ public class SmokeCoAlarm {
     }
 
     public DateTime getLastConnection() {
-        return new DateTime(lastConnection);
+        return lastConnection;
     }
 
     public boolean isOnline() {
@@ -158,7 +160,7 @@ public class SmokeCoAlarm {
     }
 
     public DateTime getLastManualTestTime() {
-        return new DateTime(lastManualTestTime);
+        return lastManualTestTime;
     }
 
     public UiColorState getUiColorState() {

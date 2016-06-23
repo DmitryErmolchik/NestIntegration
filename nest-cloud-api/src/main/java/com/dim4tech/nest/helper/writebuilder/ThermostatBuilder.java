@@ -5,7 +5,7 @@ import com.dim4tech.nest.domain.payload.constant.HvacMode;
 import com.dim4tech.nest.domain.payload.constant.TemperatureScale;
 
 public class ThermostatBuilder {
-    private boolean fanTimerActive;
+    private Boolean fanTimerActive;
     private TemperatureScale temperatureScale;
     private Double targetTemperatureF;
     private Double targetTemperatureC;
@@ -16,7 +16,7 @@ public class ThermostatBuilder {
     private HvacMode hvacMode;
     private String label;
 
-    public ThermostatBuilder setFanTimerActive(boolean fanTimerActive) {
+    public ThermostatBuilder setFanTimerActive(Boolean fanTimerActive) {
         this.fanTimerActive = fanTimerActive;
         return this;
     }

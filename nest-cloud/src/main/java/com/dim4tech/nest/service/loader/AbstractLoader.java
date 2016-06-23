@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractLoader<T> implements Loader<T> {
-    private final Logger LOG = LoggerFactory.getLogger(AbstractLoader.class);
+    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
     private final DeserializationService deserializationService = new DeserializationServiceImpl();
     private final URL endpoint;
     private final String charset;
