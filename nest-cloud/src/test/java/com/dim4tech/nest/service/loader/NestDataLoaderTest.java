@@ -200,7 +200,7 @@ public class NestDataLoaderTest {
     public void load() throws Exception {
         try {
             startSimpleServer();
-            assertEquals(ExpectedObjectsBuilder.buildExpectedCamera(), loader.load(accessToken));
+            assertEquals(ExpectedObjectsBuilder.buildExpectedNestData(), loader.load(accessToken));
         }
         finally {
             stopSimpleServer();
@@ -210,7 +210,7 @@ public class NestDataLoaderTest {
     private void startSimpleServer() {
         try {
             httpServer = HttpServer.create(new InetSocketAddress(SERVER_PORT), 0);
-            httpServer.createContext("/devices/cameras/awJo6rH0IldT2YlIVtYaGQ", httpExchange -> {
+            httpServer.createContext("/", httpExchange -> {
                 String response = DATA;
                 httpExchange.sendResponseHeaders(200, response.length());
                 OutputStream outputStream = httpExchange.getResponseBody();
