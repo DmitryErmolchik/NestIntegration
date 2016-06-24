@@ -13,10 +13,12 @@ import java.util.Objects;
 public class Identification {
     private final static String DEVICE_ID = "device_id";
     /* Unique device identifier for your product. */
+    @JsonProperty(DEVICE_ID)
     private final DeviceId deviceId;
 
     private final static String SERIAL_NUMBER = "serial_number";
     /* Serial number of your product or device. */
+    @JsonProperty(SERIAL_NUMBER)
     private final String serialNumber;
 
 

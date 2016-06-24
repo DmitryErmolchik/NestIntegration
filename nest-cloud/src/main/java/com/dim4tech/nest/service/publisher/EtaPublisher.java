@@ -14,7 +14,7 @@ public class EtaPublisher extends AbstractPublisher<Eta> {
     }
 
     @Override
-    public void publish(String accessToken, Eta object) {
-        this.publishObject(accessToken, object, Eta.class);
+    public Eta publish(String accessToken, Eta object) {
+        return this.publishObject(accessToken, object, Eta.class);
     }
 }

@@ -13,14 +13,17 @@ import java.util.Objects;
 public class Eta {
     private final static String TRIP_ID = "trip_id";
     /* Unique identifier for this ETA instance */
+    @JsonProperty(TRIP_ID)
     private final TripId tripId;
 
     private final static String ESTIMATED_ARRIVAL_WINDOWS_BEGIN = "estimated_arrival_window_begin";
     /* Beginning time of the estimated arrival window, in ISO 8601 (http://en.wikipedia.org/wiki/ISO_8601) format */
+    @JsonProperty(ESTIMATED_ARRIVAL_WINDOWS_BEGIN)
     private final DateTime estimatedArrivalWindowBegin;
 
     private final static String ESTIMATE_ARRIVAL_WINDOWS_END = "estimated_arrival_window_end";
     /* End time of the estimated arrival window, in ISO 8601 (http://en.wikipedia.org/wiki/ISO_8601) format */
+    @JsonProperty(ESTIMATE_ARRIVAL_WINDOWS_END)
     private final DateTime estimatedArrivalWindowEnd;
 
     @JsonCreator

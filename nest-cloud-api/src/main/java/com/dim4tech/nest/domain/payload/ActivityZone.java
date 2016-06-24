@@ -3,6 +3,7 @@ package com.dim4tech.nest.domain.payload;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 import java.util.Objects;
@@ -12,10 +13,12 @@ import java.util.Objects;
 public class ActivityZone {
     private final static String ID = "id";
     /* Activity zone id */
+    @JsonProperty(ID)
     private final ActivityZoneId id;
 
     private final static String NAME = "name";
     /* Activity zone name */
+    @JsonProperty(NAME)
     private final String name;
 
     public ActivityZone(ActivityZoneId id, String name) {

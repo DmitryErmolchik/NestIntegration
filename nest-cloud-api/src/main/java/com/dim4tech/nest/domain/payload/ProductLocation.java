@@ -13,10 +13,12 @@ import java.util.Objects;
 public class ProductLocation {
     private final static String STRUCTURE_ID = "structure_id";
     /* Unique identifier for the structure. */
+    @JsonProperty(STRUCTURE_ID)
     private final StructureId structureId;
 
     private final static String WHERE_ID = "where_id";
     /* Where unique identifier. */
+    @JsonProperty(WHERE_ID)
     private final WhereId whereId;
 
     @JsonCreator

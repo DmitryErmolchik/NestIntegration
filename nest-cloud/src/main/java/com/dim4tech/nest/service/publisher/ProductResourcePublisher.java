@@ -14,8 +14,8 @@ public class ProductResourcePublisher extends AbstractPublisher<ProductResource>
     }
 
     @Override
-    public void publish(String accessToken, ProductResource object) {
-        this.publishObject(accessToken, object, ProductResource.class);
+    public ProductResource publish(String accessToken, ProductResource object) {
+        return this.publishObject(accessToken, object, ProductResource.class);
 
     }
 }

@@ -13,6 +13,7 @@ import java.util.Objects;
 public class Software {
     private final static String VERSION = "version";
     /* Software version number of your product or device. */
+    @JsonProperty(VERSION)
     private final String version;
 
     @JsonCreator

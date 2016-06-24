@@ -15,12 +15,14 @@ public class Metadata {
         This access token serves as proof that a user has authorized your client to make calls on their behalf.
      */
     private final static String ACCESS_TOKEN = "access_token";
+    @JsonProperty(ACCESS_TOKEN)
     private final String accessToken;
 
     /*
         Client version is the last user-authorized version of a client, and is associated with an access_token.
      */
     private final static String CLIENT_VERSION = "client_version";
+    @JsonProperty(CLIENT_VERSION)
     private final int clientVersion;
 
     @JsonCreator

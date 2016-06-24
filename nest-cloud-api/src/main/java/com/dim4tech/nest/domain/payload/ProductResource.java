@@ -14,16 +14,19 @@ import java.util.Objects;
 public class ProductResource {
     private final static String VALUE = "value";
     /* Number of joules consumed in the time period (where time period is measurement_time - measurement_reset_time). */
+    @JsonProperty(VALUE)
     private final Double value;
 
     private final static String MEASUREMENT_RESET_TIME = "measurement_reset_time";
     /* Timestamp that identifies the start of the measurement time period,
         in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. */
+    @JsonProperty(MEASUREMENT_RESET_TIME)
     private final DateTime measurementResetTime;
 
     private final static String MEASUREMENT_TIME = "measurement_time";
     /* Timestamp that identifies the measurement time (the time when the resource use data was measured),
        in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. */
+    @JsonProperty(MEASUREMENT_TIME)
     private final DateTime measurementTime;
 
     @JsonCreator

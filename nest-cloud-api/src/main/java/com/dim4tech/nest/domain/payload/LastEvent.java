@@ -15,22 +15,27 @@ import java.util.Objects;
 public class LastEvent {
     private final static String HAS_SOUND = "has_sound";
     /* Sound event - sound was detected. */
+    @JsonProperty(HAS_SOUND)
     private final boolean hasSound;
 
     private final static String HAS_MOTION = "has_motion";
     /* Motion event - motion was detected. */
+    @JsonProperty(HAS_MOTION)
     private final boolean hasMotion;
 
     private final static String START_TIME = "start_time";
     /* Event start time, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. */
+    @JsonProperty(START_TIME)
     private final DateTime startTime;
 
     private final static String END_TIME = "end_time";
     /* Event end time, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. */
+    @JsonProperty(END_TIME)
     private final DateTime endTime;
 
     private final static String URLS_EXPIRE_TIME = "urls_expire_time";
     /* Timestamp that identifies when the last event URLs expire, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. */
+    @JsonProperty(URLS_EXPIRE_TIME)
     private final DateTime urlsExpireTime;
 
     private final static String WEB_URL = "web_url";
@@ -38,6 +43,7 @@ public class LastEvent {
         Used to display the recorded event from the camera at that physical location (where).
         NOTE: If the event URL has expired or the device does not have an active subscription,
         then this value is not included in the payload. */
+    @JsonProperty(WEB_URL)
     private final String webUrl;
 
     private final static String APP_URL = "app_url";
@@ -45,18 +51,22 @@ public class LastEvent {
         Used to display the recorded event from the camera at that physical location (where).
         NOTE: If the event URL has expired or the device does not have an active subscription,
         then this value is not included in the payload. */
+    @JsonProperty(APP_URL)
     private final String appUrl;
 
     private final static String IMAGE_URL = "image_url";
     /* URL (link) to the image file captured at the start time of a sound or motion event. */
+    @JsonProperty(IMAGE_URL)
     private final String imageUrl;
 
     private final static String ANIMATED_IMAGE_URL = "animated_image_url";
     /* URL (link) to the gif file captured at the start time of a sound or motion event. */
+    @JsonProperty(ANIMATED_IMAGE_URL)
     private final String animatedImageUrl;
 
     private final static String ACTIVITY_ZONE_IDS = "activity_zone_ids";
     /* Identifiers for Activity Zones that detected a motion event. Used with activity_zones and has_motion. */
+    @JsonProperty(ACTIVITY_ZONE_IDS)
     private final List<ActivityZoneId> activityZoneIds;
 
     @JsonCreator

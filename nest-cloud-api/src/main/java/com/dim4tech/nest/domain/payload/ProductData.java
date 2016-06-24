@@ -14,18 +14,22 @@ import java.util.Objects;
 public class ProductData {
     private final static String IDENTIFICATION = "identification";
     /* Contains product identifiers. */
+    @JsonProperty(IDENTIFICATION)
     private final Identification identification;
 
     private final static String LOCATION = "location";
     /* Contains the structure identifier for your product. */
+    @JsonProperty(LOCATION)
     private final ProductLocation location;
 
     private final static String SOFTWARE = "software";
     /* Contains the software version identifier for your product. */
+    @JsonProperty(SOFTWARE)
     private final Software software;
 
     private final static String RESOURCE_USE = "resource_use";
     /* Contains the resource use data values and measurement timestamps. */
+    @JsonProperty(RESOURCE_USE)
     private final Map<String, ProductResource> resourceUse;
 
     @JsonCreator

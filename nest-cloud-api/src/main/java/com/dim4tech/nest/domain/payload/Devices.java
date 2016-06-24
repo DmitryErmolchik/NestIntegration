@@ -13,14 +13,17 @@ import java.util.Objects;
 public class Devices {
     public final static String THERMOSTATS = "thermostats";
     /* Thermostats in the structure */
+    @JsonProperty(THERMOSTATS)
     private final Map<DeviceId, Thermostat> thermostats;
 
     public final static String SMOKE_CO_ALARMS = "smoke_co_alarms";
     /* Smoke + CO alarms in the structure */
+    @JsonProperty(SMOKE_CO_ALARMS)
     private final Map<DeviceId, SmokeCoAlarm> smokeCoAlarms;
 
     public final static String CAMERAS= "cameras";
     /* Cameras in the structure */
+    @JsonProperty(CAMERAS)
     private final Map<DeviceId, Camera> cameras;
 
     private final static String COMPANY = "company";

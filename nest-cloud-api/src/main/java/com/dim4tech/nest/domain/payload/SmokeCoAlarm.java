@@ -18,64 +18,79 @@ import java.util.Objects;
 public class SmokeCoAlarm {
     private final static String DEVICE_ID = "device_id";
     /* Smoke+CO alarm unique identifier */
+    @JsonProperty(DEVICE_ID)
     private final DeviceId deviceId;
 
     private final static String LOCALE = "locale";
     /* Country and language preference, in IETF Language Tag (https://en.wikipedia.org/wiki/IETF_language_tag) format */
+    @JsonProperty(LOCALE)
     private final Locale locale;
 
     private final static String SOFTWARE_VERSION ="software_version";
     /* Software version */
+    @JsonProperty(SOFTWARE_VERSION)
     private final String softwareVersion;
 
     private final static String STRUCTURE_ID = "structure_id";
     /* Unique structure identifier */
+    @JsonProperty(STRUCTURE_ID)
     private final StructureId structureId;
 
     private final static String NAME = "name";
     /* Display name of the device */
+    @JsonProperty(NAME)
     private final String name;
 
     private final static String NAME_LONG = "name_long";
     /* Long display name of the device */
+    @JsonProperty(NAME_LONG)
     private final String nameLong;
 
     private final static String LAST_CONNECTION = "last_connection";
     /* Time of the last successful interaction with the Nest service, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format */
     /* 2016-10-31T23:59:59.000Z */
+    @JsonProperty(LAST_CONNECTION)
     private final DateTime lastConnection;
 
     private final static String IS_ONLINE = "is_online";
     /* Device connection status with the Nest Service */
+    @JsonProperty(IS_ONLINE)
     private final boolean isOnline;
 
     private final static String BATTERY_HEALTH = "battery_health";
     /* Battery life/health; estimate of time to end of life */
+    @JsonProperty(BATTERY_HEALTH)
     private final BatteryHealth batteryHealth;
 
     private final static String CO_ALARM_STATE = "co_alarm_state";
     /* CO alarm status */
+    @JsonProperty(CO_ALARM_STATE)
     private final AlarmState coAlarmState;
 
     private final static String SMOKE_ALARM_STATE = "smoke_alarm_state";
     /* Smoke alarm status */
+    @JsonProperty(SMOKE_ALARM_STATE)
     private final AlarmState smokeAlarmState;
 
     private final static String IS_MANUAL_TEST_ACTIVE = "is_manual_test_active";
     /* State of the manual smoke and CO alarm test. */
+    @JsonProperty(IS_MANUAL_TEST_ACTIVE)
     private final boolean isManualTestActive;
 
     private final static String LAST_MANUAL_TEST_TIME = "last_manual_test_time";
     /* Timestamp of the last successful manual test, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. */
+    @JsonProperty(LAST_MANUAL_TEST_TIME)
     private final DateTime lastManualTestTime;
 
     private final static String UI_COLOR_STATE = "ui_color_state";
     /* Indicates device status by color in the Nest app UI; it is an aggregate condition for battery+smoke+co states,
         and reflects the actual color indicators displayed in the Nest app */
+    @JsonProperty(UI_COLOR_STATE)
     private final UiColorState uiColorState;
 
     private final static String WHERE_ID = "where_id";
     /* Where unique identifier. */
+    @JsonProperty(WHERE_ID)
     private final WhereId whereId;
 
     @JsonCreator

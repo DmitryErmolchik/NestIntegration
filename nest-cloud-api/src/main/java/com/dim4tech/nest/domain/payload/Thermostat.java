@@ -18,162 +18,200 @@ import java.util.Objects;
 public class Thermostat {
     private final static String DEVICE_ID = "device_id";
     /* Thermostat unique identifier */
+    @JsonProperty(DEVICE_ID)
     private final DeviceId deviceId;
 
     private final static String LOCALE = "locale";
     /* Country and language preference, in IETF Language Tag (https://en.wikipedia.org/wiki/IETF_language_tag) format */
+    @JsonProperty(LOCALE)
     private final Locale locale;
 
     private final static String SOFTWARE_VERSION ="software_version";
     /* Software version */
+    @JsonProperty(SOFTWARE_VERSION)
     private final String softwareVersion;
 
     private final static String STRUCTURE_ID = "structure_id";
     /* Unique structure identifier */
+    @JsonProperty(STRUCTURE_ID)
     private final StructureId structureId;
 
     private final static String NAME = "name";
     /* Display name of the device */
+    @JsonProperty(NAME)
     private final String name;
 
     private final static String NAME_LONG = "name_long";
     /* Long display name of the device */
+    @JsonProperty(NAME_LONG)
     private final String nameLong;
 
     private final static String LAST_CONNECTION = "last_connection";
     /* Time of the last successful interaction with the Nest service, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format */
     /* 2016-10-31T23:59:59.000Z */
+    @JsonProperty(LAST_CONNECTION)
     private final DateTime lastConnection;
 
     private final static String IS_ONLINE = "is_online";
     /* Device connection status with the Nest Service */
+    @JsonProperty(IS_ONLINE)
     private final Boolean isOnline;
 
     private final static String CAN_COOL = "can_cool";
     /* System ability to cool (AC) */
+    @JsonProperty(CAN_COOL)
     private final Boolean canCool;
 
     private final static String CAN_HEAT = "can_heat";
     /* System ability to heat */
+    @JsonProperty(CAN_HEAT)
     private final Boolean canHeat;
 
     private final static String IS_USING_EMERGENCY_HEAT = "is_using_emergency_heat";
     /* Emergency Heat status in systems with heat pumps */
+    @JsonProperty(IS_USING_EMERGENCY_HEAT)
     private final Boolean isUsingEmergencyHeat;
 
     private final static String HAS_FAN = "has_fan";
     /* System ability to control the fan separately from heating or cooling */
+    @JsonProperty(HAS_FAN)
     private final Boolean hasFan;
 
     private final static String FAN_TIMER_ACTIVE = "fan_timer_active";
     /* Indicates if the fan timer is engaged; used with 'fan_timer_timeout' to turn on the fan for a (user-specified) preset duration */
+    @JsonProperty(FAN_TIMER_ACTIVE)
     private final Boolean fanTimerActive;
 
     private final static String FAN_TIMER_TIMEOUT = "fan_timer_timeout";
     /* Timestamp, showing when the fan timer reaches 0 (end of timer duration), in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format */
+    @JsonProperty(FAN_TIMER_TIMEOUT)
     private final DateTime fanTimerTimeout;
 
     private final static String HAS_LEAF = "has_leaf";
     /* Displayed when users choose an energy-saving temperature */
+    @JsonProperty(HAS_LEAF)
     private final Boolean hasLeaf;
 
     private final static String TEMPERATURE_SCALE = "temperature_scale";
     /* Celsius or Fahrenheit; used with temperature display */
+    @JsonProperty(TEMPERATURE_SCALE)
     private final TemperatureScale temperatureScale;
 
     private final static String TARGET_TEMPERATURE_F = "target_temperature_f";
     /* Desired temperature, displayed in whole degrees Fahrenheit (1°F) */
+    @JsonProperty(TARGET_TEMPERATURE_F)
     private final Double targetTemperatureF;
 
     private final static String TARGET_TEMPERATURE_C = "target_temperature_c";
     /* Desired temperature, displayed in half degrees Celsius (0.5°C) */
+    @JsonProperty(TARGET_TEMPERATURE_C)
     private final Double targetTemperatureC;
 
     private final static String TARGET_TEMPERATURE_HIGH_F = "target_temperature_high_f";
     /* Maximum target temperature, displayed in whole degrees Fahrenheit (1°F); used with Heat • Cool mode */
+    @JsonProperty(TARGET_TEMPERATURE_HIGH_F)
     private final Double targetTemperatureHighF;
 
     private final static String TARGET_TEMPERATURE_HIGH_C = "target_temperature_high_c";
     /* Maximum target temperature, displayed in half degrees Celsius (0.5°C); used with Heat • Cool mode */
+    @JsonProperty(TARGET_TEMPERATURE_HIGH_C)
     private final Double targetTemperatureHighC;
 
     private final static String TARGET_TEMPERATURE_LOW_F = "target_temperature_low_f";
     /* Minimum target temperature, displayed in whole degrees Fahrenheit (1°F); used with Heat • Cool mode */
+    @JsonProperty(TARGET_TEMPERATURE_LOW_F)
     private final Double targetTemperatureLowF;
 
     private final static String TARGET_TEMPERATURE_LOW_C = "target_temperature_low_c";
     /* Minimum target temperature, displayed in half degrees Celsius (0.5°C); used with Heat • Cool mode */
+    @JsonProperty(TARGET_TEMPERATURE_LOW_C)
     private final Double targetTemperatureLowC;
 
     private final static String AWAY_TEMPERATURE_HIGH_F = "away_temperature_high_f";
     /* Maximum 'away' temperature, displayed in whole degrees Fahrenheit (1°F) */
+    @JsonProperty(AWAY_TEMPERATURE_HIGH_F)
     private final Double awayTemperatureHighF;
 
     private final static String AWAY_TEMPERATURE_HIGH_C = "away_temperature_high_c";
     /* Maximum 'away' temperature, displayed in half degrees Celsius (0.5°C) */
+    @JsonProperty(AWAY_TEMPERATURE_HIGH_C)
     private final Double awayTemperatureHighC;
 
     private final static String AWAY_TEMPERATURE_LOW_F = "away_temperature_low_f";
     /* Minimum 'away' temperature, displayed in whole degrees Fahrenheit (1°F) */
+    @JsonProperty(AWAY_TEMPERATURE_LOW_F)
     private final Double awayTemperatureLowF;
 
     private final static String AWAY_TEMPERATURE_LOW_C = "away_temperature_low_c";
     /* Minimum 'away' temperature, displayed in half degrees Celsius (0.5°C) */
+    @JsonProperty(AWAY_TEMPERATURE_LOW_C)
     private final Double awayTemperatureLowC;
 
     private final static String HVAC_MODE = "hvac_mode";
     /* Indicates HVAC system heating/cooling modes; for systems with both heating and cooling capability,
         use 'heat-cool': (Heat • Cool mode) */
+    @JsonProperty(HVAC_MODE)
     private final HvacMode hvacMode;
 
     private final static String AMBIENT_TEMPERATURE_F = "ambient_temperature_f";
     /* Temperature, measured at the device, in whole degrees Fahrenheit (1°f) */
+    @JsonProperty(AMBIENT_TEMPERATURE_F)
     private final Double ambientTemperatureF;
 
     private final static String AMBIENT_TEMPERATURE_C = "ambient_temperature_c";
     /* Temperature, measured at the device, in half degrees Celsius (0.5°C) */
+    @JsonProperty(AMBIENT_TEMPERATURE_C)
     private final Double ambientTemperatureC;
 
     private final static String HUMIDITY = "humidity";
     /* Humidity, in percent (%) format, measured at the device. */
+    @JsonProperty(HUMIDITY)
     private final Double humidity;
 
     private final static String HVAC_STATE = "hvac_state";
     /* Indicates whether the HVAC system is actively heating, cooling or is off */
+    @JsonProperty(HVAC_STATE)
     private final HvacState hvacState;
 
     private final static String WHERE_ID = "where_id";
     /* Where unique identifier. */
+    @JsonProperty(WHERE_ID)
     private final WhereId whereId;
 
     private final static String IS_LOCKED = "is_locked";
     /* Thermostat Lock status. When true, the Thermostat Lock feature is enabled,
         and restricts the temperature range to these min/max values:
         locked_temp_min_f, locked_temp_max_f, locked_temp_min_c, and locked_temp_max_c. */
+    @JsonProperty(IS_LOCKED)
     private final Boolean isLocked;
 
     private final static String LOCKED_TEMP_MIN_F = "locked_temp_min_f";
     /* Minimum Thermostat Lock temperature, displayed in whole degrees Fahrenheit (1°F).
         Used when is_locked is true. */
+    @JsonProperty(LOCKED_TEMP_MIN_F)
     private final String lockedTempMinF;
 
     private final static String LOCKED_TEMP_MAX_F = "locked_temp_max_f";
     /* Maximum Thermostat Lock temperature, displayed in whole degrees Fahrenheit (1°F).
         Used when is_locked is true. */
+    @JsonProperty(LOCKED_TEMP_MAX_F)
     private final String lockedTempMaxF;
 
     private final static String LOCKED_TEMP_MIN_C = "locked_temp_min_c";
     /* Minimum Thermostat Lock temperature, displayed in half degrees Celsius (0.5°C).
         Used when is_locked is true. */
+    @JsonProperty(LOCKED_TEMP_MIN_C)
     private final String lockedTempMinC;
 
     private final static String LOCKED_TEMP_MAX_C = "locked_temp_max_c";
     /* Maximum Thermostat Lock temperature, displayed in half degrees Celsius (0.5°C).
     Used when is_locked is true. */
+    @JsonProperty(LOCKED_TEMP_MAX_C)
     private final String lockedTempMaxC;
 
     private final static String LABEL = "label";
     /* Thermostat custom label. */
+    @JsonProperty(LABEL)
     private final String label;
 
     @JsonCreator

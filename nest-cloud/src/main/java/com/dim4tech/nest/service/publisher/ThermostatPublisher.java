@@ -14,7 +14,7 @@ public class ThermostatPublisher extends AbstractPublisher<Thermostat> {
     }
 
     @Override
-    public void publish(String accessToken, Thermostat object) {
-        this.publishObject(accessToken, object, Thermostat.class);
+    public Thermostat publish(String accessToken, Thermostat object) {
+        return this.publishObject(accessToken, object, Thermostat.class);
     }
 }

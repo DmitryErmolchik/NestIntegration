@@ -12,21 +12,18 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class NestData {
     private final static String METADATA = "metadata";
-    /*
-        Additional information that is provided when you make a REST Streaming call with Multiuser integration
-     */
+    /* Additional information that is provided when you make a REST Streaming call with Multiuser integration */
+    @JsonProperty(METADATA)
     private final Metadata metadata;
 
     private final static String DEVICES = "devices";
-    /*
-        Devices in the structure
-     */
+    /* Devices in the structure */
+    @JsonProperty(DEVICES)
     private final Devices devices;
 
     private final static String STRUCTURES = "structures";
-    /*
-        Structure
-     */
+    /* Structure */
+    @JsonProperty(STRUCTURES)
     private final Map<StructureId, Structure> structure;
 
     @JsonCreator

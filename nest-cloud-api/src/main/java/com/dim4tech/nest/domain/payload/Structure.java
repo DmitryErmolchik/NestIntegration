@@ -17,65 +17,80 @@ import java.util.TimeZone;
 public class Structure {
     private final static String STRUCTURE_ID = "structure_id";
     /* Unique structure identifier */
+    @JsonProperty(STRUCTURE_ID)
     private final StructureId structureId;
 
     private final static String THERMOSTATS = "thermostats";
     /* Array of Thermostats in the structure, by unique identifier */
+    @JsonProperty(THERMOSTATS)
     private final List<DeviceId> thermostats;
 
     private final static String SMOKE_CO_ALARMS = "smoke_co_alarms";
     /* Array of smoke+CO alarms in the structure, by unique identifier */
+    @JsonProperty(SMOKE_CO_ALARMS)
     private final List<DeviceId> smokeCoAlarms;
 
     private final static String CAMERAS = "cameras";
     /* List of cameras in the structure, by unique device identifier.
         This is an array of JSON objects that includes all cameras in the structure. */
+    @JsonProperty(CAMERAS)
     private final List<DeviceId> cameras;
 
     private final static String DEVICES = "devices";
     /* Devices */
+    @JsonProperty(DEVICES)
     private final StructureDevices devices;
 
     private final static String AWAY = "away";
     /* Describes the Structure state; see the Away Guide for more information */
+    @JsonProperty(AWAY)
     private final AwayState away;
 
     private final static String NAME = "name";
     /* User-defined structure name; defaults to 'Home' if the structure type is 'home' */
+    @JsonProperty(NAME)
     private final String name;
 
     private final static String COUNTRY_CODE = "country_code";
     /* Country, in ISO 3166-1 alpha-2 (http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format */
+    @JsonProperty(COUNTRY_CODE)
     private final String countryCode;
 
     private final static String POSTAL_CODE = "postal_code";
     /* Postal/zip code. */
+    @JsonProperty(POSTAL_CODE)
     private final String postalCode;
 
     private final static String PEAK_PERIOD_START_TIME = "peak_period_start_time";
     /* Start time of Rush Hour Rewards energy event, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format */
+    @JsonProperty(PEAK_PERIOD_START_TIME)
     private final DateTime peakPeriodStartTime;
 
     private final static String PEAK_PERIOD_END_TIME = "peak_period_end_time";
     /* End time of Rush Hour Rewards energy event, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format */
+    @JsonProperty(PEAK_PERIOD_END_TIME)
     private final DateTime peakPeriodEndTime;
 
     private final static String TIME_ZONE = "time_zone";
     /* Time zone at the structure, in IANA (http://www.iana.org/time-zones) time zone format */
+    @JsonProperty(TIME_ZONE)
     private final TimeZone timeZone;
 
     private final static String ETA = "eta";
     /* Used to let Nest know that a user is expected to return home at a specific time.
         Requires a series of calls. All three contained fields are required when supplying 'eta'.
         Learn more: ETA Guide (https://developers.nest.com/documentation/cloud/eta-guide) */
+    @JsonProperty(ETA)
     private final Eta eta;
 
     private final static String RHR_ENROLLMENT = "rhr_enrollment";
     /* Rush Hour Rewards enrollment status */
+    @JsonProperty(RHR_ENROLLMENT)
     private final Boolean rhrEnrollment;
 
     private final static String WHERES = "wheres";
     /* An object containing where identifiers for devices in the structure. */
+    @JsonProperty(WHERES)
     private final Map<WhereId, Where> wheres;
 
     @JsonCreator

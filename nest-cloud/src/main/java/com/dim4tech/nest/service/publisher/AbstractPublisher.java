@@ -35,7 +35,7 @@ public abstract class AbstractPublisher<T> implements Publisher<T> {
     }
 
     @Override
-    public abstract void publish(String accessToken, T object);
+    public abstract T publish(String accessToken, T object);
 
     protected T publishObject(String accessToken, T object, Class<T> returnObjectClass) {
         Map<String, String > params = new HashMap<>();
@@ -45,7 +45,9 @@ public abstract class AbstractPublisher<T> implements Publisher<T> {
             HttpURLConnection connection = (HttpURLConnection) dataUrl.openConnection();
             connection.setRequestMethod("PUT");
             connection.setDoOutput(true);
-            HttpHelper.request(connection, serializationService.serialize(object).getBytes(charset));
+            String serializedObject = serializationService.serialize(object);
+            LOG.debug("Sending object {}", serializedObject);
+            HttpHelper.request(connection, serializedObject.getBytes(charset));
             Response response = HttpHelper.response(connection);
             if (response.getResponseCode() == 200) {
                 return deserializationService.deserialize(response.getContent(), returnObjectClass);

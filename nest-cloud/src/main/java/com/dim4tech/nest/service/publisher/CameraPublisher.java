@@ -14,7 +14,7 @@ public class CameraPublisher extends AbstractPublisher<Camera> {
     }
 
     @Override
-    public void publish(String accessToken, Camera object) {
-        this.publishObject(accessToken, object, Camera.class);
+    public Camera publish(String accessToken, Camera object) {
+        return this.publishObject(accessToken, object, Camera.class);
     }
 }

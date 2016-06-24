@@ -14,7 +14,7 @@ public class SoftwarePublisher extends AbstractPublisher<Software> {
     }
 
     @Override
-    public void publish(String accessToken, Software object) {
-        this.publishObject(accessToken, object, Software.class);
+    public Software publish(String accessToken, Software object) {
+        return this.publishObject(accessToken, object, Software.class);
     }
 }

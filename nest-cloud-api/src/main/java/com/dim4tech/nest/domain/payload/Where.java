@@ -12,6 +12,7 @@ import java.util.Objects;
 public class Where {
     private final static String WHERE_ID = "where_id";
     /* Where unique identifier. */
+    @JsonProperty(WHERE_ID)
     private final WhereId whereId;
 
     private final static String NAME = "name";
@@ -19,6 +20,7 @@ public class Where {
         Users can optionally create a custom room name.
         You can create custom wheres (where_id and name).
         At this time, wheres cannot be edited or deleted after creation. */
+    @JsonProperty(NAME)
     private final String name;
 
     @JsonCreator
