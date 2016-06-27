@@ -4,9 +4,9 @@ import com.dim4tech.nest.constant.Default;
 import com.dim4tech.nest.dto.Response;
 import com.dim4tech.nest.exception.NestIntegrationException;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
-import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
+import com.dim4tech.nest.service.deserializer.DeserializationServiceFactory;
 import com.dim4tech.nest.service.serializer.SerializationService;
-import com.dim4tech.nest.service.serializer.SerializationServiceImpl;
+import com.dim4tech.nest.service.serializer.SerializationServiceFactory;
 import com.dim4tech.nest.utils.HttpHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +19,8 @@ import java.util.Map;
 
 public abstract class AbstractPublisher<T> implements Publisher<T> {
     private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-    private final SerializationService serializationService = new SerializationServiceImpl();
-    private final DeserializationService deserializationService  =new DeserializationServiceImpl();
+    private final SerializationService serializationService = SerializationServiceFactory.getInstance();
+    private final DeserializationService deserializationService = DeserializationServiceFactory.getInstance();
     private final URL endpoint;
     private final String charset;
     private final String AUTH = "auth";

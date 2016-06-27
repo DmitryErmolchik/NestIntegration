@@ -4,7 +4,7 @@ import com.dim4tech.nest.constant.Default;
 import com.dim4tech.nest.dto.Response;
 import com.dim4tech.nest.exception.NestIntegrationException;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
-import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
+import com.dim4tech.nest.service.deserializer.DeserializationServiceFactory;
 import com.dim4tech.nest.utils.HttpHelper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 public abstract class AbstractLoader<T> implements Loader<T> {
     private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-    private final DeserializationService deserializationService = new DeserializationServiceImpl();
+    private final DeserializationService deserializationService = DeserializationServiceFactory.getInstance();
     private final URL endpoint;
     private final String charset;
     private final String AUTH = "auth";

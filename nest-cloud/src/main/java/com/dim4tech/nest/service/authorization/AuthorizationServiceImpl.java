@@ -6,6 +6,7 @@ import com.dim4tech.nest.dto.Response;
 import com.dim4tech.nest.exception.NestIntegrationException;
 import com.dim4tech.nest.service.data.AbstractDataSevice;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
+import com.dim4tech.nest.service.deserializer.DeserializationServiceFactory;
 import com.dim4tech.nest.utils.HttpHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class AuthorizationServiceImpl extends AbstractDataSevice implements Auth
     private final URL accessTokenUrl;
     private final String productId;
     private final String productSecret;
-    private DeserializationService deserializationService;
+    private final DeserializationService deserializationService = DeserializationServiceFactory.getInstance();
 
     private final static String CLIENT_ID = "client_id";
     private final static String STATE = "state";
@@ -44,10 +45,6 @@ public class AuthorizationServiceImpl extends AbstractDataSevice implements Auth
 
     public void setCharset(String charset) {
         this.charset = charset;
-    }
-
-    public void setDeserializationService(DeserializationService deserializationService) {
-        this.deserializationService = deserializationService;
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.dim4tech.nest.service.authorization;
 
 import com.dim4tech.nest.constant.Default;
 import com.dim4tech.nest.domain.authorization.AuthorizationData;
-import com.dim4tech.nest.service.deserializer.DeserializationServiceImpl;
 import com.sun.net.httpserver.HttpServer;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +34,6 @@ public class AuthorizationServiceImplTest {
         URL authorizationUrl = new URL(AUTHORIZATION_URL + ":" + SERVER_PORT);
         URL accessTokenUrl = new URL(ACCESS_TOKEN_URL + ":" + SERVER_PORT);
         this.authorizationService = new AuthorizationServiceImpl(authorizationUrl, accessTokenUrl, PRODUCT_ID, PRODUCT_SECRET);
-        this.authorizationService.setDeserializationService(new DeserializationServiceImpl());
     }
 
     @Before
