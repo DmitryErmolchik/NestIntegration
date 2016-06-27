@@ -55,7 +55,7 @@ public class SmokeCoAlarm {
     private final static String IS_ONLINE = "is_online";
     /* Device connection status with the Nest Service */
     @JsonProperty(IS_ONLINE)
-    private final boolean isOnline;
+    private final Boolean isOnline;
 
     private final static String BATTERY_HEALTH = "battery_health";
     /* Battery life/health; estimate of time to end of life */
@@ -75,7 +75,7 @@ public class SmokeCoAlarm {
     private final static String IS_MANUAL_TEST_ACTIVE = "is_manual_test_active";
     /* State of the manual smoke and CO alarm test. */
     @JsonProperty(IS_MANUAL_TEST_ACTIVE)
-    private final boolean isManualTestActive;
+    private final Boolean isManualTestActive;
 
     private final static String LAST_MANUAL_TEST_TIME = "last_manual_test_time";
     /* Timestamp of the last successful manual test, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. */
@@ -101,7 +101,7 @@ public class SmokeCoAlarm {
                         @JsonProperty(NAME) String name,
                         @JsonProperty(NAME_LONG) String nameLong,
                         @JsonProperty(LAST_CONNECTION) DateTime lastConnection,
-                        @JsonProperty(IS_ONLINE) boolean isOnline,
+                        @JsonProperty(IS_ONLINE) Boolean isOnline,
                         @JsonProperty(BATTERY_HEALTH) BatteryHealth batteryHealth,
                         @JsonProperty(CO_ALARM_STATE) AlarmState coAlarmState,
                         @JsonProperty(SMOKE_ALARM_STATE) AlarmState smokeAlarmState,
@@ -154,7 +154,7 @@ public class SmokeCoAlarm {
         return lastConnection;
     }
 
-    public boolean isOnline() {
+    public Boolean isOnline() {
         return isOnline;
     }
 
@@ -170,7 +170,7 @@ public class SmokeCoAlarm {
         return smokeAlarmState;
     }
 
-    public boolean isManualTestActive() {
+    public Boolean isManualTestActive() {
         return isManualTestActive;
     }
 

@@ -16,12 +16,12 @@ public class LastEvent {
     private final static String HAS_SOUND = "has_sound";
     /* Sound event - sound was detected. */
     @JsonProperty(HAS_SOUND)
-    private final boolean hasSound;
+    private final Boolean hasSound;
 
     private final static String HAS_MOTION = "has_motion";
     /* Motion event - motion was detected. */
     @JsonProperty(HAS_MOTION)
-    private final boolean hasMotion;
+    private final Boolean hasMotion;
 
     private final static String START_TIME = "start_time";
     /* Event start time, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. */
@@ -92,11 +92,11 @@ public class LastEvent {
         this.activityZoneIds = activityZoneIds;
     }
 
-    public boolean isHasSound() {
+    public Boolean isHasSound() {
         return hasSound;
     }
 
-    public boolean isHasMotion() {
+    public Boolean isHasMotion() {
         return hasMotion;
     }
 
