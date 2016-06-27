@@ -438,39 +438,39 @@ public class Thermostat {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Thermostat that = (Thermostat) o;
-        return isOnline == that.isOnline &&
-                canCool == that.canCool &&
-                canHeat == that.canHeat &&
-                isUsingEmergencyHeat == that.isUsingEmergencyHeat &&
-                hasFan == that.hasFan &&
-                fanTimerActive == that.fanTimerActive &&
-                hasLeaf == that.hasLeaf &&
-                Double.compare(that.targetTemperatureF, targetTemperatureF) == 0 &&
-                Double.compare(that.targetTemperatureC, targetTemperatureC) == 0 &&
-                Double.compare(that.targetTemperatureHighF, targetTemperatureHighF) == 0 &&
-                Double.compare(that.targetTemperatureHighC, targetTemperatureHighC) == 0 &&
-                Double.compare(that.targetTemperatureLowF, targetTemperatureLowF) == 0 &&
-                Double.compare(that.targetTemperatureLowC, targetTemperatureLowC) == 0 &&
-                Double.compare(that.awayTemperatureHighF, awayTemperatureHighF) == 0 &&
-                Double.compare(that.awayTemperatureHighC, awayTemperatureHighC) == 0 &&
-                Double.compare(that.awayTemperatureLowF, awayTemperatureLowF) == 0 &&
-                Double.compare(that.awayTemperatureLowC, awayTemperatureLowC) == 0 &&
-                Double.compare(that.ambientTemperatureF, ambientTemperatureF) == 0 &&
-                Double.compare(that.ambientTemperatureC, ambientTemperatureC) == 0 &&
-                Double.compare(that.humidity, humidity) == 0 &&
-                isLocked == that.isLocked &&
-                Objects.equals(deviceId, that.deviceId) &&
+        return Objects.equals(deviceId, that.deviceId) &&
                 Objects.equals(locale, that.locale) &&
                 Objects.equals(softwareVersion, that.softwareVersion) &&
                 Objects.equals(structureId, that.structureId) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(nameLong, that.nameLong) &&
                 Objects.equals(lastConnection, that.lastConnection) &&
+                Objects.equals(isOnline, that.isOnline) &&
+                Objects.equals(canCool, that.canCool) &&
+                Objects.equals(canHeat, that.canHeat) &&
+                Objects.equals(isUsingEmergencyHeat, that.isUsingEmergencyHeat) &&
+                Objects.equals(hasFan, that.hasFan) &&
+                Objects.equals(fanTimerActive, that.fanTimerActive) &&
                 Objects.equals(fanTimerTimeout, that.fanTimerTimeout) &&
+                Objects.equals(hasLeaf, that.hasLeaf) &&
                 temperatureScale == that.temperatureScale &&
+                Objects.equals(targetTemperatureF, that.targetTemperatureF) &&
+                Objects.equals(targetTemperatureC, that.targetTemperatureC) &&
+                Objects.equals(targetTemperatureHighF, that.targetTemperatureHighF) &&
+                Objects.equals(targetTemperatureHighC, that.targetTemperatureHighC) &&
+                Objects.equals(targetTemperatureLowF, that.targetTemperatureLowF) &&
+                Objects.equals(targetTemperatureLowC, that.targetTemperatureLowC) &&
+                Objects.equals(awayTemperatureHighF, that.awayTemperatureHighF) &&
+                Objects.equals(awayTemperatureHighC, that.awayTemperatureHighC) &&
+                Objects.equals(awayTemperatureLowF, that.awayTemperatureLowF) &&
+                Objects.equals(awayTemperatureLowC, that.awayTemperatureLowC) &&
                 hvacMode == that.hvacMode &&
+                Objects.equals(ambientTemperatureF, that.ambientTemperatureF) &&
+                Objects.equals(ambientTemperatureC, that.ambientTemperatureC) &&
+                Objects.equals(humidity, that.humidity) &&
                 hvacState == that.hvacState &&
                 Objects.equals(whereId, that.whereId) &&
+                Objects.equals(isLocked, that.isLocked) &&
                 Objects.equals(lockedTempMinF, that.lockedTempMinF) &&
                 Objects.equals(lockedTempMaxF, that.lockedTempMaxF) &&
                 Objects.equals(lockedTempMinC, that.lockedTempMinC) &&
