@@ -87,4 +87,9 @@ public class EndpointsTest {
     public void getMetadata() throws Exception {
         assertEquals(baseUrl + "metadata", endpoints.getMetadataUrl().toString());
     }
+
+    @Test
+    public void getStructureEtaUrl() throws Exception {
+        assertEquals(baseUrl + "structures/123/eta", endpoints.getStructureEtaUrl(new StructureId("123")).toString());
+    }
 }

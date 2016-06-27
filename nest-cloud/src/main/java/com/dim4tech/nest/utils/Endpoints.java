@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Endpoints {
+    private final String ETA = "eta";
     private final URL rootPath;
 
     public Endpoints(URL rootPath) {
@@ -86,6 +87,14 @@ public class Endpoints {
 
     public URL getStructureUrl(StructureId structureId) {
         return getStructureUrl(structureId.getId());
+    }
+
+    public URL getStructureEtaUrl(String structureId) {
+        return buildEndpoint(Endpoint.STRUCTURES, structureId, ETA);
+    }
+
+    public URL getStructureEtaUrl(StructureId structureId) {
+        return getStructureEtaUrl(structureId.getId());
     }
 
     public URL getMetadataUrl() {
