@@ -42,7 +42,7 @@ public class SmokeCoAlarmLoaderTest {
     private HttpServer httpServer;
 
     public SmokeCoAlarmLoaderTest() throws MalformedURLException {
-        loader = new SmokeCoAlarmLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getSmokeCoAlarm(new DeviceId("RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs")));
+        loader = new SmokeCoAlarmLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getSmokeCoAlarmUrl(new DeviceId("RTMTKxsQTCxzVcsySOHPxKoF4OyCifrs")));
     }
 
     @Test

@@ -66,7 +66,7 @@ public class ThermostatLoaderTest {
     private HttpServer httpServer;
 
     public ThermostatLoaderTest() throws MalformedURLException {
-        loader = new ThermostatLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getThermostat(new DeviceId("peyiJNo0IldT2YlIVtYaGQ")));
+        loader = new ThermostatLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getThermostatUrl(new DeviceId("peyiJNo0IldT2YlIVtYaGQ")));
     }
 
     @Test

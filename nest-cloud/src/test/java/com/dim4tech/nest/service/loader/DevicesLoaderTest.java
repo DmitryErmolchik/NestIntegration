@@ -155,7 +155,7 @@ public class DevicesLoaderTest {
     private HttpServer httpServer;
 
     public DevicesLoaderTest() throws MalformedURLException {
-        loader = new DevicesLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getDevices());
+        loader = new DevicesLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getDevicesUrl());
     }
 
     @Test

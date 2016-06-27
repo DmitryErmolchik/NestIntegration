@@ -61,7 +61,7 @@ public class StructuresLoaderTest {
     private HttpServer httpServer;
 
     public StructuresLoaderTest() throws MalformedURLException {
-        loader = new StructuresLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getStructures());
+        loader = new StructuresLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getStructuresUrl());
     }
 
     @Test

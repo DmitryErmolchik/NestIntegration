@@ -193,7 +193,7 @@ public class NestDataLoaderTest {
     private HttpServer httpServer;
 
     public NestDataLoaderTest() throws MalformedURLException {
-        loader = new NestDataLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getNestData());
+        loader = new NestDataLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getNestDataUrl());
     }
 
     @Test

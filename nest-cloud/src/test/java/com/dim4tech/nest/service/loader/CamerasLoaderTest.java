@@ -61,7 +61,7 @@ public class CamerasLoaderTest {
     private HttpServer httpServer;
 
     public CamerasLoaderTest() throws MalformedURLException {
-        loader = new CamerasLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getCameras());
+        loader = new CamerasLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getCamerasUrl());
     }
 
     @Test

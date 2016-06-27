@@ -28,7 +28,7 @@ public class MetadataLoaderTest {
     private HttpServer httpServer;
 
     public MetadataLoaderTest() throws MalformedURLException {
-        loader = new MetadataLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getMetadata());
+        loader = new MetadataLoader(new Endpoints(new URL(HOST_URL + ":" + SERVER_PORT)).getMetadataUrl());
     }
 
     @Test
