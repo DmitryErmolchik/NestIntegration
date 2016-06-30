@@ -101,15 +101,15 @@ public class LastEvent {
     }
 
     public DateTime getStartTime() {
-        return startTime;
+        return startTime != null ? new DateTime(startTime) : null;
     }
 
     public DateTime getEndTime() {
-        return endTime;
+        return endTime != null ? new DateTime(endTime) : null;
     }
 
     public DateTime getUrlsExpireTime() {
-        return urlsExpireTime;
+        return urlsExpireTime != null ? new DateTime(urlsExpireTime) : null;
     }
 
     public String getWebUrl() {

@@ -163,11 +163,11 @@ public class Structure {
     }
 
     public DateTime getPeakPeriodStartTime() {
-        return peakPeriodStartTime;
+        return peakPeriodStartTime != null ? new DateTime(peakPeriodStartTime) : null;
     }
 
     public DateTime getPeakPeriodEndTime() {
-        return peakPeriodEndTime;
+        return peakPeriodEndTime != null ? new DateTime(peakPeriodEndTime) : null;
     }
 
     public TimeZone getTimeZone() {

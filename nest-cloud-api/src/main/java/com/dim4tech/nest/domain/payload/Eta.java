@@ -40,11 +40,11 @@ public class Eta {
     }
 
     public DateTime getEstimatedArrivalWindowBegin() {
-        return estimatedArrivalWindowBegin;
+        return estimatedArrivalWindowBegin != null ? new DateTime(estimatedArrivalWindowBegin) : null;
     }
 
     public DateTime getEstimatedArrivalWindowEnd() {
-        return estimatedArrivalWindowEnd;
+        return estimatedArrivalWindowEnd != null ? new DateTime(estimatedArrivalWindowEnd) : null;
     }
 
     @Override

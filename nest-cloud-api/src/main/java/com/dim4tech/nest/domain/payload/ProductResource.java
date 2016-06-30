@@ -65,11 +65,11 @@ public class ProductResource {
     }
 
     public DateTime getMeasurementResetTime() {
-        return measurementResetTime;
+        return measurementResetTime != null ? new DateTime(measurementResetTime) : null;
     }
 
     public DateTime getMeasurementTime() {
-        return measurementTime;
+        return measurementTime != null ? new DateTime(measurementTime) : null;
     }
 
     @Override
