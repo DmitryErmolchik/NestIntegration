@@ -4,7 +4,6 @@ import com.dim4tech.nest.constant.Default;
 import com.dim4tech.nest.domain.authorization.AuthorizationData;
 import com.dim4tech.nest.dto.Response;
 import com.dim4tech.nest.exception.NestIntegrationException;
-import com.dim4tech.nest.service.data.AbstractDataSevice;
 import com.dim4tech.nest.service.deserializer.DeserializationService;
 import com.dim4tech.nest.service.deserializer.DeserializationServiceFactory;
 import com.dim4tech.nest.utils.HttpHelper;
@@ -18,7 +17,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthorizationServiceImpl extends AbstractDataSevice implements AuthorizationService {
+public class AuthorizationServiceImpl implements AuthorizationService {
     private final Logger LOG = LoggerFactory.getLogger(AuthorizationServiceImpl.class);
 
     private final URL authorizationUrl;
