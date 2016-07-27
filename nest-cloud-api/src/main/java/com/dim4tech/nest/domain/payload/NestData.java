@@ -35,11 +35,6 @@ public class NestData {
         this.structure = structure;
     }
 
-
-    /*public static NestData createFromJson(Map<String, Object> nestData) {
-
-    }*/
-
     public Metadata getMetadata() {
         return metadata;
     }
